@@ -5,16 +5,17 @@
 --   * a row ONLY when the person ticked the research consent;
 --   * plan answers in coarse form (arrival as month, never the exact date);
 --   * research answers;
---   * never names, emails, nationality or free text (emails go to `waitlist`).
+--   * never names, emails, nationality or free text (emails go to `waitlist`;
+--     "Something else" free text stays on the device).
 -- Each submit inserts a new row; analysis uses the latest row per anon_id.
 
 create table if not exists public.responses (
   id                     bigint generated always as identity primary key,
   anon_id                uuid        not null,
   questionnaire_version  text        not null check (char_length(questionnaire_version) <= 32),
-  -- plan answers, coarse: purpose, eu, arrival_month, state, city_id, household, german_level, done_already
+  -- plan answers, coarse: purpose, eu, status, arrival_month, state, city_id, household, german_level, done_already
   plan                   jsonb       not null default '{}'::jsonb check (pg_column_size(plan) < 2000),
-  -- research answers: worries, helpers, paid_for_help, read_language, heard_from
+  -- research answers (part not enabled yet): worries, helpers, paid_for_help, read_language, heard_from
   research               jsonb       not null default '{}'::jsonb check (pg_column_size(research) < 2000),
   consent                text        not null check (consent = 'research_v1'),  -- which consent text was shown
   created_at             timestamptz not null default now()
@@ -35,6 +36,7 @@ select distinct on (anon_id)
   created_at,
   plan->>'purpose'        as purpose,
   (plan->>'eu')::boolean  as eu,
+  plan->>'status'         as status,
   plan->>'arrival_month'  as arrival_month,
   plan->>'state'          as state,
   plan->>'city_id'        as city_id,

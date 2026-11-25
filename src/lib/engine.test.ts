@@ -98,3 +98,19 @@ describe('planEntitlements', () => {
     expect(ids).not.toContain('recognition-advice')
   })
 })
+
+describe('residence status', () => {
+  const permit = s.tasks.find((t) => t.id === 'residence-permit')!
+  it('shows the permit task to people who do not hold a permit yet', () => {
+    expect(applies(permit.appliesTo, { ...student, status: 'national_visa' })).toBe(true)
+    expect(applies(permit.appliesTo, { ...student, status: 'not_sure' })).toBe(true)
+  })
+  it('hides it from people who already have a permit or have applied', () => {
+    expect(applies(permit.appliesTo, { ...student, status: 'blue_card' })).toBe(false)
+    expect(applies(permit.appliesTo, { ...student, status: 'fiktion' })).toBe(false)
+    expect(applies(permit.appliesTo, { ...student, status: 'permanent' })).toBe(false)
+  })
+  it('status rules do not hide anything when no status is given', () => {
+    expect(applies(permit.appliesTo, student)).toBe(true)
+  })
+})

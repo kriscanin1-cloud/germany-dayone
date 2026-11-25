@@ -18,6 +18,7 @@ export function applies(rule: AppliesTo, p: Profile): boolean {
   if (rule.euCitizen !== undefined && rule.euCitizen !== p.eu) return false
   if (rule.states && !rule.states.includes(p.state)) return false
   if (rule.cities && (!p.cityId || !rule.cities.includes(p.cityId))) return false
+  if (rule.statuses && p.status && !rule.statuses.includes(p.status)) return false
   return true
 }
 

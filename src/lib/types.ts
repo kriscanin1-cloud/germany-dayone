@@ -5,6 +5,11 @@ export type StateCode =
   | 'DE-BW' | 'DE-BY' | 'DE-BE' | 'DE-BB' | 'DE-HB' | 'DE-HH' | 'DE-HE' | 'DE-MV'
   | 'DE-NI' | 'DE-NW' | 'DE-RP' | 'DE-SL' | 'DE-SN' | 'DE-ST' | 'DE-SH' | 'DE-TH'
 
+/** Residence status ids, see questionnaire.json → status */
+export type ResidenceStatus =
+  | 'not_arrived' | 'visa_free' | 'national_visa' | 'fiktion' | 'temporary'
+  | 'blue_card' | 'chancenkarte' | 'permanent' | 'protection' | 'not_sure' | 'other'
+
 export type Lang = 'en'
 /** Translatable text; `en` is required. */
 export type T = Partial<Record<Lang, string>> & { en: string }
@@ -20,6 +25,8 @@ export interface AppliesTo {
   states?: StateCode[]
   /** city ids from places.de.json; omit = everywhere */
   cities?: string[]
+  /** residence statuses; omit = any. A profile without a status (e.g. EU citizens) always matches. */
+  statuses?: ResidenceStatus[]
 }
 
 export interface Link {
@@ -69,6 +76,8 @@ export interface Profile {
   arrival: string
   state: StateCode
   cityId?: string
+  /** only asked of non-EU citizens */
+  status?: ResidenceStatus
 }
 
 export interface State {

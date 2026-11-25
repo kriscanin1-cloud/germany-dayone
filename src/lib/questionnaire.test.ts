@@ -40,3 +40,33 @@ describe('questionnaire integrity', () => {
     expect(q.consents.research_v1.default).toBe(false)
   })
 })
+
+describe('questionnaire v2 rules', () => {
+  const byId = new Map(q.questions.map((x) => [x.id, x]))
+  it('status is asked only of non-EU citizens', () => {
+    const st = byId.get('status')!
+    expect(st.showIf).toEqual({ question: 'eu', equals: 'no' })
+    expect(byId.get('eu')!.options!.map((o) => o.id)).toContain('no')
+  })
+  it('every showIf points to an earlier question and a real option', () => {
+    const order = q.questions.map((x) => x.id)
+    for (const x of q.questions) {
+      if (!x.showIf) continue
+      const src = byId.get(x.showIf.question)!
+      expect(order.indexOf(src.id)).toBeLessThan(order.indexOf(x.id))
+      expect(src.options!.map((o) => o.id)).toContain(x.showIf.equals)
+    }
+  })
+  it('free text is only offered on "other" options', () => {
+    for (const x of q.questions) for (const o of x.options ?? []) if ('freeText' in o) expect(o.id).toBe('other')
+  })
+  it("status options match the engine type", () => {
+    const ids = byId.get('status')!.options!.map((o) => o.id).sort()
+    expect(ids).toEqual(
+      ['not_arrived', 'visa_free', 'national_visa', 'fiktion', 'temporary', 'blue_card', 'chancenkarte', 'permanent', 'protection', 'not_sure', 'other'].sort(),
+    )
+  })
+  it('only the plan part is enabled for now', () => {
+    expect(q.parts.filter((p) => p.enabled).map((p) => p.id)).toEqual(['plan'])
+  })
+})

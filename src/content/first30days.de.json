@@ -213,7 +213,14 @@
       ],
       "appliesTo": {
         "purposes": "all",
-        "euCitizen": false
+        "euCitizen": false,
+        "statuses": [
+          "not_arrived",
+          "visa_free",
+          "national_visa",
+          "not_sure",
+          "other"
+        ]
       },
       "links": [
         {
