@@ -58,8 +58,9 @@ describe('applies', () => {
 
 describe('planTasks', () => {
   it('hides drafts unless asked', () => {
-    expect(planTasks(s.tasks, student, [], { today })).toHaveLength(0)
-    expect(planTasks(s.tasks, student, [], { today, showDrafts: true }).length).toBeGreaterThan(0)
+    const published = planTasks(s.tasks, student, [], { today })
+    expect(published.every((p) => p.task.status === 'verified')).toBe(true)
+    expect(planTasks(s.tasks, student, [], { today, showDrafts: true }).length).toBeGreaterThan(published.length)
   })
 
   it('puts dependencies before dependants', () => {
@@ -179,5 +180,21 @@ describe('v3: citizenship, dates and answers', () => {
   it('reports the day number from arrival', () => {
     const plan = planTasks(s.tasks, student, [], { today, showDrafts: true })
     expect(plan.find((p) => p.task.id === 'health-insurance')!.day).toBe(1)
+  })
+})
+
+describe('verified content', () => {
+  it('every verified item has a date and at least one source', () => {
+    for (const x of [...s.tasks, ...s.entitlements, ...s.milestones])
+      if (x.status === 'verified') {
+        expect(x.lastVerified, x.id).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+        expect(x.sources?.length, x.id).toBeGreaterThan(0)
+      }
+  })
+  it('people with protection status are pointed to counselling, not to study/work permit tasks', () => {
+    const p: Profile = { ...student, citizenship: 'other', status: 'protection' }
+    const ids = planTasks(s.tasks, p, [], { today, showDrafts: true }).map((x) => x.task.id)
+    expect(ids).toContain('protection-counselling')
+    expect(ids).not.toContain('residence-permit')
   })
 })

@@ -65,6 +65,8 @@ export interface Task {
   appliesTo: AppliesTo
   links: Link[]
   lastVerified: string
+  /** pages the facts were checked against when it was marked verified */
+  sources?: string[]
   status: ContentStatus
 }
 
@@ -77,6 +79,8 @@ export interface Entitlement {
   appliesTo: AppliesTo
   links: Link[]
   lastVerified: string
+  /** pages the facts were checked against when it was marked verified */
+  sources?: string[]
   status: ContentStatus
 }
 
@@ -89,6 +93,8 @@ export interface Milestone {
   appliesTo: AppliesTo
   links: Link[]
   lastVerified: string
+  /** pages the facts were checked against when it was marked verified */
+  sources?: string[]
   status: ContentStatus
 }
 

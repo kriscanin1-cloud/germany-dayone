@@ -2,8 +2,8 @@
   "meta": {
     "scenario": "first30days",
     "country": "DE",
-    "version": "0.2.0",
-    "note": "SAMPLE STRUCTURE. Every item is status 'draft': check each against official sources, then set status 'verified' and lastVerified before showing it to users. Deadlines and conditions change; this is practical guidance, not legal advice.",
+    "version": "0.3.0",
+    "note": "Items marked 'verified' were checked against the pages in their `sources` on lastVerified. Everything else is a draft. Practical guidance, not legal advice.",
     "languages": [
       "en"
     ]
@@ -155,14 +155,18 @@
       "links": [
         {
           "label": {
-            "en": "Berlin: service portal"
+            "en": "Federal service portal"
           },
-          "url": "https://service.berlin.de",
+          "url": "https://verwaltung.bund.de",
           "official": true
         }
       ],
-      "lastVerified": "",
-      "status": "draft"
+      "lastVerified": "2026-11-25",
+      "status": "verified",
+      "sources": [
+        "https://www.eu-gleichbehandlungsstelle.de/eugs-en/eu-citizens/information-center/residence",
+        "https://stadt.muenchen.de/en-old/info/eu-citizens-right-residence.html"
+      ]
     },
     {
       "id": "residence-permit",
@@ -263,8 +267,13 @@
           "official": true
         }
       ],
-      "lastVerified": "",
-      "status": "draft"
+      "lastVerified": "2026-11-25",
+      "status": "verified",
+      "sources": [
+        "https://www.gesetze-im-internet.de/aufenthg_2004/__81.html",
+        "https://www.stadt-koeln.de/leben-in-koeln/soziales/auslaenderamt/informationen-zu-fiktionsbescheinigungen",
+        "https://www.mkjfgfi.nrw/fiktionsbescheinigung"
+      ]
     },
     {
       "id": "bank-account",
@@ -485,14 +494,24 @@
       "links": [
         {
           "label": {
+            "en": "Hamburg: tax ID"
+          },
+          "url": "https://www.hamburg.com/publicservice/info/11949679/n0/",
+          "official": true
+        },
+        {
+          "label": {
             "en": "Federal Central Tax Office"
           },
           "url": "https://www.bzst.de",
           "official": true
         }
       ],
-      "lastVerified": "",
-      "status": "draft"
+      "lastVerified": "2026-11-25",
+      "status": "verified",
+      "sources": [
+        "https://www.hamburg.com/publicservice/info/11949679/n0/"
+      ]
     },
     {
       "id": "broadcasting-fee",
@@ -683,8 +702,13 @@
           "official": true
         }
       ],
-      "lastVerified": "",
-      "status": "draft"
+      "lastVerified": "2026-11-25",
+      "status": "verified",
+      "sources": [
+        "https://www.gesetze-im-internet.de/aufenthv/__41.html",
+        "https://www.mkjfgfi.nrw/system/files/media/document/file/info-fiktionsbescheinigung-de.pdf",
+        "https://wetteraukreis.de/fileadmin/2_Service/Integration_Migration/Aufenthalt/merkblatt_fiktionswirkung_aufenthaltstitel_hmdi_stand_01_02.pdf"
+      ]
     },
     {
       "id": "tourist-visa-advice",
@@ -915,7 +939,66 @@
           "label": {
             "en": "Federal Ministry of Transport"
           },
-          "url": "https://www.bmv.de",
+          "url": "https://www.bmv.de/SharedDocs/EN/Articles/StV/Roadtraffic/validity-foreign-driving-licences-in-germany.html",
+          "official": true
+        }
+      ],
+      "lastVerified": "2026-11-25",
+      "status": "verified",
+      "sources": [
+        "https://www.bmv.de/SharedDocs/EN/Articles/StV/Roadtraffic/validity-foreign-driving-licences-in-germany.html",
+        "https://verwaltung.bund.de/leistungsverzeichnis/EN/leistung/99108047050002/herausgeber/RP-8939276/region/07"
+      ]
+    },
+    {
+      "id": "protection-counselling",
+      "category": "status",
+      "title": {
+        "en": "Get free advice on your asylum or protection case"
+      },
+      "summary": {
+        "en": "This plan is built for study and work moves. Asylum procedures and protection status have their own rules and deadlines, so talk to a free counselling service first."
+      },
+      "why": {
+        "en": "Deadlines in asylum procedures can be short, and mistakes are hard to fix later. Counselling is free and confidential."
+      },
+      "steps": [
+        {
+          "en": "Aged 27 or over: find a Migration Counselling for Adult Immigrants (MBE) office near you."
+        },
+        {
+          "en": "Aged 12–27: go to a Youth Migration Service (Jugendmigrationsdienst, JMD)."
+        },
+        {
+          "en": "Bring all letters you got from BAMF or the Ausländerbehörde."
+        }
+      ],
+      "documents": [
+        {
+          "en": "All letters from BAMF and the Ausländerbehörde"
+        },
+        {
+          "en": "Your ID or arrival certificate"
+        }
+      ],
+      "deadline": {
+        "offsetDays": 3,
+        "hard": false
+      },
+      "dependsOn": [],
+      "appliesTo": {
+        "purposes": "all",
+        "euCitizen": false,
+        "statuses": [
+          "protection"
+        ]
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Migration counselling (MBE)"
+          },
+          "url": "https://www.migrationsberatung.org",
           "official": true
         }
       ],
@@ -962,18 +1045,27 @@
     {
       "id": "integration-course",
       "title": {
-        "en": "Check if you can join a subsidised German course"
+        "en": "Check if you can join an integration course"
       },
       "valueHint": {
-        "en": "Eligibility and quotas changed in 2026 — check your status."
+        "en": "A state-funded German and orientation course. Places for voluntary participants are limited in 2026."
       },
       "conditions": [
         {
-          "en": "Depends on residence status; rules changed in 2026."
+          "en": "Many newcomers with a residence permit for work, family reasons or a long-term stay have a legal right to a place."
+        },
+        {
+          "en": "Since February 2026, BAMF has stopped admitting people who join voluntarily without a legal right."
+        },
+        {
+          "en": "From 1 August 2026, some groups can be admitted again if places are free — EU citizens among them."
+        },
+        {
+          "en": "Students usually have no right to a place: look at your university's language centre instead."
         }
       ],
       "howTo": {
-        "en": "Check eligibility on the BAMF website or with a migration advice service."
+        "en": "Your Ausländerbehörde tells you if you have a right to a course (or must take one). Otherwise ask a migration counselling service whether you can be admitted."
       },
       "appliesTo": {
         "purposes": "all"
@@ -981,14 +1073,18 @@
       "links": [
         {
           "label": {
-            "en": "BAMF: integration courses"
+            "en": "BMI: FAQ on integration courses"
           },
-          "url": "https://www.bamf.de",
+          "url": "https://www.bmi.bund.de/SharedDocs/faqs/DE/themen/gesellschaft-integration/integration/integrationskurs-faq-liste.html",
           "official": true
         }
       ],
-      "lastVerified": "",
-      "status": "draft"
+      "lastVerified": "2026-11-25",
+      "status": "verified",
+      "sources": [
+        "https://www.bmi.bund.de/SharedDocs/faqs/DE/themen/gesellschaft-integration/integration/integrationskurs-faq-liste.html",
+        "https://www.der-paritaetische.de/alle-meldungen/anpassung-der-integrationskursverordnung-zum-01-august-2026/"
+      ]
     },
     {
       "id": "recognition-advice",
@@ -1088,15 +1184,18 @@
         "en": "Free counselling for newcomers"
       },
       "valueHint": {
-        "en": "Free, independent help with paperwork and questions."
+        "en": "Free and confidential advice on permits, work, housing and family."
       },
       "conditions": [
         {
-          "en": "Offers and age groups differ by service — check locally."
+          "en": "Adults 27 and over: Migration Counselling for Adult Immigrants (MBE), around 1,400 offices across Germany."
+        },
+        {
+          "en": "Aged 12–27: Youth Migration Services (JMD)."
         }
       ],
       "howTo": {
-        "en": "Find a migration counselling service near you."
+        "en": "Find an office near you and book an appointment; many offer advice in several languages."
       },
       "appliesTo": {
         "purposes": "all"
@@ -1104,9 +1203,9 @@
       "links": [
         {
           "label": {
-            "en": "BAMF: advice services"
+            "en": "migrationsberatung.org"
           },
-          "url": "https://www.bamf.de",
+          "url": "https://www.migrationsberatung.org",
           "official": true
         }
       ],
@@ -1183,8 +1282,11 @@
           "official": true
         }
       ],
-      "lastVerified": "",
-      "status": "draft"
+      "lastVerified": "2026-11-25",
+      "status": "verified",
+      "sources": [
+        "https://www.make-it-in-germany.com/en/study-training/study/prospects/seeking-employment/"
+      ]
     },
     {
       "id": "settlement-german-graduates",
@@ -1212,8 +1314,11 @@
           "official": true
         }
       ],
-      "lastVerified": "",
-      "status": "draft"
+      "lastVerified": "2026-11-25",
+      "status": "verified",
+      "sources": [
+        "https://www.make-it-in-germany.com/en/international-students-as-the-skilled-workers-of-tomorrow"
+      ]
     },
     {
       "id": "settlement-blue-card",
@@ -1242,8 +1347,12 @@
           "official": true
         }
       ],
-      "lastVerified": "",
-      "status": "draft"
+      "lastVerified": "2026-11-25",
+      "status": "verified",
+      "sources": [
+        "https://service.berlin.de/dienstleistung/326556/en/",
+        "https://stadt.muenchen.de/service/en-GB/info/settlement-permit-with-eu-blue-card/10422536/"
+      ]
     },
     {
       "id": "settlement-general",
@@ -1306,8 +1415,12 @@
           "official": true
         }
       ],
-      "lastVerified": "",
-      "status": "draft"
+      "lastVerified": "2026-11-25",
+      "status": "verified",
+      "sources": [
+        "https://verwaltung.bund.de/leistungsverzeichnis/EN/leistung/99010009012000/herausgeber/BY-27359/region/09",
+        "https://stadt.muenchen.de/en-old/info/eu-citizens-right-residence.html"
+      ]
     },
     {
       "id": "naturalisation",
@@ -1326,14 +1439,17 @@
       "links": [
         {
           "label": {
-            "en": "BAMF"
+            "en": "Bundestag"
           },
-          "url": "https://www.bamf.de",
+          "url": "https://www.bundestag.de/presse/hib/kurzmeldungen-1108272",
           "official": true
         }
       ],
-      "lastVerified": "",
-      "status": "draft"
+      "lastVerified": "2026-11-25",
+      "status": "verified",
+      "sources": [
+        "https://www.bundestag.de/presse/hib/kurzmeldungen-1108272"
+      ]
     }
   ]
 }
