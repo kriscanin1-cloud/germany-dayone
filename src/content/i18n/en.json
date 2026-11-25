@@ -1,6 +1,6 @@
 {
   "app.name": "Day One Germany",
-  "nav.timeline": "Timeline",
+  "nav.timeline": "Next steps",
   "nav.entitled": "Entitled",
   "nav.people": "People",
   "nav.me": "Me",
@@ -9,7 +9,7 @@
   "welcome.cta": "Get my plan",
   "draft.badge": "DRAFT",
   "draft.banner": "Preview: content is not verified yet.",
-  "timeline.title": "Your plan",
+  "timeline.title": "Next steps",
   "timeline.sample": "Preview with a sample profile — your own plan appears after onboarding.",
   "entitled.title": "What you can get",
   "people.title": "People",
@@ -190,5 +190,9 @@
   "me.deleteNo": "Cancel",
   "me.cit.eu": "EU / EEA / Swiss",
   "me.cit.best_friend": "Visa-free for long stays (§ 41)",
-  "me.cit.other": "Other country"
+  "me.cit.other": "Other country",
+  "steps.todo": "To do",
+  "steps.discover": "Discover",
+  "discover.intro": "Optional and fun: local food, everyday Germany and the holidays near you. Tick what you tried, remove what's not for you.",
+  "discover.tried": "Tried so far: {n}"
 }

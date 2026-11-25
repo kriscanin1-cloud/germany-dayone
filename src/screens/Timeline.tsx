@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { ConfirmDialog } from '../components/ConfirmDialog'
 import { activitiesByWeek, holidaysInWeeks, type Activity, type DatedHoliday } from '../lib/activities'
 import { track } from '../lib/analytics'
@@ -59,6 +59,12 @@ export function Timeline() {
   const doneCount = plan.filter((p) => p.done).length
   const tried = new Set(saved.tried ?? [])
 
+  // two views: what you must do, and what you can discover; kept in the URL so Back returns to the same view
+  const [params, setParams] = useSearchParams()
+  const view: 'todo' | 'discover' = params.get('view') === 'discover' ? 'discover' : 'todo'
+  const openTasks = plan.filter((p) => !p.done && p.week <= currentWeek).length
+  const funThisWeek = (fun.get(currentWeek)?.length ?? 0) + hols.filter((h) => h.week === currentWeek).length
+
   const persist = (change: (s: Saved) => Saved) => setSaved(update(change))
   const toggleTried = (id: string) =>
     persist((s) => {
@@ -101,6 +107,26 @@ export function Timeline() {
         </div>
       )}
 
+      <div role="tablist" aria-label={t('timeline.title')} className="mt-5 grid grid-cols-2 rounded-md border-2 border-ink p-1">
+        {(['todo', 'discover'] as const).map((v) => (
+          <button
+            key={v}
+            type="button"
+            role="tab"
+            aria-selected={view === v}
+            onClick={() => {
+              setParams(v === 'todo' ? {} : { view: v }, { replace: true })
+              track('next_steps_view', { view: v })
+            }}
+            className={`rounded py-2.5 text-[17px] font-semibold ${view === v ? 'bg-ink text-paper' : ''}`}
+          >
+            {t(`steps.${v}`)}{' '}
+            <span className={view === v ? 'text-sign' : 'text-muted'}>{v === 'todo' ? openTasks : funThisWeek}</span>
+          </button>
+        ))}
+      </div>
+
+      {view === 'todo' && (<>
       <div className="mt-5">
         <p className="text-sm text-muted">{t('timeline.progress', { done: String(doneCount), total: String(plan.length) })}</p>
         <div className="mt-1.5 h-2 bg-concrete">
@@ -110,11 +136,9 @@ export function Timeline() {
 
       {weeks.map((week) => {
         const tasks = plan.filter((p) => p.week === week)
+        if (!tasks.length) return null
         const isPast = week < currentWeek
         const open = tasks.filter((p) => !p.done)
-        const acts = fun.get(week) ?? []
-        const weekHols = hols.filter((h) => h.week === week)
-        if (!tasks.length && !acts.length && !weekHols.length) return null
         return (
           <div key={week} className="mt-8">
             <h2 className="flex items-baseline justify-between border-b-2 border-ink pb-1.5">
@@ -130,25 +154,6 @@ export function Timeline() {
                   <TaskRow key={p.task.id} p={p} titles={titles} onToggle={() => ask(p.task.id, p.task.title.en)} />
                 ))}
               </ol>
-            )}
-            {(acts.length > 0 || weekHols.length > 0) && !isPast && (
-              <div className="mt-4">
-                <p className="text-sm font-semibold">{t('fun.title')}</p>
-                <ul className="mt-2 space-y-2">
-                  {weekHols.map((h) => (
-                    <HolidayCard key={h.holiday.id + h.date.getFullYear()} h={h} />
-                  ))}
-                  {acts.map((a) => (
-                    <ActivityCard
-                      key={a.id}
-                      a={a}
-                      tried={tried.has(a.id)}
-                      onTried={() => toggleTried(a.id)}
-                      onRemove={() => remove(a.id)}
-                    />
-                  ))}
-                </ul>
-              </div>
             )}
           </div>
         )
@@ -190,6 +195,44 @@ export function Timeline() {
               </li>
             ))}
           </ol>
+        </div>
+      )}
+      </>)}
+
+      {view === 'discover' && (
+        <div>
+          <p className="mt-4 text-muted">{t('discover.intro')}</p>
+          <p className="mt-2 text-sm font-semibold">{t('discover.tried', { n: String(tried.size) })}</p>
+          {weeks
+            .filter((w) => w >= currentWeek)
+            .map((week) => {
+              const acts = fun.get(week) ?? []
+              const weekHols = hols.filter((h) => h.week === week)
+              if (!acts.length && !weekHols.length) return null
+              return (
+                <div key={week} className="mt-8">
+                  <h2 className="flex items-baseline justify-between border-b-2 border-ink pb-1.5">
+                    <span className="font-sign text-2xl font-bold">{t('week.n', { n: String(week) })}</span>
+                    {week === currentWeek && <span className="bg-sign px-2 py-0.5 text-sm font-semibold">{t('week.this')}</span>}
+                    {week === currentWeek + 1 && <span className="text-sm text-muted">{t('week.next')}</span>}
+                  </h2>
+                  <ul className="mt-3 space-y-2">
+                    {weekHols.map((h) => (
+                      <HolidayCard key={h.holiday.id + h.date.getFullYear()} h={h} />
+                    ))}
+                    {acts.map((a) => (
+                      <ActivityCard
+                        key={a.id}
+                        a={a}
+                        tried={tried.has(a.id)}
+                        onTried={() => toggleTried(a.id)}
+                        onRemove={() => remove(a.id)}
+                      />
+                    ))}
+                  </ul>
+                </div>
+              )
+            })}
         </div>
       )}
 
