@@ -36,6 +36,8 @@ Collected while building. Order inside a section = rough priority.
 - [ ] Offline check, install prompt on Android
 
 ## Business
-- [ ] Monetisation experiments (see strategy notes): affiliate disclosure, “Arrival pack” fake door, uni/employer pilot
+- [ ] Proactive Anmeldung form: moved in + not registered → ask the few facts, generate the filled PDF on device, landlord-confirmation message, Bürgeramt booking link (pattern reused for permit and Kindergeld forms)
+- [ ] Arrival Pack fake door with price (count taps)
+- [ ] Monetisation experiments (strategy & business plan doc on claude.ai): affiliate disclosure, “Arrival pack” fake door, uni/employer pilot
 - [ ] Legal check: RDG boundary for paid paperwork help, § 34d GewO (insurance tip-giver only), § 49b BRAO (no per-referral fees to lawyers), GDPR
 - [ ] Company setup (Estonia) and where the business is registered for German affiliate contracts
