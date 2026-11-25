@@ -78,6 +78,9 @@ export interface Profile {
   cityId?: string
   /** only asked of non-EU citizens */
   status?: ResidenceStatus
+  /** option ids from questionnaire.json */
+  household?: string
+  germanLevel?: string
 }
 
 export interface State {

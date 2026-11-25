@@ -70,3 +70,66 @@ describe('questionnaire v2 rules', () => {
     expect(q.parts.filter((p) => p.enabled).map((p) => p.id)).toEqual(['plan'])
   })
 })
+
+import {
+  activeQuestions,
+  canContinue,
+  normalize,
+  otherKey,
+  toProfile,
+  toResearchPayload,
+  visibleQuestions,
+  type Answers,
+} from './questionnaire'
+
+describe('questionnaire logic', () => {
+  const base: Answers = {
+    purpose: 'study',
+    eu: 'no',
+    status: 'national_visa',
+    arrival: '2026-11-20',
+    place: { state: 'DE-SN', cityId: 'leipzig' },
+    household: 'alone',
+    german_level: 'basic',
+    done_already: ['sim-card'],
+  }
+
+  it('asks the status question only of non-EU citizens', () => {
+    expect(visibleQuestions({ eu: 'no' }).map((x) => x.id)).toContain('status')
+    expect(visibleQuestions({ eu: 'yes' }).map((x) => x.id)).not.toContain('status')
+  })
+
+  it('shows only enabled parts', () => {
+    expect(activeQuestions.every((x) => x.part === 'plan')).toBe(true)
+  })
+
+  it('"Something else" needs text before continuing', () => {
+    const purpose = activeQuestions.find((x) => x.id === 'purpose')!
+    expect(canContinue(purpose, { purpose: 'other' })).toBe(false)
+    expect(canContinue(purpose, { purpose: 'other', [otherKey('purpose')]: 'Au pair' })).toBe(true)
+    expect(canContinue(purpose, { purpose: 'study' })).toBe(true)
+  })
+
+  it('optional questions can be skipped', () => {
+    const done = activeQuestions.find((x) => x.id === 'done_already')!
+    expect(canContinue(done, {})).toBe(true)
+  })
+
+  it('builds a profile and drops the status for EU citizens', () => {
+    expect(toProfile(base)).toMatchObject({ purpose: 'study', eu: false, status: 'national_visa', state: 'DE-SN', cityId: 'leipzig' })
+    expect(toProfile({ ...base, eu: 'yes' }).status).toBeUndefined()
+  })
+
+  it('research payload has the month only and no free text', () => {
+    const p = toResearchPayload({ ...base, purpose: 'other', [otherKey('purpose')]: 'secret words' })
+    expect(p.plan.arrival_month).toBe('2026-11')
+    expect(JSON.stringify(p)).not.toContain('2026-11-20')
+    expect(JSON.stringify(p)).not.toContain('secret words')
+  })
+
+  it('normalises city names', () => {
+    expect(normalize('München')).toBe(normalize('Muenchen'))
+    expect(normalize('Düsseldorf')).toBe(normalize('dusseldorf'))
+    expect(normalize('Gießen')).toBe(normalize('giessen'))
+  })
+})

@@ -32,6 +32,24 @@ export async function track(name: string, props: Props = {}): Promise<void> {
   }
 }
 
+/** Consent-only: coarse questionnaire answers → `responses` (see migrations/002). */
+export async function submitResponses(payload: {
+  questionnaire_version: string
+  plan: Record<string, unknown>
+  research: Record<string, unknown>
+}, consent: string): Promise<void> {
+  const c = db()
+  if (!c) {
+    if (import.meta.env.DEV) console.debug('[responses]', payload)
+    return
+  }
+  try {
+    await c.from('responses').insert({ anon_id: load().anonId, consent, ...payload })
+  } catch {
+    /* never block the person on research data */
+  }
+}
+
 export function isStandalone(): boolean {
   try {
     return (

@@ -1,5 +1,6 @@
 // Everything the app remembers lives on the device under one key.
 // Every access is wrapped: private mode or blocked storage must never break the app.
+import type { Answers } from './questionnaire'
 import type { Profile } from './types'
 
 const KEY = 'dayone.v1'
@@ -7,6 +8,10 @@ const KEY = 'dayone.v1'
 export interface Saved {
   anonId: string
   profile?: Profile
+  /** raw questionnaire answers, incl. free text — device only */
+  answers?: Answers
+  /** consent id the person ticked, e.g. 'research_v1' */
+  consent?: string
   done: string[]
   createdAt: string
 }
@@ -17,7 +22,10 @@ function newId(): string {
   try {
     return crypto.randomUUID()
   } catch {
-    return `anon-${Date.now()}-${Math.random().toString(36).slice(2)}`
+    // RFC 4122-shaped fallback so the id still fits the uuid column
+    const h = () => Math.floor(Math.random() * 16).toString(16)
+    const s = (n: number) => Array.from({ length: n }, h).join('')
+    return `${s(8)}-${s(4)}-4${s(3)}-a${s(3)}-${s(12)}`
   }
 }
 

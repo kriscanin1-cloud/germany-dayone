@@ -1,11 +1,14 @@
 import { useState } from 'react'
-import { analyticsEnabled, isStandalone } from '../lib/analytics'
+import { Link, useNavigate } from 'react-router-dom'
+import { analyticsEnabled, isStandalone, track } from '../lib/analytics'
 import { t } from '../lib/i18n'
-import { wipe } from '../lib/storage'
+import { load, wipe } from '../lib/storage'
 
 export function Me() {
-  const [deleted, setDeleted] = useState(false)
+  const navigate = useNavigate()
+  const [deletedId, setDeletedId] = useState<string | null>(null)
   const installed = isStandalone()
+  const saved = load()
 
   return (
     <section>
@@ -13,17 +16,35 @@ export function Me() {
 
       {!installed && <p className="mt-6 border-l-4 border-sign pl-3">{t('install.ios')}</p>}
 
+      {saved.profile && (
+        <Link to="/onboarding" className="mt-8 block rounded-md border-2 border-ink py-3 text-center font-semibold">
+          {t('me.edit')}
+        </Link>
+      )}
+
       <button
         type="button"
         onClick={() => {
+          const id = load().anonId
+          track('data_deleted')
           wipe()
-          setDeleted(true)
+          setDeletedId(id)
         }}
-        className="mt-8 w-full rounded-md border-2 border-alert py-3 font-semibold text-alert"
+        className="mt-3 w-full rounded-md border-2 border-alert py-3 font-semibold text-alert"
       >
         {t('me.delete')}
       </button>
-      {deleted && <p className="mt-2 text-sm text-muted">{t('me.deleted')}</p>}
+      {deletedId && (
+        <div className="mt-3 text-sm">
+          <p>{t('me.deleted')}</p>
+          <p className="mt-1 text-muted">
+            {t('me.id')} <span className="break-all">{deletedId}</span>
+          </p>
+          <button type="button" onClick={() => navigate('/')} className="mt-2 font-semibold underline">
+            {t('welcome.cta')}
+          </button>
+        </div>
+      )}
 
       <p className="mt-10 text-sm text-muted">{t('me.disclaimer')}</p>
       <p className="mt-1 text-xs text-muted">

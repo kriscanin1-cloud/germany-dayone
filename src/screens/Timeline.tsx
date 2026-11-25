@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { Link } from 'react-router-dom'
 import { scenario, SHOW_DRAFTS } from '../lib/content'
 import { parseDate, planTasks, type Bucket } from '../lib/engine'
 import { t } from '../lib/i18n'
@@ -36,7 +37,14 @@ export function Timeline() {
           Day {today}
         </p>
       </div>
-      {!saved.profile && <p className="mt-3 text-muted">{t('timeline.sample')}</p>}
+      {!saved.profile && (
+        <div className="mt-3">
+          <p className="text-muted">{t('timeline.sample')}</p>
+          <Link to="/onboarding" className="mt-3 inline-block rounded-md bg-ink px-4 py-2.5 font-semibold text-paper">
+            {t('timeline.cta')}
+          </Link>
+        </div>
+      )}
 
       <div className="mt-5">
         <p className="text-sm text-muted">

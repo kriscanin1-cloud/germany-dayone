@@ -3,14 +3,20 @@ import { Layout } from './components/Layout'
 import { t } from './lib/i18n'
 import { load } from './lib/storage'
 import { Me } from './screens/Me'
+import { Onboarding } from './screens/Onboarding'
 import { Placeholder } from './screens/Placeholder'
 import { Timeline } from './screens/Timeline'
 import { Welcome } from './screens/Welcome'
 
+/** Decided on every visit, not once at start-up: after onboarding "/" goes to the plan. */
+function Start() {
+  return load().profile ? <Navigate to="/timeline" replace /> : <Welcome />
+}
+
 // HashRouter-style URLs (/#/timeline) because GitHub Pages cannot serve SPA routes.
 const router = createHashRouter([
-  { path: '/', element: load().profile ? <Navigate to="/timeline" replace /> : <Welcome /> },
-  { path: '/onboarding', element: <Placeholder title="Onboarding" body="5–6 quick questions build your plan." /> },
+  { path: '/', element: <Start /> },
+  { path: '/onboarding', element: <Onboarding /> },
   {
     element: <Layout />,
     children: [
