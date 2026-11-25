@@ -9,6 +9,8 @@ export interface PlannedTask {
   due: Date
   /** Day number counted from arrival (arrival = Day 1) */
   day: number
+  /** Week number counted from arrival (days 1–7 = week 1) */
+  week: number
   bucket: Bucket
   done: boolean
   /** dependency ids that are not done yet */
@@ -113,6 +115,7 @@ export function planTasks(
       task,
       due,
       day: daysBetween(arrival, due) + 1,
+      week: Math.max(1, Math.ceil((daysBetween(arrival, due) + 1) / 7)),
       done: isDone,
       bucket: bucketFor(due, today, isDone),
       blockedBy: task.dependsOn.filter((d) => visibleIds.has(d) && !done.has(d)),

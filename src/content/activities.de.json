@@ -1,0 +1,1130 @@
+{
+  "version": "2026-11-v1",
+  "note": "Fun, optional things to try. Holidays: public holidays by state (shops closed) and traditions. Regional items use `where`.",
+  "activities": [
+    {
+      "id": "bratwurst",
+      "kind": "food",
+      "title": {
+        "en": "Eat a Bratwurst with mustard"
+      },
+      "body": {
+        "en": "Grab one in a bread roll from a street stand or a market — mustard (Senf), not ketchup."
+      }
+    },
+    {
+      "id": "currywurst",
+      "kind": "food",
+      "title": {
+        "en": "Try a Currywurst"
+      },
+      "body": {
+        "en": "Sliced sausage with curry ketchup, usually with fries (Pommes). Ask for “mit Darm” or “ohne Darm”."
+      }
+    },
+    {
+      "id": "brezel",
+      "kind": "food",
+      "title": {
+        "en": "Have a fresh Brezel"
+      },
+      "body": {
+        "en": "Buy a pretzel at any bakery. Butterbrezel — with butter — is the classic breakfast on the go."
+      }
+    },
+    {
+      "id": "broetchen",
+      "kind": "food",
+      "title": {
+        "en": "Do a Sunday-style Brötchen breakfast"
+      },
+      "body": {
+        "en": "Fresh bread rolls from the bakery, butter, jam, cheese, cold cuts and a soft-boiled egg."
+      }
+    },
+    {
+      "id": "kaffee-kuchen",
+      "kind": "food",
+      "title": {
+        "en": "Kaffee und Kuchen at 3 pm"
+      },
+      "body": {
+        "en": "Afternoon coffee and cake is a ritual. Try Bienenstich, Käsekuchen or Schwarzwälder Kirschtorte."
+      }
+    },
+    {
+      "id": "schnitzel",
+      "kind": "food",
+      "title": {
+        "en": "Eat a Schnitzel"
+      },
+      "body": {
+        "en": "Wiener Schnitzel is veal; Schnitzel Wiener Art is pork. Jägerschnitzel comes with mushroom sauce."
+      }
+    },
+    {
+      "id": "doener",
+      "kind": "food",
+      "title": {
+        "en": "Get a Döner"
+      },
+      "body": {
+        "en": "The German-Turkish kebab was perfected in Berlin. Say “mit alles” for everything, “scharf” for spicy."
+      }
+    },
+    {
+      "id": "kartoffelsalat",
+      "kind": "food",
+      "title": {
+        "en": "Taste two kinds of potato salad"
+      },
+      "body": {
+        "en": "South: with vinegar and broth. North: with mayonnaise. Pick a side."
+      }
+    },
+    {
+      "id": "spaetzle",
+      "kind": "food",
+      "title": {
+        "en": "Eat Käsespätzle"
+      },
+      "body": {
+        "en": "Soft egg noodles baked with cheese and fried onions — Swabian comfort food."
+      }
+    },
+    {
+      "id": "rouladen",
+      "kind": "food",
+      "title": {
+        "en": "Try Rinderrouladen"
+      },
+      "body": {
+        "en": "Beef rolls with bacon, onion and pickle, braised in gravy — a typical family Sunday dish."
+      }
+    },
+    {
+      "id": "beer",
+      "kind": "drink",
+      "title": {
+        "en": "Drink a local beer"
+      },
+      "body": {
+        "en": "Ask for whatever is brewed nearby. A small one is “ein Kleines”."
+      },
+      "alt": {
+        "en": "Not drinking? Try an alcohol-free beer — Germany makes very good ones."
+      }
+    },
+    {
+      "id": "apfelschorle",
+      "kind": "drink",
+      "title": {
+        "en": "Order an Apfelschorle"
+      },
+      "body": {
+        "en": "Apple juice with sparkling water — the national soft drink."
+      }
+    },
+    {
+      "id": "spezi",
+      "kind": "drink",
+      "title": {
+        "en": "Try a Spezi"
+      },
+      "body": {
+        "en": "Cola mixed with orange soda. Ask for it in any café or Späti."
+      }
+    },
+    {
+      "id": "pfand",
+      "kind": "culture",
+      "title": {
+        "en": "Return your first Pfand bottles"
+      },
+      "body": {
+        "en": "Bottles and cans with the Pfand logo give you 8–25 cents back at the machines in supermarkets."
+      }
+    },
+    {
+      "id": "muelltrennung",
+      "kind": "culture",
+      "title": {
+        "en": "Master waste sorting"
+      },
+      "body": {
+        "en": "Yellow bin: packaging. Blue: paper. Brown: food. Black: the rest. Glass goes to street containers by colour."
+      }
+    },
+    {
+      "id": "sonntag",
+      "kind": "culture",
+      "title": {
+        "en": "Take a Sunday walk"
+      },
+      "body": {
+        "en": "Shops are closed on Sundays, so do what locals do: a long walk (Spaziergang) in a park or forest."
+      }
+    },
+    {
+      "id": "tatort",
+      "kind": "culture",
+      "title": {
+        "en": "Watch Tatort on Sunday at 8:15 pm"
+      },
+      "body": {
+        "en": "Germany's longest-running crime show. Many bars screen it — a chance to listen to German."
+      }
+    },
+    {
+      "id": "flohmarkt",
+      "kind": "culture",
+      "title": {
+        "en": "Visit a flea market"
+      },
+      "body": {
+        "en": "Weekend flea markets (Flohmarkt) are good for cheap furniture and kitchen things."
+      }
+    },
+    {
+      "id": "library",
+      "kind": "culture",
+      "title": {
+        "en": "Get a library card"
+      },
+      "body": {
+        "en": "Public libraries (Stadtbibliothek) lend books, films and language courses, often for a small yearly fee."
+      }
+    },
+    {
+      "id": "sauna",
+      "kind": "culture",
+      "title": {
+        "en": "Try a German sauna"
+      },
+      "body": {
+        "en": "Most saunas are mixed and nude, with a towel to sit on. Take a cold shower between rounds."
+      }
+    },
+    {
+      "id": "ticket-check",
+      "kind": "culture",
+      "title": {
+        "en": "Ride a regional train"
+      },
+      "body": {
+        "en": "With the Deutschlandticket you can take any regional train — try a day trip to a nearby town."
+      }
+    },
+    {
+      "id": "feierabend",
+      "kind": "culture",
+      "title": {
+        "en": "Learn the word Feierabend"
+      },
+      "body": {
+        "en": "The end of the working day — and the right to switch off. Ask a colleague about their Feierabend plans."
+      }
+    },
+    {
+      "id": "biergarten",
+      "kind": "drink",
+      "title": {
+        "en": "Sit in a Biergarten"
+      },
+      "body": {
+        "en": "Shared long tables under trees. In many you can bring your own food and buy drinks."
+      },
+      "months": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "alt": {
+        "en": "Order an Apfelschorle or a lemonade instead."
+      }
+    },
+    {
+      "id": "radler",
+      "kind": "drink",
+      "title": {
+        "en": "Order a Radler"
+      },
+      "body": {
+        "en": "Half beer, half lemonade — a summer favourite."
+      },
+      "months": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "alt": {
+        "en": "Ask for a Zitronenlimonade instead."
+      }
+    },
+    {
+      "id": "spargel",
+      "kind": "food",
+      "title": {
+        "en": "Eat white asparagus"
+      },
+      "body": {
+        "en": "Spargelzeit runs from April to 24 June. Classic: with potatoes, ham and hollandaise."
+      },
+      "months": [
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "id": "erdbeeren",
+      "kind": "food",
+      "title": {
+        "en": "Buy strawberries from a roadside hut"
+      },
+      "body": {
+        "en": "In early summer, small strawberry-shaped huts sell local berries."
+      },
+      "months": [
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "id": "eis",
+      "kind": "food",
+      "title": {
+        "en": "Have Spaghettieis"
+      },
+      "body": {
+        "en": "Ice cream pressed through a noodle press, with strawberry sauce and white chocolate “parmesan”."
+      },
+      "months": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "id": "federweisser",
+      "kind": "drink",
+      "title": {
+        "en": "Try Federweißer with Zwiebelkuchen"
+      },
+      "body": {
+        "en": "New, still-fermenting wine with onion tart — only in early autumn."
+      },
+      "months": [
+        9,
+        10
+      ],
+      "alt": {
+        "en": "Try fresh apple cider juice (Süßmost) instead."
+      }
+    },
+    {
+      "id": "kuerbis",
+      "kind": "food",
+      "title": {
+        "en": "Eat pumpkin soup"
+      },
+      "body": {
+        "en": "Autumn means Kürbissuppe everywhere — try it with pumpkin seed oil."
+      },
+      "months": [
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "id": "gluehwein",
+      "kind": "drink",
+      "title": {
+        "en": "Drink Glühwein at a Christmas market"
+      },
+      "body": {
+        "en": "Hot spiced wine in a souvenir mug — you pay a deposit and can keep the mug."
+      },
+      "months": [
+        11,
+        12
+      ],
+      "alt": {
+        "en": "Ask for Kinderpunsch — the alcohol-free version."
+      }
+    },
+    {
+      "id": "lebkuchen",
+      "kind": "food",
+      "title": {
+        "en": "Taste Lebkuchen"
+      },
+      "body": {
+        "en": "Soft gingerbread with spices, sold from autumn until Christmas."
+      },
+      "months": [
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "id": "stollen",
+      "kind": "food",
+      "title": {
+        "en": "Try Christstollen"
+      },
+      "body": {
+        "en": "A dense fruit bread dusted with sugar — the Dresden one is the most famous."
+      },
+      "months": [
+        11,
+        12
+      ]
+    },
+    {
+      "id": "weihnachtsmarkt",
+      "kind": "culture",
+      "title": {
+        "en": "Walk through a Christmas market"
+      },
+      "body": {
+        "en": "Stalls with crafts, sausages and mulled wine open from late November."
+      },
+      "months": [
+        11,
+        12
+      ]
+    },
+    {
+      "id": "gans",
+      "kind": "food",
+      "title": {
+        "en": "Share a roast goose"
+      },
+      "body": {
+        "en": "Martinsgans and Christmas goose with red cabbage and dumplings (Knödel)."
+      },
+      "months": [
+        11,
+        12
+      ]
+    },
+    {
+      "id": "berliner",
+      "kind": "food",
+      "title": {
+        "en": "Eat a Berliner"
+      },
+      "body": {
+        "en": "Jam-filled doughnut. Around carnival and New Year's Eve bakeries sell them by the tray."
+      },
+      "months": [
+        1,
+        2,
+        12
+      ]
+    },
+    {
+      "id": "koelsch",
+      "kind": "drink",
+      "title": {
+        "en": "Drink a Kölsch"
+      },
+      "body": {
+        "en": "Served in small 0.2 l glasses; the waiter keeps bringing new ones until you put your coaster on top."
+      },
+      "where": {
+        "cities": [
+          "koeln",
+          "bonn"
+        ]
+      },
+      "alt": {
+        "en": "Ask for a Fassbrause instead."
+      }
+    },
+    {
+      "id": "altbier",
+      "kind": "drink",
+      "title": {
+        "en": "Drink an Altbier in the Altstadt"
+      },
+      "body": {
+        "en": "Dark top-fermented beer from Düsseldorf's old breweries."
+      },
+      "where": {
+        "cities": [
+          "duesseldorf"
+        ]
+      },
+      "alt": {
+        "en": "Ask for a Fassbrause instead."
+      }
+    },
+    {
+      "id": "weissbier",
+      "kind": "drink",
+      "title": {
+        "en": "Order a Weißbier"
+      },
+      "body": {
+        "en": "Wheat beer in a tall glass. In Bavaria, many people drink it with Weißwurst before noon."
+      },
+      "where": {
+        "states": [
+          "DE-BY"
+        ]
+      },
+      "alt": {
+        "en": "Alcohol-free Weißbier is everywhere in Bavaria."
+      }
+    },
+    {
+      "id": "weisswurst",
+      "kind": "food",
+      "title": {
+        "en": "Eat Weißwurst before noon"
+      },
+      "body": {
+        "en": "White veal sausage with sweet mustard and a pretzel. Suck it out of the skin like a local."
+      },
+      "where": {
+        "states": [
+          "DE-BY"
+        ]
+      }
+    },
+    {
+      "id": "leberkaese",
+      "kind": "food",
+      "title": {
+        "en": "Have a Leberkässemmel"
+      },
+      "body": {
+        "en": "A thick slice of Leberkäse in a bread roll, from any butcher."
+      },
+      "where": {
+        "states": [
+          "DE-BY",
+          "DE-BW"
+        ]
+      }
+    },
+    {
+      "id": "maultaschen",
+      "kind": "food",
+      "title": {
+        "en": "Try Maultaschen"
+      },
+      "body": {
+        "en": "Swabian pasta pockets filled with meat and spinach, in broth or fried with onions."
+      },
+      "where": {
+        "states": [
+          "DE-BW"
+        ]
+      }
+    },
+    {
+      "id": "gruene-sosse",
+      "kind": "food",
+      "title": {
+        "en": "Eat Grüne Soße"
+      },
+      "body": {
+        "en": "Cold herb sauce with eggs and potatoes — Frankfurt's signature dish."
+      },
+      "where": {
+        "cities": [
+          "frankfurt-am-main",
+          "darmstadt",
+          "wiesbaden",
+          "giessen",
+          "marburg",
+          "kassel"
+        ]
+      }
+    },
+    {
+      "id": "apfelwein",
+      "kind": "drink",
+      "title": {
+        "en": "Drink Apfelwein (Ebbelwoi)"
+      },
+      "body": {
+        "en": "Sour cider served in a ribbed glass, in a traditional Äppelwoi-tavern."
+      },
+      "where": {
+        "states": [
+          "DE-HE"
+        ]
+      },
+      "alt": {
+        "en": "Ask for a sparkling apple juice (Apfelsaftschorle) instead."
+      }
+    },
+    {
+      "id": "franzbroetchen",
+      "kind": "food",
+      "title": {
+        "en": "Eat a Franzbrötchen"
+      },
+      "body": {
+        "en": "Hamburg's cinnamon pastry — every bakery has its own."
+      },
+      "where": {
+        "states": [
+          "DE-HH",
+          "DE-SH"
+        ]
+      }
+    },
+    {
+      "id": "fischbroetchen",
+      "kind": "food",
+      "title": {
+        "en": "Have a Fischbrötchen"
+      },
+      "body": {
+        "en": "Bread roll with herring or fried fish, best by the water."
+      },
+      "where": {
+        "states": [
+          "DE-HH",
+          "DE-SH",
+          "DE-HB",
+          "DE-MV",
+          "DE-NI"
+        ]
+      }
+    },
+    {
+      "id": "berliner-weisse",
+      "kind": "drink",
+      "title": {
+        "en": "Try a Berliner Weiße"
+      },
+      "body": {
+        "en": "Sour wheat beer, traditionally with red or green syrup."
+      },
+      "where": {
+        "states": [
+          "DE-BE"
+        ]
+      },
+      "alt": {
+        "en": "Try a Club-Mate instead — Berlin's favourite soft drink."
+      }
+    },
+    {
+      "id": "spaeti",
+      "kind": "culture",
+      "title": {
+        "en": "Hang out at a Späti"
+      },
+      "body": {
+        "en": "Late-night corner shops where people sit outside with a drink."
+      },
+      "where": {
+        "states": [
+          "DE-BE"
+        ]
+      }
+    },
+    {
+      "id": "thueringer",
+      "kind": "food",
+      "title": {
+        "en": "Eat a Thüringer Rostbratwurst"
+      },
+      "body": {
+        "en": "Grilled over charcoal and protected by EU law as a regional product."
+      },
+      "where": {
+        "states": [
+          "DE-TH"
+        ]
+      }
+    },
+    {
+      "id": "eierschecke",
+      "kind": "food",
+      "title": {
+        "en": "Try Eierschecke"
+      },
+      "body": {
+        "en": "A three-layer cake from Saxony with quark and custard."
+      },
+      "where": {
+        "states": [
+          "DE-SN"
+        ]
+      }
+    },
+    {
+      "id": "pfaelzer-saumagen",
+      "kind": "food",
+      "title": {
+        "en": "Try Saumagen"
+      },
+      "body": {
+        "en": "Pfalz speciality of meat and potatoes cooked in a pig's stomach."
+      },
+      "where": {
+        "states": [
+          "DE-RP"
+        ]
+      }
+    },
+    {
+      "id": "labskaus",
+      "kind": "food",
+      "title": {
+        "en": "Try Labskaus"
+      },
+      "body": {
+        "en": "A sailor's mash of corned beef, potatoes and beetroot with a fried egg."
+      },
+      "where": {
+        "states": [
+          "DE-HH",
+          "DE-HB",
+          "DE-SH"
+        ]
+      }
+    }
+  ],
+  "holidays": [
+    {
+      "id": "new-year",
+      "kind": "public",
+      "title": {
+        "en": "New Year's Day"
+      },
+      "body": {
+        "en": "Public holiday: shops are closed — buy groceries the day before."
+      },
+      "rule": {
+        "fixed": "01-01"
+      }
+    },
+    {
+      "id": "epiphany",
+      "kind": "public",
+      "title": {
+        "en": "Epiphany (Heilige Drei Könige)"
+      },
+      "body": {
+        "en": "Public holiday: shops are closed — buy groceries the day before."
+      },
+      "rule": {
+        "fixed": "01-06"
+      },
+      "where": {
+        "states": [
+          "DE-BW",
+          "DE-BY",
+          "DE-ST"
+        ]
+      }
+    },
+    {
+      "id": "womens-day",
+      "kind": "public",
+      "title": {
+        "en": "International Women's Day"
+      },
+      "body": {
+        "en": "Public holiday: shops are closed — buy groceries the day before."
+      },
+      "rule": {
+        "fixed": "03-08"
+      },
+      "where": {
+        "states": [
+          "DE-BE",
+          "DE-MV"
+        ]
+      }
+    },
+    {
+      "id": "weiberfastnacht",
+      "kind": "tradition",
+      "title": {
+        "en": "Weiberfastnacht"
+      },
+      "body": {
+        "en": "Carnival begins in earnest: costumes everywhere, and women cut off men's ties."
+      },
+      "rule": {
+        "easter": -52
+      },
+      "where": {
+        "cities": [
+          "koeln",
+          "duesseldorf",
+          "mainz",
+          "bonn",
+          "aachen"
+        ]
+      }
+    },
+    {
+      "id": "rosenmontag",
+      "kind": "tradition",
+      "title": {
+        "en": "Rosenmontag parade"
+      },
+      "body": {
+        "en": "The big carnival parade. Dress up and shout “Alaaf” (Cologne) or “Helau” (Düsseldorf, Mainz)."
+      },
+      "rule": {
+        "easter": -48
+      },
+      "where": {
+        "cities": [
+          "koeln",
+          "duesseldorf",
+          "mainz",
+          "bonn",
+          "aachen"
+        ]
+      }
+    },
+    {
+      "id": "good-friday",
+      "kind": "public",
+      "title": {
+        "en": "Good Friday"
+      },
+      "body": {
+        "en": "Public holiday: shops are closed — buy groceries the day before. It's also a quiet day: no dance parties."
+      },
+      "rule": {
+        "easter": -2
+      }
+    },
+    {
+      "id": "easter",
+      "kind": "tradition",
+      "title": {
+        "en": "Easter Sunday"
+      },
+      "body": {
+        "en": "Coloured eggs, chocolate bunnies and family lunch."
+      },
+      "rule": {
+        "easter": 0
+      }
+    },
+    {
+      "id": "easter-monday",
+      "kind": "public",
+      "title": {
+        "en": "Easter Monday"
+      },
+      "body": {
+        "en": "Public holiday: shops are closed — buy groceries the day before."
+      },
+      "rule": {
+        "easter": 1
+      }
+    },
+    {
+      "id": "may-day",
+      "kind": "public",
+      "title": {
+        "en": "Labour Day (1 May)"
+      },
+      "body": {
+        "en": "Public holiday: shops are closed — buy groceries the day before. The night before is Walpurgisnacht / Tanz in den Mai."
+      },
+      "rule": {
+        "fixed": "05-01"
+      }
+    },
+    {
+      "id": "ascension",
+      "kind": "public",
+      "title": {
+        "en": "Ascension Day"
+      },
+      "body": {
+        "en": "Public holiday: shops are closed — buy groceries the day before. Also Father's Day: groups of men hike with handcarts of beer."
+      },
+      "rule": {
+        "easter": 39
+      }
+    },
+    {
+      "id": "whit-monday",
+      "kind": "public",
+      "title": {
+        "en": "Whit Monday"
+      },
+      "body": {
+        "en": "Public holiday: shops are closed — buy groceries the day before."
+      },
+      "rule": {
+        "easter": 50
+      }
+    },
+    {
+      "id": "corpus-christi",
+      "kind": "public",
+      "title": {
+        "en": "Corpus Christi (Fronleichnam)"
+      },
+      "body": {
+        "en": "Public holiday: shops are closed — buy groceries the day before."
+      },
+      "rule": {
+        "easter": 60
+      },
+      "where": {
+        "states": [
+          "DE-BW",
+          "DE-BY",
+          "DE-HE",
+          "DE-NW",
+          "DE-RP",
+          "DE-SL"
+        ]
+      }
+    },
+    {
+      "id": "assumption",
+      "kind": "public",
+      "title": {
+        "en": "Assumption Day"
+      },
+      "body": {
+        "en": "Public holiday: shops are closed — buy groceries the day before."
+      },
+      "rule": {
+        "fixed": "08-15"
+      },
+      "where": {
+        "states": [
+          "DE-SL"
+        ]
+      }
+    },
+    {
+      "id": "oktoberfest",
+      "kind": "tradition",
+      "title": {
+        "en": "Oktoberfest starts"
+      },
+      "body": {
+        "en": "Two weeks of beer tents, rides and Tracht on the Theresienwiese. Weekday afternoons are the easiest time to get in."
+      },
+      "rule": {
+        "special": "oktoberfest"
+      },
+      "where": {
+        "cities": [
+          "muenchen"
+        ]
+      }
+    },
+    {
+      "id": "childrens-day",
+      "kind": "public",
+      "title": {
+        "en": "World Children's Day"
+      },
+      "body": {
+        "en": "Public holiday: shops are closed — buy groceries the day before."
+      },
+      "rule": {
+        "fixed": "09-20"
+      },
+      "where": {
+        "states": [
+          "DE-TH"
+        ]
+      }
+    },
+    {
+      "id": "unity-day",
+      "kind": "public",
+      "title": {
+        "en": "Day of German Unity"
+      },
+      "body": {
+        "en": "Public holiday: shops are closed — buy groceries the day before."
+      },
+      "rule": {
+        "fixed": "10-03"
+      }
+    },
+    {
+      "id": "reformation",
+      "kind": "public",
+      "title": {
+        "en": "Reformation Day"
+      },
+      "body": {
+        "en": "Public holiday: shops are closed — buy groceries the day before."
+      },
+      "rule": {
+        "fixed": "10-31"
+      },
+      "where": {
+        "states": [
+          "DE-BB",
+          "DE-HB",
+          "DE-HH",
+          "DE-MV",
+          "DE-NI",
+          "DE-SN",
+          "DE-ST",
+          "DE-SH",
+          "DE-TH"
+        ]
+      }
+    },
+    {
+      "id": "all-saints",
+      "kind": "public",
+      "title": {
+        "en": "All Saints' Day"
+      },
+      "body": {
+        "en": "Public holiday: shops are closed — buy groceries the day before."
+      },
+      "rule": {
+        "fixed": "11-01"
+      },
+      "where": {
+        "states": [
+          "DE-BW",
+          "DE-BY",
+          "DE-NW",
+          "DE-RP",
+          "DE-SL"
+        ]
+      }
+    },
+    {
+      "id": "st-martin",
+      "kind": "tradition",
+      "title": {
+        "en": "St. Martin's Day"
+      },
+      "body": {
+        "en": "Children walk through the streets with paper lanterns and sing. Many restaurants serve roast goose."
+      },
+      "rule": {
+        "fixed": "11-11"
+      }
+    },
+    {
+      "id": "repentance",
+      "kind": "public",
+      "title": {
+        "en": "Day of Repentance and Prayer"
+      },
+      "body": {
+        "en": "Public holiday: shops are closed — buy groceries the day before."
+      },
+      "rule": {
+        "special": "repentance"
+      },
+      "where": {
+        "states": [
+          "DE-SN"
+        ]
+      }
+    },
+    {
+      "id": "advent-1",
+      "kind": "tradition",
+      "title": {
+        "en": "First Sunday of Advent"
+      },
+      "body": {
+        "en": "Light the first candle of an Advent wreath. Christmas markets are open."
+      },
+      "rule": {
+        "special": "advent1"
+      }
+    },
+    {
+      "id": "nikolaus",
+      "kind": "tradition",
+      "title": {
+        "en": "Nikolaus"
+      },
+      "body": {
+        "en": "Put your boots outside the door on the evening of 5 December — they get filled with sweets."
+      },
+      "rule": {
+        "fixed": "12-06"
+      }
+    },
+    {
+      "id": "christmas-eve",
+      "kind": "tradition",
+      "title": {
+        "en": "Christmas Eve"
+      },
+      "body": {
+        "en": "The main celebration in Germany is in the evening. Shops close at lunchtime."
+      },
+      "rule": {
+        "fixed": "12-24"
+      }
+    },
+    {
+      "id": "christmas",
+      "kind": "public",
+      "title": {
+        "en": "Christmas Day"
+      },
+      "body": {
+        "en": "Public holiday: shops are closed — buy groceries the day before."
+      },
+      "rule": {
+        "fixed": "12-25"
+      }
+    },
+    {
+      "id": "boxing-day",
+      "kind": "public",
+      "title": {
+        "en": "2nd Christmas Day"
+      },
+      "body": {
+        "en": "Public holiday: shops are closed — buy groceries the day before."
+      },
+      "rule": {
+        "fixed": "12-26"
+      }
+    },
+    {
+      "id": "silvester",
+      "kind": "tradition",
+      "title": {
+        "en": "New Year's Eve (Silvester)"
+      },
+      "body": {
+        "en": "Fireworks at midnight, Bleigießen-style fortune telling and “Dinner for One” on TV."
+      },
+      "rule": {
+        "fixed": "12-31"
+      }
+    }
+  ]
+}

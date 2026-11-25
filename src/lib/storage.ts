@@ -13,6 +13,10 @@ export interface Saved {
   /** consent id the person ticked, e.g. 'research_v1' */
   consent?: string
   done: string[]
+  /** activity ids the person removed with × */
+  removed?: string[]
+  /** activity ids the person ticked as tried */
+  tried?: string[]
   createdAt: string
 }
 
