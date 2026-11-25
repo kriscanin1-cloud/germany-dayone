@@ -1,52 +1,66 @@
 # Questionnaire and data flow
 
-Source of truth: `src/content/questionnaire.json` (version `2026-11-v1`).
-Database: `supabase/migrations/001_schema.sql`, then `supabase/migrations/002_responses.sql`.
+Source of truth: `src/content/questionnaire.json` (version `2026-11-v2`).
+Database: `supabase/migrations/` (run 001, then 002).
 
-## Two parts, two purposes
+## What is asked now
 
-| Part | Questions | Why we ask | Where it goes |
+Only the **Your plan** part is enabled (~1 minute):
+
+| # | Question | Shown to | Notes |
 |---|---|---|---|
-| **Your plan** (required, ~1 min) | purpose, EU citizen, arrival date, city/state, household, German level, already done | To build the personal plan | **Device only** (`localStorage`). Coarse version to the server **only with research consent** |
-| **Help us improve** (optional, ~1 min) | worries (max 3), who helps, paid for help, preferred language, how you found us, interview email | To learn what newcomers need and who pays | Server, **only with research consent** (unticked by default) |
+| 1 | Why are you moving to Germany? | everyone | study · job · job search (Opportunity Card) · family · something else (free text) |
+| 2 | EU / EEA / Swiss citizen? | everyone | "yes" hides visa and permit steps |
+| 3 | Current residence status | **non-EU only** | not in Germany yet · visa-free/tourist · national (D) visa · waiting for permit (Fiktionsbescheinigung) · residence permit · Blue Card · Opportunity Card · permanent residence · asylum/protection · not sure · something else (free text) |
+| 4 | Arrival date | everyone | exact date on the device, month only on the server |
+| 5 | City (or state if not listed) | everyone | |
+| 6 | Who is moving with you? | everyone | just me · partner · children · something else (free text) |
+| 7 | German level | everyone | none · A1–A2 · B1–B2 · C1+ |
+| 8 | Already done | everyone | pre-ticks tasks in the plan |
+
+At the end: an **unticked** checkbox — *"Share my answers with Day One, without my name, to improve the app…"* (`consents.research_v1`).
+
+The **Help us improve** part (worries, who helps, paid for help, preferred language, how you found us, interview email) is kept in the file with `"enabled": false` for a later version.
+
+### How the status changes the plan
+- Tasks can be limited with `appliesTo.statuses`. A profile without a status (EU citizens) is never filtered out by it.
+- *Book your residence permit appointment* is shown for: not in Germany yet, visa-free, national visa, not sure, something else. It is hidden for people who already hold or have applied for a permit.
+- *Asylum or protection status*: this version is built for study and work migration; the app should say so and point to free counselling (content to add).
 
 ## Three data streams
 
 ```
 Device (localStorage)
-  full answers, exact arrival date, done tasks  ──► builds the plan, never leaves the phone
+  all answers, exact arrival date, free-text "something else", done tasks
+  ──► builds the plan, never leaves the phone
 
-Supabase  events     (anonymous usage, always on if configured)
-  onboarding_completed {purpose, eu, state, city_listed}, task_done, …   ──► funnel + activation metric
+Supabase  events     (anonymous usage)
+  onboarding_completed {purpose, eu, state, city_listed}, task_done, …
+  ──► funnel and the 7-day activation metric
 
-Supabase  responses  (research, consent only)
-  plan: coarse answers (arrival → YYYY-MM), research answers, consent id   ──► insights, segmentation
-
-Supabase  waitlist   (contact, explicit consent)
-  email + interest ('interview' | 'meetup' | …)   ──► kept apart from answers
+Supabase  responses  (only if the person ticked the consent box)
+  plan: purpose, eu, status, arrival month, state, city, household, German level, already done
+  ──► insights and segmentation
 ```
 
 Rules:
-- The exact arrival date, names, nationality and free text are never sent to the server.
-- Emails live only in `waitlist`, never next to answers.
-- Each question and option has a stable id. A changed meaning = new id + new questionnaire version; old rows keep their version.
-- Each submit inserts a new `responses` row; `responses_latest` gives one row per person.
+- Never sent to the server: exact arrival date, names, nationality, free text.
+- Each question and option has a stable id. A changed meaning means a new id and a new questionnaire version; old rows keep their version.
+- Each submit inserts a new `responses` row; the `responses_latest` view gives one row per person.
 
-## What the collected data can be used for later
+## What consented data can be used for
 
-Covered by the research consent text (`consents.research_v1`):
-- improving the app (which tasks, entitlements and languages to add);
-- segmentation: who struggles with what (students vs workers, by state, German level);
-- willingness-to-pay signals (`paid_for_help`, `helpers`);
-- channel attribution (`heard_from`);
-- **combined statistics that cannot identify anyone**, e.g. a report for universities or employers on what newcomers struggle with.
+Covered by `research_v1`:
+- improving the app (which tasks, statuses, cities and languages to cover);
+- segmentation: who struggles with what (students vs workers, by status, state, German level);
+- **combined statistics that cannot identify anyone**, e.g. a report for universities or employers.
 
-Not covered (would need a new consent): selling or sharing individual rows, contacting people about offers, linking to other datasets.
+Not covered (needs a new consent): sharing individual rows, contacting people with offers, linking to other datasets.
 
 ## Deletion and retention
 
-- *Me → Delete my data* clears the device and shows the anonymous ID for a server deletion request (SQL in the migration file).
-- Research rows older than 24 months are deleted (SQL in the migration file; schedule it).
+- *Me → Delete my data* clears the device and shows the anonymous ID for a server deletion request (SQL in migration 002).
+- Consented rows older than 24 months are deleted (SQL in migration 002; schedule it).
 
 ## Before going public
 
