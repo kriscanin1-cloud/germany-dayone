@@ -1,13 +1,14 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { scenario, SHOW_DRAFTS } from '../lib/content'
-import { parseDate, planTasks, type Bucket } from '../lib/engine'
+import { parseDate, planMilestones, planTasks, type Bucket } from '../lib/engine'
 import { t } from '../lib/i18n'
+import { toProfile } from '../lib/questionnaire'
 import { load } from '../lib/storage'
 import type { Profile } from '../lib/types'
 
 // Until onboarding exists, the timeline previews a sample profile.
-const SAMPLE: Profile = { purpose: 'study', eu: false, arrival: isoDaysAgo(4), state: 'DE-BE', cityId: 'berlin' }
+const SAMPLE: Profile = { purpose: 'study', eu: false, citizenship: 'other', status: 'national_visa', arrival: isoDaysAgo(4), state: 'DE-BE', cityId: 'berlin' }
 
 function isoDaysAgo(n: number): string {
   const d = new Date()
@@ -20,10 +21,16 @@ const fmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short' })
 
 export function Timeline() {
   const saved = load()
-  const profile = saved.profile ?? SAMPLE
+  // profiles saved before questionnaire v3 have no citizenship: rebuild them from the saved answers
+  const profile =
+    saved.profile && !saved.profile.citizenship && saved.answers ? toProfile(saved.answers) : (saved.profile ?? SAMPLE)
   const plan = useMemo(
     () => planTasks(scenario.tasks, profile, saved.done, { showDrafts: SHOW_DRAFTS }),
     [profile, saved.done],
+  )
+  const milestones = useMemo(
+    () => planMilestones(scenario.milestones ?? [], profile, { showDrafts: SHOW_DRAFTS }),
+    [profile],
   )
   const doneCount = plan.filter((p) => p.done).length
   const arrival = parseDate(profile.arrival)
@@ -70,12 +77,12 @@ export function Timeline() {
               {t(`bucket.${bucket}`)}
             </h2>
             <ol className="mt-2 border-t-2 border-ink">
-              {items.map(({ task, due, blockedBy }) => (
+              {items.map(({ task, due, day, blockedBy }) => (
                 <li key={task.id} className="flex gap-4 border-b border-ink/15 py-3.5">
-                  <div className="w-14 shrink-0 pt-0.5">
-                    <p className="font-sign text-[22px] leading-none font-bold">
-                      {/* arrival day is Day 1, so an offset of N days is Day N+1 */}
-                      Day {task.deadline.offsetDays + 1}
+                  <div className="w-[4.5rem] shrink-0 pt-0.5">
+                    <p className="font-sign text-[22px] leading-none font-bold whitespace-nowrap">
+                      {/* arrival day is Day 1 */}
+                      {day >= 1 ? `Day ${day}` : 'Now'}
                     </p>
                     <p className="mt-1 text-xs text-muted">{fmt.format(due)}</p>
                   </div>
@@ -93,6 +100,24 @@ export function Timeline() {
           </div>
         )
       })}
+
+      {milestones.length > 0 && (
+        <div className="mt-10">
+          <h2 className="font-sign text-xl font-bold">{t('timeline.ahead')}</h2>
+          <ol className="mt-2 border-t-2 border-ink">
+            {milestones.map((m) => (
+              <li key={m.id} className="border-b border-ink/15 py-3.5">
+                <p className="text-sm font-semibold">{m.when.en}</p>
+                <p className="mt-0.5 text-[17px] leading-snug font-semibold">{m.title.en}</p>
+                <p className="mt-1 text-sm text-muted">
+                  {m.summary.en}{' '}
+                  {m.status === 'draft' && <span className="bg-sign-soft px-1">{t('draft.badge')}</span>}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
     </section>
   )
 }

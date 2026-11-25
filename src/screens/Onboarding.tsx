@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { isStandalone, submitResponses, track } from '../lib/analytics'
 import { cities, states } from '../lib/content'
@@ -7,6 +7,7 @@ import {
   CONSENT_ID,
   canContinue,
   doneFromAnswers,
+  migrate,
   normalize,
   otherKey,
   questionnaire,
@@ -32,14 +33,12 @@ function isoToday(offsetDays = 0): string {
 export function Onboarding() {
   const navigate = useNavigate()
   const saved = load()
-  const [answers, setAnswers] = useState<Answers>(saved.answers ?? {})
+  const [answers, setAnswers] = useState<Answers>(() => migrate(saved.answers ?? {}))
   const [step, setStep] = useState(0)
   const [consent, setConsent] = useState(saved.consent === CONSENT_ID)
-  const advanceTimer = useRef<number | undefined>(undefined)
-
-  // Until the EU question is answered, count the status question in, so "1 of 9" doesn't jump to "of 9" later.
+  // Count follow-up questions in before their trigger is answered, so "1 of 10" doesn't jump to "of 12" later.
   const questions = useMemo(
-    () => visibleQuestions(answers.eu === undefined ? { ...answers, eu: 'no' } : answers),
+    () => visibleQuestions({ citizenship: 'other', housing: 'moved_in', ...answers }),
     [answers],
   )
   const total = questions.length + 1 // + final consent step
@@ -48,7 +47,6 @@ export function Onboarding() {
 
   useEffect(() => {
     track('onboarding_started', { editing: Boolean(saved.profile) })
-    return () => window.clearTimeout(advanceTimer.current)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -59,12 +57,10 @@ export function Onboarding() {
   const set = (key: string, value: Answers[string]) => setAnswers((a) => ({ ...a, [key]: value }))
 
   const next = () => {
-    window.clearTimeout(advanceTimer.current)
     setStep((s) => Math.min(s + 1, total - 1))
     window.scrollTo({ top: 0 })
   }
   const back = () => {
-    window.clearTimeout(advanceTimer.current)
     if (step === 0) navigate('/')
     else setStep((s) => s - 1)
   }
@@ -84,6 +80,8 @@ export function Onboarding() {
     track('onboarding_completed', {
       purpose: profile.purpose,
       eu: profile.eu,
+      citizenship: profile.citizenship ?? null,
+      status: profile.status ?? null,
       state: profile.state,
       city_listed: Boolean(profile.cityId),
       days_since_arrival: days,
@@ -122,10 +120,6 @@ export function Onboarding() {
             q={q}
             answers={answers}
             set={set}
-            onPicked={() => {
-              window.clearTimeout(advanceTimer.current)
-              advanceTimer.current = window.setTimeout(next, 220)
-            }}
           />
         ) : (
           <section>
@@ -171,19 +165,17 @@ function QuestionView({
   q,
   answers,
   set,
-  onPicked,
 }: {
   q: Question
   answers: Answers
   set: (key: string, value: Answers[string]) => void
-  onPicked: () => void
 }) {
   return (
     <section>
       <h1 className="font-sign text-[28px] leading-tight font-bold">{q.text}</h1>
       {q.help && <p className="mt-2 text-muted">{q.help}</p>}
       <div className="mt-6">
-        {q.type === 'single' && <SingleChoice q={q} answers={answers} set={set} onPicked={onPicked} />}
+        {q.type === 'single' && <SingleChoice q={q} answers={answers} set={set} />}
         {q.type === 'multi' && <MultiChoice q={q} answers={answers} set={set} />}
         {q.type === 'date' && <DateInput q={q} answers={answers} set={set} />}
         {q.type === 'city' && <CityPicker value={answers[q.id] as Place | undefined} onChange={(v) => set(q.id, v)} />}
@@ -202,12 +194,10 @@ function SingleChoice({
   q,
   answers,
   set,
-  onPicked,
 }: {
   q: Question
   answers: Answers
   set: (key: string, value: Answers[string]) => void
-  onPicked: () => void
 }) {
   const value = answers[q.id]
   const chosen = q.options?.find((o) => o.id === value)
@@ -220,10 +210,7 @@ function SingleChoice({
           role="radio"
           aria-checked={value === o.id}
           className={optionClass(value === o.id)}
-          onClick={() => {
-            set(q.id, o.id)
-            if (!o.freeText) onPicked()
-          }}
+          onClick={() => set(q.id, o.id)}
         >
           {o.label}
         </button>
@@ -297,19 +284,22 @@ function DateInput({
   set: (key: string, value: Answers[string]) => void
 }) {
   const value = (answers[q.id] as string | undefined) ?? ''
+  const range = q.range ?? { minDays: -730, maxDays: 365 }
   return (
     <div>
       <input
         type="date"
-        min={isoToday(-730)}
-        max={isoToday(365)}
+        min={isoToday(range.minDays)}
+        max={isoToday(range.maxDays)}
         value={value}
         onChange={(e) => set(q.id, e.target.value)}
         className="w-full rounded-md border-2 border-ink bg-paper px-4 py-3 text-[17px]"
       />
-      <button type="button" onClick={() => set(q.id, isoToday())} className="mt-3 font-semibold underline">
-        {t('onb.date.today')}
-      </button>
+      {range.minDays <= 0 && range.maxDays >= 0 && q.id !== 'visa_end' && (
+        <button type="button" onClick={() => set(q.id, isoToday())} className="mt-3 font-semibold underline">
+          {t('onb.date.today')}
+        </button>
+      )}
     </div>
   )
 }

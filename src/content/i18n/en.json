@@ -44,5 +44,6 @@
   "onb.consent.optional": "Optional. You can still use everything without it.",
   "me.edit": "Change my answers",
   "me.id": "Your anonymous ID, for deletion requests:",
-  "timeline.cta": "Get my plan"
+  "timeline.cta": "Get my plan",
+  "timeline.ahead": "Further ahead"
 }

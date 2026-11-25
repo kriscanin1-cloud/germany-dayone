@@ -1,6 +1,6 @@
 {
-  "version": "2026-11-v2",
-  "note": "Question ids and option ids are stable keys in the database. Never reuse an id for a different meaning: add a new id and bump the version.",
+  "version": "2026-11-v3",
+  "note": "Question ids and option ids are stable keys in the database. Never reuse an id for a different meaning: add a new id and bump the version. v3 replaced `eu` (yes/no) with `citizenship` (eu/best_friend/other); old answers are migrated in questionnaire.ts.",
   "parts": [
     {
       "id": "plan",
@@ -54,20 +54,24 @@
       }
     },
     {
-      "id": "eu",
+      "id": "citizenship",
       "part": "plan",
       "type": "single",
       "required": true,
-      "text": "Are you a citizen of an EU country, Iceland, Liechtenstein, Norway or Switzerland?",
-      "help": "If yes, you don't need a visa or residence permit, so we hide those steps.",
+      "text": "Which passport do you hold?",
+      "help": "If you have more than one, pick the first option that fits. It decides which permit steps and deadlines apply to you.",
       "options": [
         {
-          "id": "yes",
-          "label": "Yes"
+          "id": "eu",
+          "label": "EU country, Iceland, Liechtenstein, Norway or Switzerland"
         },
         {
-          "id": "no",
-          "label": "No"
+          "id": "best_friend",
+          "label": "Australia, Canada, Israel, Japan, New Zealand, South Korea, the UK or the USA"
+        },
+        {
+          "id": "other",
+          "label": "Another country"
         }
       ],
       "storage": {
@@ -81,8 +85,11 @@
       "type": "single",
       "required": true,
       "showIf": {
-        "question": "eu",
-        "equals": "no"
+        "question": "citizenship",
+        "in": [
+          "best_friend",
+          "other"
+        ]
       },
       "text": "What is your current residence status in Germany?",
       "help": "Pick the closest one. If you're not sure, that's fine — choose “I'm not sure”.",
@@ -139,6 +146,31 @@
       }
     },
     {
+      "id": "visa_end",
+      "part": "plan",
+      "type": "date",
+      "required": false,
+      "showIf": {
+        "question": "status",
+        "in": [
+          "national_visa",
+          "chancenkarte",
+          "temporary",
+          "blue_card"
+        ]
+      },
+      "text": "When does your visa or permit end?",
+      "help": "It's printed on your visa or card. We count your permit deadline from it. Not sure? Skip this.",
+      "range": {
+        "minDays": -30,
+        "maxDays": 1830
+      },
+      "storage": {
+        "device": "exact",
+        "server": "none"
+      }
+    },
+    {
       "id": "arrival",
       "part": "plan",
       "type": "date",
@@ -147,6 +179,58 @@
       "storage": {
         "device": "exact",
         "server": "month"
+      },
+      "range": {
+        "minDays": -730,
+        "maxDays": 365
+      }
+    },
+    {
+      "id": "housing",
+      "part": "plan",
+      "type": "single",
+      "required": true,
+      "text": "Do you have a place to live in Germany?",
+      "help": "You have to register your address within two weeks of moving in.",
+      "options": [
+        {
+          "id": "moved_in",
+          "label": "Yes, I've moved in"
+        },
+        {
+          "id": "soon",
+          "label": "Yes, but I haven't moved in yet"
+        },
+        {
+          "id": "searching",
+          "label": "Not yet, I'm still looking"
+        }
+      ],
+      "storage": {
+        "device": "exact",
+        "server": "exact"
+      }
+    },
+    {
+      "id": "move_in",
+      "part": "plan",
+      "type": "date",
+      "required": true,
+      "showIf": {
+        "question": "housing",
+        "in": [
+          "moved_in",
+          "soon"
+        ]
+      },
+      "text": "When did you move in, or when will you?",
+      "range": {
+        "minDays": -730,
+        "maxDays": 365
+      },
+      "storage": {
+        "device": "exact",
+        "server": "none"
       }
     },
     {
@@ -184,6 +268,39 @@
           "id": "other",
           "label": "Something else",
           "freeText": true
+        }
+      ],
+      "storage": {
+        "device": "exact",
+        "server": "exact"
+      }
+    },
+    {
+      "id": "drives",
+      "part": "plan",
+      "type": "single",
+      "required": true,
+      "showIf": {
+        "question": "citizenship",
+        "in": [
+          "best_friend",
+          "other"
+        ]
+      },
+      "text": "Will you drive a car in Germany?",
+      "help": "A driving licence from outside the EU works for six months after you move here.",
+      "options": [
+        {
+          "id": "yes",
+          "label": "Yes"
+        },
+        {
+          "id": "maybe",
+          "label": "Maybe later"
+        },
+        {
+          "id": "no",
+          "label": "No"
         }
       ],
       "storage": {

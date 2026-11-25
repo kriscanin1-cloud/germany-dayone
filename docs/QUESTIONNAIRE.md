@@ -1,31 +1,36 @@
 # Questionnaire and data flow
 
-Source of truth: `src/content/questionnaire.json` (version `2026-11-v2`).
+Source of truth: `src/content/questionnaire.json` (version `2026-11-v3`).
 Database: `supabase/migrations/` (run 001, then 002).
+Research behind v3: the "Steps by status" table (20 steps × 8 statuses, with sources).
 
 ## What is asked now
 
-Only the **Your plan** part is enabled (~1 minute):
+Only the **Your plan** part is enabled (~1–2 minutes). Answers are picked, then confirmed with **Next** (no auto-advance).
 
 | # | Question | Shown to | Notes |
 |---|---|---|---|
 | 1 | Why are you moving to Germany? | everyone | study · job · job search (Opportunity Card) · family · something else (free text) |
-| 2 | EU / EEA / Swiss citizen? | everyone | "yes" hides visa and permit steps |
-| 3 | Current residence status | **non-EU only** | not in Germany yet · visa-free/tourist · national (D) visa · waiting for permit (Fiktionsbescheinigung) · residence permit · Blue Card · Opportunity Card · permanent residence · asylum/protection · not sure · something else (free text) |
-| 4 | Arrival date | everyone | exact date on the device, month only on the server |
-| 5 | City (or state if not listed) | everyone | |
-| 6 | Who is moving with you? | everyone | just me · partner · children · something else (free text) |
-| 7 | German level | everyone | none · A1–A2 · B1–B2 · C1+ |
-| 8 | Already done | everyone | pre-ticks tasks in the plan |
+| 2 | Which passport do you hold? | everyone | `eu` EU/EEA/Swiss · `best_friend` § 41 AufenthV countries (AU, CA, IL, JP, NZ, KR, UK, US) · `other`. Replaces v2 `eu: yes/no` (old answers migrated) |
+| 3 | Current residence status | non-EU | as in v2 |
+| 4 | When does your visa or permit end? | status = D visa, Opportunity Card, residence permit, Blue Card | optional; **device only**; permit deadline = end − 42 days |
+| 5 | Arrival date | everyone | exact on device, month on server |
+| 6 | Do you have a place to live? | everyone | moved in · not yet moved in · still looking |
+| 7 | Move-in date | has a place | **device only**; Anmeldung, tax ID, broadcasting fee and licence count from it |
+| 8 | City (or state) | everyone | |
+| 9 | Who is moving with you? | everyone | children → Kindergeld |
+| 10 | Will you drive in Germany? | non-EU | yes/maybe → licence swap task (6-month limit) |
+| 11 | German level | everyone | |
+| 12 | Already done | everyone | pre-ticks tasks |
 
-At the end: an **unticked** checkbox — *"Share my answers with Day One, without my name, to improve the app…"* (`consents.research_v1`).
+`showIf` takes a list (`{question, in: [...]}`) and chains: a follow-up of a hidden question is hidden too.
 
-The **Help us improve** part (worries, who helps, paid for help, preferred language, how you found us, interview email) is kept in the file with `"enabled": false` for a later version.
-
-### How the status changes the plan
-- Tasks can be limited with `appliesTo.statuses`. A profile without a status (EU citizens) is never filtered out by it.
-- *Book your residence permit appointment* is shown for: not in Germany yet, visa-free, national visa, not sure, something else. It is hidden for people who already hold or have applied for a permit.
-- *Asylum or protection status*: this version is built for study and work migration; the app should say so and point to free counselling (content to add).
+### How answers change the plan
+- `appliesTo` can filter by `purposes`, `euCitizen`, `statuses`, `citizenship`, `match` (household / housing / drives / germanLevel; a missing answer does not match) and `anyOf` (OR of alternatives).
+- `deadline.from` = `arrival` | `moveIn` | `visaEnd`; if that date is unknown, the deadline counts from arrival with `fallbackOffsetDays`.
+- Permit tasks: D visa / Opportunity Card / not sure → *Apply before your visa ends*; § 41 nationals visa-free → *Apply within 90 days* (no work until issued); other nationals on a tourist stay → *Check what your tourist stay allows*.
+- Long-term **milestones** (job-search permit, settlement permits, EU permanent right, citizenship) appear under *Further ahead*.
+- Asylum/protection: still to add — point to free counselling.
 
 ## Three data streams
 

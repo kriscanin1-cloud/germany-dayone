@@ -10,6 +10,12 @@ export type ResidenceStatus =
   | 'not_arrived' | 'visa_free' | 'national_visa' | 'fiktion' | 'temporary'
   | 'blue_card' | 'chancenkarte' | 'permanent' | 'protection' | 'not_sure' | 'other'
 
+/** Citizenship group, see questionnaire.json → citizenship.
+ * eu = EU/EEA/Switzerland (free movement);
+ * best_friend = § 41 AufenthV: may enter visa-free and apply for a permit inside Germany;
+ * other = everyone else. */
+export type Citizenship = 'eu' | 'best_friend' | 'other'
+
 export type Lang = 'en'
 /** Translatable text; `en` is required. */
 export type T = Partial<Record<Lang, string>> & { en: string }
@@ -27,7 +33,18 @@ export interface AppliesTo {
   cities?: string[]
   /** residence statuses; omit = any. A profile without a status (e.g. EU citizens) always matches. */
   statuses?: ResidenceStatus[]
+  /** citizenship groups; omit = any */
+  citizenship?: Citizenship[]
+  /** profile answers that must match, e.g. { drives: ['yes','maybe'] }. A missing answer does not match. */
+  match?: Partial<Record<MatchField, string[]>>
+  /** at least one of these must also apply (OR across alternatives) */
+  anyOf?: AppliesTo[]
 }
+
+export type MatchField = 'household' | 'housing' | 'drives' | 'germanLevel'
+
+/** Which date a deadline counts from. If that date is unknown, it counts from arrival with fallbackOffsetDays. */
+export type DeadlineFrom = 'arrival' | 'moveIn' | 'visaEnd'
 
 export interface Link {
   label: T
@@ -43,7 +60,7 @@ export interface Task {
   why: T
   steps: T[]
   documents: T[]
-  deadline: { offsetDays: number; hard: boolean; note?: T }
+  deadline: { offsetDays: number; from?: DeadlineFrom; fallbackOffsetDays?: number; hard: boolean; note?: T }
   dependsOn: string[]
   appliesTo: AppliesTo
   links: Link[]
@@ -63,15 +80,30 @@ export interface Entitlement {
   status: ContentStatus
 }
 
+/** Long-term steps beyond the first weeks (permanent residence, citizenship…). */
+export interface Milestone {
+  id: string
+  title: T
+  when: T
+  summary: T
+  appliesTo: AppliesTo
+  links: Link[]
+  lastVerified: string
+  status: ContentStatus
+}
+
 export interface Scenario {
   meta: Record<string, unknown>
   tasks: Task[]
   entitlements: Entitlement[]
+  milestones: Milestone[]
 }
 
 export interface Profile {
   purpose: Purpose
+  /** derived: citizenship === 'eu' */
   eu: boolean
+  citizenship?: Citizenship
   /** ISO date YYYY-MM-DD */
   arrival: string
   state: StateCode
@@ -81,6 +113,14 @@ export interface Profile {
   /** option ids from questionnaire.json */
   household?: string
   germanLevel?: string
+  /** option ids: moved_in | soon | searching */
+  housing?: string
+  /** ISO date of moving into the flat (device only) */
+  moveIn?: string
+  /** ISO date the visa or permit ends (device only) */
+  visaEnd?: string
+  /** yes | maybe | no */
+  drives?: string
 }
 
 export interface State {

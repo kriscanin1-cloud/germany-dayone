@@ -1,12 +1,14 @@
 // Pure logic: which items apply to a profile, when they are due, in what order.
 // No React in here, so it can be unit-tested.
-import type { AppliesTo, Entitlement, Profile, Task } from './types'
+import type { AppliesTo, Entitlement, Milestone, Profile, Task } from './types'
 
 export type Bucket = 'overdue' | 'thisWeek' | 'next' | 'later' | 'done'
 
 export interface PlannedTask {
   task: Task
   due: Date
+  /** Day number counted from arrival (arrival = Day 1) */
+  day: number
   bucket: Bucket
   done: boolean
   /** dependency ids that are not done yet */
@@ -19,6 +21,13 @@ export function applies(rule: AppliesTo, p: Profile): boolean {
   if (rule.states && !rule.states.includes(p.state)) return false
   if (rule.cities && (!p.cityId || !rule.cities.includes(p.cityId))) return false
   if (rule.statuses && p.status && !rule.statuses.includes(p.status)) return false
+  if (rule.citizenship && (!p.citizenship || !rule.citizenship.includes(p.citizenship))) return false
+  if (rule.match)
+    for (const [field, allowed] of Object.entries(rule.match)) {
+      const v = p[field as keyof Profile]
+      if (typeof v !== 'string' || !allowed!.includes(v)) return false
+    }
+  if (rule.anyOf && !rule.anyOf.some((r) => applies(r, p))) return false
   return true
 }
 
@@ -38,7 +47,7 @@ function startOfDay(d: Date): Date {
   return new Date(d.getFullYear(), d.getMonth(), d.getDate())
 }
 
-function daysBetween(a: Date, b: Date): number {
+export function daysBetween(a: Date, b: Date): number {
   return Math.round((startOfDay(b).getTime() - startOfDay(a).getTime()) / 86_400_000)
 }
 
@@ -51,10 +60,18 @@ export function bucketFor(due: Date, today: Date, done: boolean): Bucket {
   return 'later'
 }
 
-/** Dependencies first, then by due date; stable for equal dates. Throws on cycles. */
-export function orderTasks(tasks: Task[]): Task[] {
+/** Due date of a task for a profile. Counts from the move-in date or visa end when known, else from arrival. */
+export function dueDate(task: Task, p: Profile): Date {
+  const { from = 'arrival', offsetDays, fallbackOffsetDays } = task.deadline
+  const anchor = from === 'moveIn' ? p.moveIn : from === 'visaEnd' ? p.visaEnd : undefined
+  if (anchor) return addDays(parseDate(anchor), offsetDays)
+  return addDays(parseDate(p.arrival), from === 'arrival' ? offsetDays : (fallbackOffsetDays ?? offsetDays))
+}
+
+/** Dependencies first, then by `sortKey` (default: offset); stable for equal keys. Throws on cycles. */
+export function orderTasks(tasks: Task[], sortKey: (t: Task) => number = (t) => t.deadline.offsetDays): Task[] {
   const byId = new Map(tasks.map((t) => [t.id, t]))
-  const sorted = [...tasks].sort((a, b) => a.deadline.offsetDays - b.deadline.offsetDays)
+  const sorted = [...tasks].sort((a, b) => sortKey(a) - sortKey(b))
   const out: Task[] = []
   const state = new Map<string, 'visiting' | 'done'>()
   const visit = (t: Task) => {
@@ -88,12 +105,14 @@ export function planTasks(
   const arrival = parseDate(profile.arrival)
   const visible = tasks.filter((t) => (showDrafts || t.status === 'verified') && applies(t.appliesTo, profile))
   const visibleIds = new Set(visible.map((t) => t.id))
-  return orderTasks(visible).map((task) => {
-    const due = addDays(arrival, task.deadline.offsetDays)
+  const dues = new Map(visible.map((t) => [t.id, dueDate(t, profile)]))
+  return orderTasks(visible, (t) => dues.get(t.id)!.getTime()).map((task) => {
+    const due = dues.get(task.id)!
     const isDone = done.has(task.id)
     return {
       task,
       due,
+      day: daysBetween(arrival, due) + 1,
       done: isDone,
       bucket: bucketFor(due, today, isDone),
       blockedBy: task.dependsOn.filter((d) => visibleIds.has(d) && !done.has(d)),
@@ -107,4 +126,12 @@ export function planEntitlements(
   { showDrafts = false }: PlanOptions = {},
 ): Entitlement[] {
   return items.filter((e) => (showDrafts || e.status === 'verified') && applies(e.appliesTo, profile))
+}
+
+export function planMilestones(
+  items: Milestone[],
+  profile: Profile,
+  { showDrafts = false }: PlanOptions = {},
+): Milestone[] {
+  return items.filter((m) => (showDrafts || m.status === 'verified') && applies(m.appliesTo, profile))
 }

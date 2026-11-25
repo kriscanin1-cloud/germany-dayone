@@ -2,7 +2,7 @@
   "meta": {
     "scenario": "first30days",
     "country": "DE",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "note": "SAMPLE STRUCTURE. Every item is status 'draft': check each against official sources, then set status 'verified' and lastVerified before showing it to users. Deadlines and conditions change; this is practical guidance, not legal advice.",
     "languages": [
       "en"
@@ -107,7 +107,7 @@
         "en": "Register your address (Anmeldung)"
       },
       "summary": {
-        "en": "Everyone who moves into a flat in Germany must register the address at the local citizens' office (Bürgeramt)."
+        "en": "Everyone who moves into a home in Germany registers the address at the citizens' office (Bürgeramt) within two weeks — EU citizens too."
       },
       "why": {
         "en": "It is a legal duty, and many next steps depend on it: tax ID, bank account, residence permit."
@@ -138,13 +138,17 @@
         }
       ],
       "deadline": {
-        "offsetDays": 14,
+        "offsetDays": 13,
+        "from": "moveIn",
+        "fallbackOffsetDays": 13,
         "hard": true,
         "note": {
-          "en": "Generally within two weeks of moving in. Verify the rule for your city."
+          "en": "Within two weeks of moving in. Late registration can be fined."
         }
       },
-      "dependsOn": [],
+      "dependsOn": [
+        "find-housing"
+      ],
       "appliesTo": {
         "purposes": "all"
       },
@@ -164,23 +168,26 @@
       "id": "residence-permit",
       "category": "status",
       "title": {
-        "en": "Book your residence permit appointment"
+        "en": "Apply for your residence permit before your visa ends"
       },
       "summary": {
-        "en": "If you entered with a national visa, you must apply for your residence permit at the foreigners' office (Ausländerbehörde) before the visa expires."
+        "en": "Your national (D) visa is only the entry ticket. Apply for the residence permit at the foreigners' office (Ausländerbehörde) before the visa end date."
       },
       "why": {
-        "en": "Appointments can take weeks or months; missing the visa end date can put your stay at risk."
+        "en": "If you apply in time, your stay stays legal while they decide, and you can keep working if you were allowed to before. Appointments can take weeks."
       },
       "steps": [
         {
-          "en": "Check your visa end date."
+          "en": "Check the end date on your visa."
         },
         {
-          "en": "Book or request an appointment at your local Ausländerbehörde right after registering your address."
+          "en": "Request an appointment at your Ausländerbehörde as soon as you have registered your address."
         },
         {
-          "en": "Prepare the documents for your permit type."
+          "en": "If the appointment is after your visa ends, send the application in writing before the end date and keep proof."
+        },
+        {
+          "en": "You may get a Fiktionsbescheinigung — a paper that confirms your stay while they decide."
         }
       ],
       "documents": [
@@ -198,13 +205,18 @@
         },
         {
           "en": "Biometric photo"
+        },
+        {
+          "en": "Fee: up to €110 for a first permit"
         }
       ],
       "deadline": {
-        "offsetDays": 14,
+        "offsetDays": -42,
+        "from": "visaEnd",
+        "fallbackOffsetDays": 14,
         "hard": true,
         "note": {
-          "en": "Book early; the legal limit is your visa end date."
+          "en": "Legal limit: the day before your visa ends. We remind you six weeks earlier."
         }
       },
       "dependsOn": [
@@ -214,20 +226,40 @@
       "appliesTo": {
         "purposes": "all",
         "euCitizen": false,
-        "statuses": [
-          "not_arrived",
-          "visa_free",
-          "national_visa",
-          "not_sure",
-          "other"
+        "anyOf": [
+          {
+            "purposes": "all",
+            "statuses": [
+              "national_visa",
+              "chancenkarte",
+              "not_sure",
+              "other"
+            ]
+          },
+          {
+            "purposes": "all",
+            "citizenship": [
+              "other"
+            ],
+            "statuses": [
+              "not_arrived"
+            ]
+          }
         ]
       },
       "links": [
         {
           "label": {
-            "en": "BAMF"
+            "en": "Make it in Germany: residence permit"
           },
-          "url": "https://www.bamf.de",
+          "url": "https://www.make-it-in-germany.com",
+          "official": true
+        },
+        {
+          "label": {
+            "en": "§ 81 AufenthG"
+          },
+          "url": "https://www.gesetze-im-internet.de/aufenthg_2004/__81.html",
           "official": true
         }
       ],
@@ -436,8 +468,13 @@
       ],
       "documents": [],
       "deadline": {
-        "offsetDays": 28,
-        "hard": false
+        "offsetDays": 42,
+        "from": "moveIn",
+        "fallbackOffsetDays": 42,
+        "hard": false,
+        "note": {
+          "en": "It can take up to six weeks after registration."
+        }
       },
       "dependsOn": [
         "anmeldung"
@@ -464,7 +501,7 @@
         "en": "Register for the broadcasting fee"
       },
       "summary": {
-        "en": "Every household in Germany pays one broadcasting fee (Rundfunkbeitrag); flatmates share it."
+        "en": "Each home pays one broadcasting fee (Rundfunkbeitrag), €18.36 a month, however many people live there."
       },
       "why": {
         "en": "Unregistered households get letters and back-payments later. If a flatmate already pays, you may not need to."
@@ -480,6 +517,8 @@
       "documents": [],
       "deadline": {
         "offsetDays": 30,
+        "from": "moveIn",
+        "fallbackOffsetDays": 30,
         "hard": false
       },
       "dependsOn": [
@@ -527,6 +566,359 @@
         "purposes": "all"
       },
       "links": [],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "find-housing",
+      "category": "everyday",
+      "title": {
+        "en": "Find a home you can register"
+      },
+      "summary": {
+        "en": "You need an address where you can register (Anmeldung). Temporary stays count only if the landlord gives you a landlord confirmation (Wohnungsgeberbestätigung)."
+      },
+      "why": {
+        "en": "Without a registered address you can't get a tax ID, and banks and offices will ask for it."
+      },
+      "steps": [
+        {
+          "en": "Ask for the landlord confirmation before you sign."
+        },
+        {
+          "en": "Avoid listings that ask for money before a viewing."
+        },
+        {
+          "en": "If you stay with friends, they can give the confirmation too."
+        }
+      ],
+      "documents": [],
+      "deadline": {
+        "offsetDays": 7,
+        "hard": false
+      },
+      "dependsOn": [],
+      "appliesTo": {
+        "purposes": "all",
+        "match": {
+          "housing": [
+            "searching"
+          ]
+        }
+      },
+      "links": [],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "residence-permit-visa-free",
+      "category": "status",
+      "title": {
+        "en": "Apply for your residence permit within 90 days"
+      },
+      "summary": {
+        "en": "Your passport lets you enter without a visa and apply for a long-term residence permit from inside Germany (§ 41 AufenthV). Apply within 90 days of entry."
+      },
+      "why": {
+        "en": "While your application is pending, your stay is allowed — but you may not work until the permit is issued."
+      },
+      "steps": [
+        {
+          "en": "Register your address first."
+        },
+        {
+          "en": "Apply at your local Ausländerbehörde — many offices take online applications."
+        },
+        {
+          "en": "Keep the confirmation of your application (Fiktionsbescheinigung)."
+        }
+      ],
+      "documents": [
+        {
+          "en": "Passport"
+        },
+        {
+          "en": "Registration certificate"
+        },
+        {
+          "en": "Proof of health insurance"
+        },
+        {
+          "en": "Admission letter or job contract"
+        },
+        {
+          "en": "Biometric photo"
+        },
+        {
+          "en": "Fee: up to €110"
+        }
+      ],
+      "deadline": {
+        "offsetDays": 60,
+        "hard": true,
+        "note": {
+          "en": "Legal limit: 90 days after entry. Apply early: no work until the permit is issued."
+        }
+      },
+      "dependsOn": [
+        "anmeldung",
+        "health-insurance"
+      ],
+      "appliesTo": {
+        "purposes": "all",
+        "citizenship": [
+          "best_friend"
+        ],
+        "statuses": [
+          "not_arrived",
+          "visa_free"
+        ]
+      },
+      "links": [
+        {
+          "label": {
+            "en": "§ 41 AufenthV"
+          },
+          "url": "https://www.gesetze-im-internet.de/aufenthv/__41.html",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "tourist-visa-advice",
+      "category": "status",
+      "title": {
+        "en": "Check what your tourist stay allows"
+      },
+      "summary": {
+        "en": "A tourist (Schengen) visa or visa-free short stay usually can't be turned into a residence permit inside Germany. Get advice before it runs out."
+      },
+      "why": {
+        "en": "Applying on a tourist visa doesn't extend your stay. Overstaying can block future visas."
+      },
+      "steps": [
+        {
+          "en": "Note the last day of your allowed stay."
+        },
+        {
+          "en": "Talk to free migration counselling (MBE) about your options."
+        }
+      ],
+      "documents": [],
+      "deadline": {
+        "offsetDays": 7,
+        "hard": false
+      },
+      "dependsOn": [],
+      "appliesTo": {
+        "purposes": "all",
+        "citizenship": [
+          "other"
+        ],
+        "statuses": [
+          "visa_free"
+        ]
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Migration counselling (MBE)"
+          },
+          "url": "https://www.bamf.de",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "social-security-number",
+      "category": "money",
+      "title": {
+        "en": "Get your social security number"
+      },
+      "summary": {
+        "en": "Employers need your social security number (Sozialversicherungsnummer) to pay you. It comes by post from the pension insurance once you have statutory health insurance."
+      },
+      "why": {
+        "en": "Without it, your first payroll can be delayed."
+      },
+      "steps": [
+        {
+          "en": "Ask your health insurer if it hasn't arrived after a few weeks."
+        },
+        {
+          "en": "Give it to your employer."
+        }
+      ],
+      "documents": [],
+      "deadline": {
+        "offsetDays": 21,
+        "hard": false
+      },
+      "dependsOn": [
+        "health-insurance"
+      ],
+      "appliesTo": {
+        "purposes": "all",
+        "anyOf": [
+          {
+            "purposes": [
+              "work"
+            ]
+          },
+          {
+            "purposes": "all",
+            "statuses": [
+              "blue_card"
+            ]
+          }
+        ]
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Deutsche Rentenversicherung"
+          },
+          "url": "https://www.deutsche-rentenversicherung.de",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "chancenkarte-job-switch",
+      "category": "status",
+      "title": {
+        "en": "Before a full-time job: switch your permit first"
+      },
+      "summary": {
+        "en": "With the Opportunity Card you may work up to 20 hours a week and do trial work. For a qualified full-time job you need a new residence permit — approved before you start."
+      },
+      "why": {
+        "en": "Starting the job before approval is not allowed."
+      },
+      "steps": [
+        {
+          "en": "When you get an offer, contact your Ausländerbehörde straight away."
+        },
+        {
+          "en": "Ask your employer for the documents the office needs."
+        }
+      ],
+      "documents": [
+        {
+          "en": "Job contract"
+        },
+        {
+          "en": "Recognised degree or qualification"
+        }
+      ],
+      "deadline": {
+        "offsetDays": 30,
+        "hard": false
+      },
+      "dependsOn": [],
+      "appliesTo": {
+        "purposes": "all",
+        "euCitizen": false,
+        "anyOf": [
+          {
+            "purposes": [
+              "chancenkarte"
+            ]
+          },
+          {
+            "purposes": "all",
+            "statuses": [
+              "chancenkarte"
+            ]
+          }
+        ]
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Make it in Germany: Opportunity Card"
+          },
+          "url": "https://www.make-it-in-germany.com",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "driving-licence",
+      "category": "everyday",
+      "title": {
+        "en": "Swap your driving licence"
+      },
+      "summary": {
+        "en": "A licence from outside the EU is valid in Germany for six months after you take up residence. After that you need a German one."
+      },
+      "why": {
+        "en": "Driving on an expired permission counts as driving without a licence."
+      },
+      "steps": [
+        {
+          "en": "Check whether your country is on the Annex 11 list (e.g. Israel, Japan, Canada): then the swap needs no tests."
+        },
+        {
+          "en": "Otherwise expect theory and practical tests — start early."
+        },
+        {
+          "en": "Apply at your local driving licence office (Fahrerlaubnisbehörde) while your licence is still valid."
+        }
+      ],
+      "documents": [
+        {
+          "en": "Foreign licence and official translation"
+        },
+        {
+          "en": "Passport"
+        },
+        {
+          "en": "Registration certificate"
+        },
+        {
+          "en": "Biometric photo"
+        }
+      ],
+      "deadline": {
+        "offsetDays": 150,
+        "from": "moveIn",
+        "fallbackOffsetDays": 150,
+        "hard": true,
+        "note": {
+          "en": "Legal limit: six months after you take up residence."
+        }
+      },
+      "dependsOn": [
+        "anmeldung"
+      ],
+      "appliesTo": {
+        "purposes": "all",
+        "euCitizen": false,
+        "match": {
+          "drives": [
+            "yes",
+            "maybe"
+          ]
+        }
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Federal Ministry of Transport"
+          },
+          "url": "https://www.bmv.de",
+          "official": true
+        }
+      ],
       "lastVerified": "",
       "status": "draft"
     }
@@ -713,6 +1105,228 @@
         {
           "label": {
             "en": "BAMF: advice services"
+          },
+          "url": "https://www.bamf.de",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "kindergeld",
+      "title": {
+        "en": "Child benefit (Kindergeld)"
+      },
+      "valueHint": {
+        "en": "A monthly payment per child."
+      },
+      "conditions": [
+        {
+          "en": "EU citizens and permanent residents are generally eligible."
+        },
+        {
+          "en": "With a residence permit, usually only if it allows you to work. Students: only while working."
+        },
+        {
+          "en": "Parent and child need tax IDs."
+        }
+      ],
+      "howTo": {
+        "en": "Apply to the Familienkasse once you have your tax IDs."
+      },
+      "appliesTo": {
+        "purposes": "all",
+        "match": {
+          "household": [
+            "children"
+          ]
+        }
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Familienkasse"
+          },
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    }
+  ],
+  "milestones": [
+    {
+      "id": "job-search-after-studies",
+      "title": {
+        "en": "Job-search permit after graduation"
+      },
+      "when": {
+        "en": "Before your study permit ends"
+      },
+      "summary": {
+        "en": "Graduates from outside the EU can get a residence permit of up to 18 months to look for work. It can't be extended — apply before your study permit ends."
+      },
+      "appliesTo": {
+        "purposes": [
+          "study"
+        ],
+        "euCitizen": false
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Make it in Germany"
+          },
+          "url": "https://www.make-it-in-germany.com/en/staying-in-germany-after-studies",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "settlement-german-graduates",
+      "title": {
+        "en": "Permanent residence for German graduates"
+      },
+      "when": {
+        "en": "After 2 years of qualified work"
+      },
+      "summary": {
+        "en": "If you graduated in Germany, you can apply for a settlement permit after two years in qualified employment."
+      },
+      "appliesTo": {
+        "purposes": [
+          "study"
+        ],
+        "euCitizen": false
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Make it in Germany"
+          },
+          "url": "https://www.make-it-in-germany.com",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "settlement-blue-card",
+      "title": {
+        "en": "Permanent residence with the Blue Card"
+      },
+      "when": {
+        "en": "After 21–27 months"
+      },
+      "summary": {
+        "en": "27 months of Blue Card work with basic German (A1), or 21 months with B1."
+      },
+      "appliesTo": {
+        "purposes": "all",
+        "euCitizen": false,
+        "statuses": [
+          "blue_card"
+        ]
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Berlin service portal"
+          },
+          "url": "https://service.berlin.de/dienstleistung/326556/en/",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "settlement-general",
+      "title": {
+        "en": "Permanent residence"
+      },
+      "when": {
+        "en": "Usually after 5 years"
+      },
+      "summary": {
+        "en": "A settlement permit usually needs about five years of residence, B1 German and pension contributions. Some groups qualify sooner."
+      },
+      "appliesTo": {
+        "purposes": "all",
+        "euCitizen": false,
+        "statuses": [
+          "national_visa",
+          "fiktion",
+          "temporary",
+          "chancenkarte",
+          "not_sure",
+          "other",
+          "not_arrived",
+          "visa_free"
+        ]
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Make it in Germany"
+          },
+          "url": "https://www.make-it-in-germany.com",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "eu-permanent-right",
+      "title": {
+        "en": "Permanent right of residence (EU)"
+      },
+      "when": {
+        "en": "After 5 years"
+      },
+      "summary": {
+        "en": "After five years of lawful residence you get a permanent right of residence automatically. It can be lost after more than two years abroad."
+      },
+      "appliesTo": {
+        "purposes": "all",
+        "euCitizen": true
+      },
+      "links": [
+        {
+          "label": {
+            "en": "verwaltung.bund.de"
+          },
+          "url": "https://verwaltung.bund.de",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "naturalisation",
+      "title": {
+        "en": "German citizenship"
+      },
+      "when": {
+        "en": "After 5 years"
+      },
+      "summary": {
+        "en": "Naturalisation needs at least five years of lawful residence. The three-year fast track was abolished in 2025. Dual citizenship stays allowed."
+      },
+      "appliesTo": {
+        "purposes": "all"
+      },
+      "links": [
+        {
+          "label": {
+            "en": "BAMF"
           },
           "url": "https://www.bamf.de",
           "official": true

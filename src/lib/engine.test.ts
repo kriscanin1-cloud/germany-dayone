@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import scenario from '../content/first30days.de.json'
 import places from '../content/places.de.json'
-import { applies, bucketFor, orderTasks, parseDate, planEntitlements, planTasks } from './engine'
+import { applies, bucketFor, dueDate, orderTasks, parseDate, planEntitlements, planMilestones, planTasks } from './engine'
 import type { Profile, Scenario } from './types'
 
 const s = scenario as unknown as Scenario
@@ -17,11 +17,15 @@ describe('content integrity', () => {
     expect(() => orderTasks(s.tasks)).not.toThrow()
   })
 
-  it('a dependency is never due after the task that needs it', () => {
+  it('a dependency is never due after the task that needs it (when only the arrival date is known)', () => {
     const byId = new Map(s.tasks.map((t) => [t.id, t]))
     for (const t of s.tasks)
       for (const d of t.dependsOn)
-        expect(byId.get(d)!.deadline.offsetDays, `${d} before ${t.id}`).toBeLessThanOrEqual(t.deadline.offsetDays)
+        expect(dueDate(byId.get(d)!, student).getTime(), `${d} before ${t.id}`).toBeLessThanOrEqual(dueDate(t, student).getTime())
+  })
+
+  it('every milestone has a "when"', () => {
+    for (const m of s.milestones) expect(m.when.en.length, m.id).toBeGreaterThan(0)
   })
 
   it('every city maps to one of the 16 states', () => {
@@ -112,5 +116,68 @@ describe('residence status', () => {
   })
   it('status rules do not hide anything when no status is given', () => {
     expect(applies(permit.appliesTo, student)).toBe(true)
+  })
+})
+
+describe('v3: citizenship, dates and answers', () => {
+  const byId = new Map(s.tasks.map((t) => [t.id, t]))
+  const israeli: Profile = { ...student, citizenship: 'best_friend', status: 'visa_free' }
+
+  it('counts Anmeldung from the move-in date when known', () => {
+    const t = byId.get('anmeldung')!
+    expect(dueDate(t, student)).toEqual(parseDate('2026-10-14'))
+    expect(dueDate(t, { ...student, moveIn: '2026-10-10' })).toEqual(parseDate('2026-10-23'))
+  })
+
+  it('counts the permit deadline from the visa end date when known', () => {
+    const t = byId.get('residence-permit')!
+    expect(dueDate(t, { ...student, visaEnd: '2026-12-31' })).toEqual(parseDate('2026-11-19'))
+    expect(dueDate(t, student)).toEqual(parseDate('2026-10-15'))
+  })
+
+  it('gives § 41 nationals the 90-day permit task, not the visa one', () => {
+    const ids = planTasks(s.tasks, israeli, [], { today, showDrafts: true }).map((p) => p.task.id)
+    expect(ids).toContain('residence-permit-visa-free')
+    expect(ids).not.toContain('residence-permit')
+    expect(ids).not.toContain('tourist-visa-advice')
+  })
+
+  it('warns other tourists instead', () => {
+    const ids = planTasks(s.tasks, { ...israeli, citizenship: 'other' }, [], { today, showDrafts: true }).map((p) => p.task.id)
+    expect(ids).toContain('tourist-visa-advice')
+    expect(ids).not.toContain('residence-permit-visa-free')
+  })
+
+  it('shows the licence swap only to non-EU drivers', () => {
+    const t = byId.get('driving-licence')!
+    expect(applies(t.appliesTo, { ...student, drives: 'yes' })).toBe(true)
+    expect(applies(t.appliesTo, { ...student, drives: 'no' })).toBe(false)
+    expect(applies(t.appliesTo, student)).toBe(false)
+    expect(applies(t.appliesTo, { ...euWorker, drives: 'yes' })).toBe(false)
+  })
+
+  it('adds a housing task only while searching', () => {
+    const t = byId.get('find-housing')!
+    expect(applies(t.appliesTo, { ...student, housing: 'searching' })).toBe(true)
+    expect(applies(t.appliesTo, { ...student, housing: 'moved_in' })).toBe(false)
+  })
+
+  it('Kindergeld appears for families with children', () => {
+    const ids = (p: Profile) => planEntitlements(s.entitlements, p, { showDrafts: true }).map((e) => e.id)
+    expect(ids({ ...student, household: 'children' })).toContain('kindergeld')
+    expect(ids(student)).not.toContain('kindergeld')
+  })
+
+  it('milestones follow the profile', () => {
+    const ids = (p: Profile) => planMilestones(s.milestones, p, { showDrafts: true }).map((m) => m.id)
+    expect(ids({ ...student, status: 'blue_card' })).toContain('settlement-blue-card')
+    expect(ids(euWorker)).toContain('eu-permanent-right')
+    expect(ids(euWorker)).not.toContain('settlement-general')
+    expect(ids(student)).toContain('naturalisation')
+  })
+
+  it('reports the day number from arrival', () => {
+    const plan = planTasks(s.tasks, student, [], { today, showDrafts: true })
+    expect(plan.find((p) => p.task.id === 'health-insurance')!.day).toBe(1)
   })
 })
