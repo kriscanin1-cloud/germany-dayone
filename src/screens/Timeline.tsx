@@ -1,11 +1,13 @@
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
+import { ConfirmDialog } from '../components/ConfirmDialog'
 import { activitiesByWeek, holidaysInWeeks, type Activity, type DatedHoliday } from '../lib/activities'
 import { scenario, SHOW_DRAFTS } from '../lib/content'
 import { daysBetween, parseDate, planMilestones, planTasks, type PlannedTask } from '../lib/engine'
 import { t } from '../lib/i18n'
 import { toProfile } from '../lib/questionnaire'
-import { load, update, type Saved } from '../lib/storage'
+import { update, type Saved } from '../lib/storage'
+import { useDone } from '../lib/useDone'
 import type { Profile } from '../lib/types'
 
 // Until onboarding is done, the timeline previews a sample profile.
@@ -25,7 +27,7 @@ const WEEKS_SHOWN = 8
 const fmtHoliday = new Intl.DateTimeFormat('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })
 
 export function Timeline() {
-  const [saved, setSaved] = useState<Saved>(() => load())
+  const { saved, setSaved, ask, asking, confirm, close } = useDone()
   // profiles saved before questionnaire v3 have no citizenship: rebuild them from the saved answers
   const profile =
     saved.profile && !saved.profile.citizenship && saved.answers ? toProfile(saved.answers) : (saved.profile ?? SAMPLE)
@@ -56,10 +58,10 @@ export function Timeline() {
   const tried = new Set(saved.tried ?? [])
 
   const persist = (change: (s: Saved) => Saved) => setSaved(update(change))
-  const toggle = (list: 'done' | 'tried', id: string) =>
+  const toggleTried = (id: string) =>
     persist((s) => {
-      const cur = s[list] ?? []
-      return { ...s, [list]: cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id] }
+      const cur = s.tried ?? []
+      return { ...s, tried: cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id] }
     })
   const remove = (id: string) => persist((s) => ({ ...s, removed: [...new Set([...(s.removed ?? []), id])] }))
 
@@ -91,15 +93,6 @@ export function Timeline() {
         const tasks = plan.filter((p) => p.week === week)
         const isPast = week < currentWeek
         const open = tasks.filter((p) => !p.done)
-        if (isPast && open.length === 0) {
-          if (!tasks.length) return null
-          return (
-            <p key={week} className="mt-6 flex items-center justify-between border-t-2 border-ink pt-2 text-muted">
-              <span className="font-sign text-lg font-bold text-ink">{t('week.n', { n: String(week) })}</span>
-              <span>{t('week.allDone')}</span>
-            </p>
-          )
-        }
         const acts = fun.get(week) ?? []
         const weekHols = hols.filter((h) => h.week === week)
         if (!tasks.length && !acts.length && !weekHols.length) return null
@@ -108,13 +101,14 @@ export function Timeline() {
             <h2 className="flex items-baseline justify-between border-b-2 border-ink pb-1.5">
               <span className="font-sign text-2xl font-bold">{t('week.n', { n: String(week) })}</span>
               {week === currentWeek && <span className="bg-sign px-2 py-0.5 text-sm font-semibold">{t('week.this')}</span>}
-              {isPast && <span className="text-sm font-semibold">{t('week.stillOpen')}</span>}
+              {isPast && open.length > 0 && <span className="text-sm font-semibold">{t('week.stillOpen')}</span>}
+              {tasks.length > 0 && open.length === 0 && <span className="text-sm font-semibold">{t('week.allDone')}</span>}
               {week === currentWeek + 1 && <span className="text-sm text-muted">{t('week.next')}</span>}
             </h2>
             {tasks.length > 0 && (
               <ol>
-                {(isPast ? open : tasks).map((p) => (
-                  <TaskRow key={p.task.id} p={p} titles={titles} onToggle={() => toggle('done', p.task.id)} />
+                {tasks.map((p) => (
+                  <TaskRow key={p.task.id} p={p} titles={titles} onToggle={() => ask(p.task.id, p.task.title.en)} />
                 ))}
               </ol>
             )}
@@ -130,7 +124,7 @@ export function Timeline() {
                       key={a.id}
                       a={a}
                       tried={tried.has(a.id)}
-                      onTried={() => toggle('tried', a.id)}
+                      onTried={() => toggleTried(a.id)}
                       onRemove={() => remove(a.id)}
                     />
                   ))}
@@ -151,7 +145,7 @@ export function Timeline() {
                 p={p}
                 titles={titles}
                 label={t('month.n', { n: String(Math.ceil(p.day / 30)) })}
-                onToggle={() => toggle('done', p.task.id)}
+                onToggle={() => ask(p.task.id, p.task.title.en)}
               />
             ))}
           </ol>
@@ -179,7 +173,31 @@ export function Timeline() {
           </ol>
         </div>
       )}
+
+      <DoneDialog asking={asking} confirm={confirm} close={close} />
     </section>
+  )
+}
+
+export function DoneDialog({
+  asking,
+  confirm,
+  close,
+}: {
+  asking: { title: string; done: boolean } | null
+  confirm: () => void
+  close: () => void
+}) {
+  return (
+    <ConfirmDialog
+      open={Boolean(asking)}
+      title={asking?.done ? t('done.undoTitle') : t('done.askTitle')}
+      body={asking?.title}
+      yes={asking?.done ? t('done.undoYes') : t('done.yes')}
+      no={asking?.done ? t('done.undoNo') : t('done.no')}
+      onYes={confirm}
+      onClose={close}
+    />
   )
 }
 
@@ -211,7 +229,12 @@ function TaskRow({
       </button>
       <div className="min-w-0">
         {label && <p className="text-sm font-semibold">{label}</p>}
-        <p className={`text-[17px] leading-snug font-semibold ${done ? 'text-muted line-through' : ''}`}>{task.title.en}</p>
+        <Link
+          to={`/task/${task.id}`}
+          className={`block text-[17px] leading-snug font-semibold ${done ? 'text-muted line-through' : ''}`}
+        >
+          {task.title.en} <span aria-hidden className="text-muted no-underline">›</span>
+        </Link>
         {!done && (
           <p className="mt-1 text-sm text-muted">
             {task.deadline.hard && <span className="font-semibold text-alert">{t('task.legal')} </span>}

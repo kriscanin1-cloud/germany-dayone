@@ -70,22 +70,34 @@
         "en": "Get a German phone number"
       },
       "summary": {
-        "en": "Many appointments, banks and apps require a German number."
+        "en": "Start with a prepaid SIM: you only need your passport — no bank account, no registered address, no credit check."
       },
       "why": {
-        "en": "You will need it for bank verification, appointment confirmations and your employer or university."
+        "en": "Banks, landlords, doctors and offices will ask for a German number, and some banks need one to open an account."
       },
       "steps": [
         {
-          "en": "Compare prepaid vs contract (contracts may require an address registration and bank account)."
+          "en": "Pick a prepaid provider below. You can switch later and keep your number."
         },
         {
-          "en": "Activate with ID verification."
+          "en": "Buy a starter kit in a supermarket or shop, or order an eSIM in the provider's app."
+        },
+        {
+          "en": "Verify your identity: a short video call with your passport (VideoIdent) or in a shop. The law requires it for every SIM."
+        },
+        {
+          "en": "Top up with vouchers from the supermarket checkout, a card or PayPal."
+        },
+        {
+          "en": "Once you have a registered address and a German bank account, you can move to a cheaper monthly plan."
         }
       ],
       "documents": [
         {
           "en": "Passport"
+        },
+        {
+          "en": "A smartphone with a camera for the video check"
         }
       ],
       "deadline": {
@@ -98,7 +110,106 @@
       },
       "links": [],
       "lastVerified": "",
-      "status": "draft"
+      "status": "draft",
+      "choices": {
+        "title": {
+          "en": "Three good ways to start"
+        },
+        "intro": {
+          "en": "All three are prepaid: no bank account, no registered address and no minimum term."
+        },
+        "items": [
+          {
+            "name": "Aldi Talk",
+            "tag": {
+              "en": "Prepaid · O2 network · sold in every Aldi"
+            },
+            "pros": [
+              {
+                "en": "Starter kit at any Aldi Nord or Süd checkout"
+              },
+              {
+                "en": "Top up with vouchers in cash at the checkout"
+              },
+              {
+                "en": "Cheap: about €9 for 25 GB per 4 weeks"
+              }
+            ],
+            "cons": [
+              {
+                "en": "O2 coverage is weaker in rural areas and on trains"
+              },
+              {
+                "en": "Registration app and support are mostly in German"
+              }
+            ],
+            "url": "https://www.alditalk.de"
+          },
+          {
+            "name": "fraenk",
+            "tag": {
+              "en": "Monthly, cancel any time · Telekom network · app only"
+            },
+            "pros": [
+              {
+                "en": "Telekom network: strong coverage, also outside cities"
+              },
+              {
+                "en": "eSIM in the app — can be active the day you land"
+              },
+              {
+                "en": "Pay with PayPal, so no German bank account needed"
+              }
+            ],
+            "cons": [
+              {
+                "en": "No shops and no phone hotline — app and chat only"
+              },
+              {
+                "en": "Fewer options for calling abroad"
+              }
+            ],
+            "url": "https://www.fraenk.de"
+          },
+          {
+            "name": "Lebara",
+            "tag": {
+              "en": "Prepaid · O2 network · made for calls abroad"
+            },
+            "pros": [
+              {
+                "en": "App and support in English"
+              },
+              {
+                "en": "Cheap international calls and bundles"
+              },
+              {
+                "en": "Pay by international card or top up in cash"
+              }
+            ],
+            "cons": [
+              {
+                "en": "O2 coverage, as with Aldi Talk"
+              },
+              {
+                "en": "Data per euro is lower than the discount brands"
+              }
+            ],
+            "url": "https://www.lebara.de"
+          }
+        ],
+        "note": {
+          "en": "Prices as checked in November 2026. Networks: Telekom, Vodafone and O2 run their own; most cheap brands use one of them."
+        }
+      },
+      "tips": [
+        {
+          "en": "Avoid 24-month contracts in your first months: they need a credit check (Schufa) and are hard to cancel."
+        },
+        {
+          "en": "Put your German number into the bank and Anmeldung forms — offices often call or text."
+        }
+      ]
     },
     {
       "id": "anmeldung",
@@ -282,17 +393,23 @@
         "en": "Open a bank account"
       },
       "summary": {
-        "en": "You need an account with a German/EU IBAN for salary, rent, insurance and contracts."
+        "en": "You need a German or EU account (IBAN) for salary, rent and the health insurer. Online banks open in minutes with a passport; branch banks usually want your registered address first."
       },
       "why": {
-        "en": "Employers, landlords and insurers usually require it."
+        "en": "Rent, salary, insurance and many contracts in Germany run on direct debit (SEPA Lastschrift)."
       },
       "steps": [
         {
-          "en": "Compare online and branch banks (fees, English support, requirements)."
+          "en": "Not registered yet? Start with an online bank below — many open without an Anmeldung."
         },
         {
-          "en": "Complete identity verification."
+          "en": "Verify your identity with your passport in a video call."
+        },
+        {
+          "en": "Give your IBAN to your employer, landlord and health insurer."
+        },
+        {
+          "en": "Want a branch bank later? Open it after your Anmeldung and keep or close the online one."
         }
       ],
       "documents": [
@@ -300,7 +417,10 @@
           "en": "Passport"
         },
         {
-          "en": "Registration certificate (some banks)"
+          "en": "German phone number"
+        },
+        {
+          "en": "Registration certificate — for branch banks"
         }
       ],
       "deadline": {
@@ -315,7 +435,109 @@
       },
       "links": [],
       "lastVerified": "",
-      "status": "draft"
+      "status": "draft",
+      "choices": {
+        "title": {
+          "en": "Online or branch bank?"
+        },
+        "items": [
+          {
+            "name": "N26",
+            "tag": {
+              "en": "Online bank · German IBAN · app in English"
+            },
+            "pros": [
+              {
+                "en": "Opens in about 10 minutes by video call with your passport"
+              },
+              {
+                "en": "Often no Anmeldung needed — check for your nationality in the app"
+              },
+              {
+                "en": "Free basic account"
+              }
+            ],
+            "cons": [
+              {
+                "en": "No branches; support by chat"
+              },
+              {
+                "en": "Paying in cash is awkward"
+              },
+              {
+                "en": "Needs a phone number to sign up"
+              }
+            ],
+            "url": "https://n26.com/en-de"
+          },
+          {
+            "name": "bunq",
+            "tag": {
+              "en": "Online bank · accepts more passport types"
+            },
+            "pros": [
+              {
+                "en": "Accepts more passports than most online banks"
+              },
+              {
+                "en": "No Anmeldung needed"
+              },
+              {
+                "en": "English app"
+              }
+            ],
+            "cons": [
+              {
+                "en": "Monthly fee — no free plan for a full account"
+              },
+              {
+                "en": "Dutch bank: some forms may ask for a German IBAN (they must accept any EU IBAN)"
+              }
+            ],
+            "url": "https://www.bunq.com"
+          },
+          {
+            "name": "Sparkasse",
+            "tag": {
+              "en": "Local branch bank · in every town"
+            },
+            "pros": [
+              {
+                "en": "Branches and ATMs everywhere, help in person"
+              },
+              {
+                "en": "Cash deposits are easy"
+              },
+              {
+                "en": "Trusted by landlords and offices"
+              }
+            ],
+            "cons": [
+              {
+                "en": "Usually needs your Anmeldung first"
+              },
+              {
+                "en": "Monthly account fees"
+              },
+              {
+                "en": "Mostly in German"
+              }
+            ],
+            "url": "https://www.sparkasse.de"
+          }
+        ],
+        "note": {
+          "en": "Checked in November 2026. Rules for opening without an Anmeldung differ by nationality — the bank's app tells you."
+        }
+      },
+      "tips": [
+        {
+          "en": "If a bank refuses you: anyone who lives legally in the EU has the right to a basic account (Basiskonto, § 31 Zahlungskontengesetz)."
+        },
+        {
+          "en": "Employers and landlords must accept any EU IBAN for transfers and direct debits — a German one is not required by law."
+        }
+      ]
     },
     {
       "id": "public-transport",

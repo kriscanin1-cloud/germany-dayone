@@ -5,6 +5,7 @@ import { load } from './lib/storage'
 import { Me } from './screens/Me'
 import { Onboarding } from './screens/Onboarding'
 import { Placeholder } from './screens/Placeholder'
+import { TaskDetail } from './screens/TaskDetail'
 import { Timeline } from './screens/Timeline'
 import { Welcome } from './screens/Welcome'
 
@@ -21,6 +22,7 @@ const router = createHashRouter([
     element: <Layout />,
     children: [
       { path: '/timeline', element: <Timeline /> },
+      { path: '/task/:id', element: <TaskDetail /> },
       { path: '/entitled', element: <Placeholder title={t('entitled.title')} /> },
       { path: '/people', element: <Placeholder title={t('people.title')} body={t('people.body')} /> },
       { path: '/me', element: <Me /> },

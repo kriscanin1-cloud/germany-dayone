@@ -1,4 +1,5 @@
-import { NavLink, Outlet } from 'react-router-dom'
+import { useEffect } from 'react'
+import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { SHOW_DRAFTS } from '../lib/content'
 import { t } from '../lib/i18n'
 
@@ -10,6 +11,11 @@ const tabs = [
 ]
 
 export function Layout() {
+  const { pathname } = useLocation()
+  // a new screen starts at the top
+  useEffect(() => window.scrollTo({ top: 0 }), [pathname])
+  // task pages belong to the Timeline tab
+  const active = (to: string) => pathname.startsWith(to) || (to === '/timeline' && pathname.startsWith('/task/'))
   return (
     <div className="mx-auto flex min-h-full max-w-md flex-col bg-paper">
       {SHOW_DRAFTS && (
@@ -24,11 +30,9 @@ export function Layout() {
             <li key={tab.to}>
               <NavLink
                 to={tab.to}
-                className={({ isActive }) =>
-                  `block rounded-md py-3 text-center text-[15px] font-semibold ${
-                    isActive ? 'bg-sign text-ink' : 'text-muted'
-                  }`
-                }
+                className={`block rounded-md py-3 text-center text-[15px] font-semibold ${
+                  active(tab.to) ? 'bg-sign text-ink' : 'text-muted'
+                }`}
               >
                 {tab.label}
               </NavLink>

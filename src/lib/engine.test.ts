@@ -198,3 +198,17 @@ describe('verified content', () => {
     expect(ids).not.toContain('residence-permit')
   })
 })
+
+describe('task details', () => {
+  it('choices have a name, pros, cons and an https link', () => {
+    for (const t of s.tasks)
+      for (const c of t.choices?.items ?? []) {
+        expect(c.pros.length, `${t.id}/${c.name}`).toBeGreaterThan(0)
+        expect(c.cons.length, `${t.id}/${c.name}`).toBeGreaterThan(0)
+        expect(c.url, `${t.id}/${c.name}`).toMatch(/^https:\/\//)
+      }
+  })
+  it('the phone task compares three ways to start', () => {
+    expect(s.tasks.find((t) => t.id === 'sim-card')!.choices!.items).toHaveLength(3)
+  })
+})

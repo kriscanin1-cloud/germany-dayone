@@ -52,6 +52,24 @@ export interface Link {
   official: boolean
 }
 
+/** One provider or route to compare, e.g. a mobile network or a bank. */
+export interface ChoiceItem {
+  name: string
+  /** short line under the name, e.g. "Prepaid · O2 network" */
+  tag: T
+  pros: T[]
+  cons: T[]
+  url: string
+}
+
+export interface Choices {
+  title: T
+  intro?: T
+  items: ChoiceItem[]
+  /** e.g. "Prices checked in Nov 2026" */
+  note?: T
+}
+
 export interface Task {
   id: string
   category: Category
@@ -60,6 +78,10 @@ export interface Task {
   why: T
   steps: T[]
   documents: T[]
+  /** options to compare (providers, banks…) */
+  choices?: Choices
+  /** short practical tips */
+  tips?: T[]
   deadline: { offsetDays: number; from?: DeadlineFrom; fallbackOffsetDays?: number; hard: boolean; note?: T }
   dependsOn: string[]
   appliesTo: AppliesTo
