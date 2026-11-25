@@ -1,0 +1,718 @@
+{
+  "meta": {
+    "scenario": "first30days",
+    "country": "DE",
+    "version": "0.1.0",
+    "note": "SAMPLE STRUCTURE. Every item is status 'draft': check each against official sources, then set status 'verified' and lastVerified before showing it to users. Deadlines and conditions change; this is practical guidance, not legal advice.",
+    "languages": [
+      "en"
+    ]
+  },
+  "tasks": [
+    {
+      "id": "health-insurance",
+      "category": "status",
+      "title": {
+        "en": "Make sure you have health insurance"
+      },
+      "summary": {
+        "en": "Health insurance is mandatory in Germany. You usually need proof of it for your residence permit, your job or your university enrolment."
+      },
+      "why": {
+        "en": "Without proof of insurance other steps (enrolment, employment, residence permit) can be blocked."
+      },
+      "steps": [
+        {
+          "en": "Check whether you need public or private insurance for your situation."
+        },
+        {
+          "en": "Choose a provider and apply; keep the membership confirmation (PDF)."
+        },
+        {
+          "en": "Give the confirmation to your university or employer."
+        }
+      ],
+      "documents": [
+        {
+          "en": "Passport"
+        },
+        {
+          "en": "Admission letter or employment contract"
+        }
+      ],
+      "deadline": {
+        "offsetDays": 0,
+        "hard": true,
+        "note": {
+          "en": "Needed from your first day; ideally arranged before arrival."
+        }
+      },
+      "dependsOn": [],
+      "appliesTo": {
+        "purposes": "all"
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Make it in Germany: health insurance"
+          },
+          "url": "https://www.make-it-in-germany.com",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "sim-card",
+      "category": "everyday",
+      "title": {
+        "en": "Get a German phone number"
+      },
+      "summary": {
+        "en": "Many appointments, banks and apps require a German number."
+      },
+      "why": {
+        "en": "You will need it for bank verification, appointment confirmations and your employer or university."
+      },
+      "steps": [
+        {
+          "en": "Compare prepaid vs contract (contracts may require an address registration and bank account)."
+        },
+        {
+          "en": "Activate with ID verification."
+        }
+      ],
+      "documents": [
+        {
+          "en": "Passport"
+        }
+      ],
+      "deadline": {
+        "offsetDays": 2,
+        "hard": false
+      },
+      "dependsOn": [],
+      "appliesTo": {
+        "purposes": "all"
+      },
+      "links": [],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "anmeldung",
+      "category": "status",
+      "title": {
+        "en": "Register your address (Anmeldung)"
+      },
+      "summary": {
+        "en": "Everyone who moves into a flat in Germany must register the address at the local citizens' office (Bürgeramt)."
+      },
+      "why": {
+        "en": "It is a legal duty, and many next steps depend on it: tax ID, bank account, residence permit."
+      },
+      "steps": [
+        {
+          "en": "Book an appointment at your Bürgeramt as early as possible (slots can be scarce)."
+        },
+        {
+          "en": "Ask your landlord for the landlord confirmation (Wohnungsgeberbestätigung)."
+        },
+        {
+          "en": "Fill in the registration form and bring all documents."
+        },
+        {
+          "en": "Keep the registration certificate (Meldebescheinigung) — you will need it often."
+        }
+      ],
+      "documents": [
+        {
+          "en": "Passport"
+        },
+        {
+          "en": "Landlord confirmation (Wohnungsgeberbestätigung)"
+        },
+        {
+          "en": "Registration form"
+        }
+      ],
+      "deadline": {
+        "offsetDays": 14,
+        "hard": true,
+        "note": {
+          "en": "Generally within two weeks of moving in. Verify the rule for your city."
+        }
+      },
+      "dependsOn": [],
+      "appliesTo": {
+        "purposes": "all"
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Berlin: service portal"
+          },
+          "url": "https://service.berlin.de",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "residence-permit",
+      "category": "status",
+      "title": {
+        "en": "Book your residence permit appointment"
+      },
+      "summary": {
+        "en": "If you entered with a national visa, you must apply for your residence permit at the foreigners' office (Ausländerbehörde) before the visa expires."
+      },
+      "why": {
+        "en": "Appointments can take weeks or months; missing the visa end date can put your stay at risk."
+      },
+      "steps": [
+        {
+          "en": "Check your visa end date."
+        },
+        {
+          "en": "Book or request an appointment at your local Ausländerbehörde right after registering your address."
+        },
+        {
+          "en": "Prepare the documents for your permit type."
+        }
+      ],
+      "documents": [
+        {
+          "en": "Passport with visa"
+        },
+        {
+          "en": "Registration certificate"
+        },
+        {
+          "en": "Proof of health insurance"
+        },
+        {
+          "en": "Admission / employment contract"
+        },
+        {
+          "en": "Biometric photo"
+        }
+      ],
+      "deadline": {
+        "offsetDays": 14,
+        "hard": true,
+        "note": {
+          "en": "Book early; the legal limit is your visa end date."
+        }
+      },
+      "dependsOn": [
+        "anmeldung",
+        "health-insurance"
+      ],
+      "appliesTo": {
+        "purposes": "all",
+        "euCitizen": false
+      },
+      "links": [
+        {
+          "label": {
+            "en": "BAMF"
+          },
+          "url": "https://www.bamf.de",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "bank-account",
+      "category": "money",
+      "title": {
+        "en": "Open a bank account"
+      },
+      "summary": {
+        "en": "You need an account with a German/EU IBAN for salary, rent, insurance and contracts."
+      },
+      "why": {
+        "en": "Employers, landlords and insurers usually require it."
+      },
+      "steps": [
+        {
+          "en": "Compare online and branch banks (fees, English support, requirements)."
+        },
+        {
+          "en": "Complete identity verification."
+        }
+      ],
+      "documents": [
+        {
+          "en": "Passport"
+        },
+        {
+          "en": "Registration certificate (some banks)"
+        }
+      ],
+      "deadline": {
+        "offsetDays": 10,
+        "hard": false
+      },
+      "dependsOn": [
+        "sim-card"
+      ],
+      "appliesTo": {
+        "purposes": "all"
+      },
+      "links": [],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "public-transport",
+      "category": "everyday",
+      "title": {
+        "en": "Sort out public transport"
+      },
+      "summary": {
+        "en": "Check if your university includes a semester ticket; otherwise compare monthly passes."
+      },
+      "why": {
+        "en": "Saves money from week one."
+      },
+      "steps": [
+        {
+          "en": "Students: check your semester ticket first."
+        },
+        {
+          "en": "Others: compare a nationwide subscription with local monthly passes."
+        }
+      ],
+      "documents": [],
+      "deadline": {
+        "offsetDays": 3,
+        "hard": false
+      },
+      "dependsOn": [],
+      "appliesTo": {
+        "purposes": "all"
+      },
+      "links": [],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "university-enrolment",
+      "category": "status",
+      "title": {
+        "en": "Complete university enrolment"
+      },
+      "summary": {
+        "en": "Finish enrolment (Immatrikulation) and get your student ID and enrolment certificate."
+      },
+      "why": {
+        "en": "You need the enrolment certificate for the residence permit, insurance and discounts."
+      },
+      "steps": [
+        {
+          "en": "Follow your university's enrolment checklist and deadline."
+        },
+        {
+          "en": "Pay the semester contribution."
+        },
+        {
+          "en": "Download your enrolment certificate."
+        }
+      ],
+      "documents": [
+        {
+          "en": "Admission letter"
+        },
+        {
+          "en": "Proof of health insurance"
+        },
+        {
+          "en": "Passport"
+        }
+      ],
+      "deadline": {
+        "offsetDays": 14,
+        "hard": false,
+        "note": {
+          "en": "Your university's deadline applies."
+        }
+      },
+      "dependsOn": [
+        "health-insurance"
+      ],
+      "appliesTo": {
+        "purposes": [
+          "study"
+        ]
+      },
+      "links": [],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "employer-documents",
+      "category": "status",
+      "title": {
+        "en": "Hand in your onboarding documents to your employer"
+      },
+      "summary": {
+        "en": "Your employer needs your tax ID, social security number, health insurance and bank details to pay you correctly."
+      },
+      "why": {
+        "en": "Missing data can mean a higher emergency tax rate until it is fixed."
+      },
+      "steps": [
+        {
+          "en": "Ask HR for their checklist."
+        },
+        {
+          "en": "Send the tax ID as soon as it arrives by post."
+        }
+      ],
+      "documents": [
+        {
+          "en": "Tax ID"
+        },
+        {
+          "en": "Social security number"
+        },
+        {
+          "en": "Health insurance confirmation"
+        },
+        {
+          "en": "IBAN"
+        }
+      ],
+      "deadline": {
+        "offsetDays": 14,
+        "hard": false
+      },
+      "dependsOn": [
+        "health-insurance",
+        "bank-account"
+      ],
+      "appliesTo": {
+        "purposes": [
+          "work",
+          "chancenkarte"
+        ]
+      },
+      "links": [],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "tax-id",
+      "category": "money",
+      "title": {
+        "en": "Watch your mailbox for your tax ID"
+      },
+      "summary": {
+        "en": "After your first address registration, your personal tax ID (Steuer-ID) is usually sent to you by post."
+      },
+      "why": {
+        "en": "Employers need it for payroll; you need it for tax returns."
+      },
+      "steps": [
+        {
+          "en": "Make sure your name is on your mailbox."
+        },
+        {
+          "en": "If it has not arrived after a few weeks, request it from the Federal Central Tax Office."
+        }
+      ],
+      "documents": [],
+      "deadline": {
+        "offsetDays": 28,
+        "hard": false
+      },
+      "dependsOn": [
+        "anmeldung"
+      ],
+      "appliesTo": {
+        "purposes": "all"
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Federal Central Tax Office"
+          },
+          "url": "https://www.bzst.de",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "broadcasting-fee",
+      "category": "money",
+      "title": {
+        "en": "Register for the broadcasting fee"
+      },
+      "summary": {
+        "en": "Every household in Germany pays one broadcasting fee (Rundfunkbeitrag); flatmates share it."
+      },
+      "why": {
+        "en": "Unregistered households get letters and back-payments later. If a flatmate already pays, you may not need to."
+      },
+      "steps": [
+        {
+          "en": "Ask flatmates whether the household is already registered."
+        },
+        {
+          "en": "If not, register online and check possible exemptions."
+        }
+      ],
+      "documents": [],
+      "deadline": {
+        "offsetDays": 30,
+        "hard": false
+      },
+      "dependsOn": [
+        "anmeldung"
+      ],
+      "appliesTo": {
+        "purposes": "all"
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Rundfunkbeitrag"
+          },
+          "url": "https://www.rundfunkbeitrag.de",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "meet-people",
+      "category": "people",
+      "title": {
+        "en": "Meet people who arrived the same month"
+      },
+      "summary": {
+        "en": "Join a small coffee meetup with newcomers in your city."
+      },
+      "why": {
+        "en": "The first weeks are the loneliest; people one step ahead of you are the best source of tips."
+      },
+      "steps": [
+        {
+          "en": "Open the People tab and join the list for your city."
+        }
+      ],
+      "documents": [],
+      "deadline": {
+        "offsetDays": 10,
+        "hard": false
+      },
+      "dependsOn": [],
+      "appliesTo": {
+        "purposes": "all"
+      },
+      "links": [],
+      "lastVerified": "",
+      "status": "draft"
+    }
+  ],
+  "entitlements": [
+    {
+      "id": "tax-refund",
+      "title": {
+        "en": "You may get tax back for your first year"
+      },
+      "valueHint": {
+        "en": "Depends on your income and expenses; people who started work mid-year often overpay."
+      },
+      "conditions": [
+        {
+          "en": "You were employed in Germany during the year."
+        }
+      ],
+      "howTo": {
+        "en": "File a tax return for the year after it ends (online via ELSTER or a tax app)."
+      },
+      "appliesTo": {
+        "purposes": [
+          "work",
+          "chancenkarte",
+          "study"
+        ]
+      },
+      "links": [
+        {
+          "label": {
+            "en": "ELSTER (official tax portal)"
+          },
+          "url": "https://www.elster.de",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "integration-course",
+      "title": {
+        "en": "Check if you can join a subsidised German course"
+      },
+      "valueHint": {
+        "en": "Eligibility and quotas changed in 2026 — check your status."
+      },
+      "conditions": [
+        {
+          "en": "Depends on residence status; rules changed in 2026."
+        }
+      ],
+      "howTo": {
+        "en": "Check eligibility on the BAMF website or with a migration advice service."
+      },
+      "appliesTo": {
+        "purposes": "all"
+      },
+      "links": [
+        {
+          "label": {
+            "en": "BAMF: integration courses"
+          },
+          "url": "https://www.bamf.de",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "recognition-advice",
+      "title": {
+        "en": "Free advice on recognising your qualifications"
+      },
+      "valueHint": {
+        "en": "Recognition can unlock better-paid jobs and some permit types."
+      },
+      "conditions": [
+        {
+          "en": "You have a foreign vocational or university qualification."
+        }
+      ],
+      "howTo": {
+        "en": "Use the official recognition finder and book a counselling session."
+      },
+      "appliesTo": {
+        "purposes": [
+          "work",
+          "chancenkarte"
+        ]
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Anerkennung in Deutschland"
+          },
+          "url": "https://www.anerkennung-in-deutschland.de",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "scholarships",
+      "title": {
+        "en": "Scholarships open to international students"
+      },
+      "valueHint": {
+        "en": "Some programmes pay a monthly stipend."
+      },
+      "conditions": [
+        {
+          "en": "Enrolled student; programme-specific criteria."
+        }
+      ],
+      "howTo": {
+        "en": "Search the DAAD scholarship database and ask your university about programmes it participates in."
+      },
+      "appliesTo": {
+        "purposes": [
+          "study"
+        ]
+      },
+      "links": [
+        {
+          "label": {
+            "en": "DAAD scholarship database"
+          },
+          "url": "https://www.daad.de",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "student-discounts",
+      "title": {
+        "en": "Student discounts you can use from day one"
+      },
+      "valueHint": {
+        "en": "Transport, culture, software and more."
+      },
+      "conditions": [
+        {
+          "en": "Valid student ID or enrolment certificate."
+        }
+      ],
+      "howTo": {
+        "en": "Always ask for the student price (Ermäßigung) and check your university's benefits page."
+      },
+      "appliesTo": {
+        "purposes": [
+          "study"
+        ]
+      },
+      "links": [],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "migration-counselling",
+      "title": {
+        "en": "Free counselling for newcomers"
+      },
+      "valueHint": {
+        "en": "Free, independent help with paperwork and questions."
+      },
+      "conditions": [
+        {
+          "en": "Offers and age groups differ by service — check locally."
+        }
+      ],
+      "howTo": {
+        "en": "Find a migration counselling service near you."
+      },
+      "appliesTo": {
+        "purposes": "all"
+      },
+      "links": [
+        {
+          "label": {
+            "en": "BAMF: advice services"
+          },
+          "url": "https://www.bamf.de",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    }
+  ]
+}

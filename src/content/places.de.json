@@ -1,0 +1,507 @@
+{
+  "meta": {
+    "note": "Starter list of large and university cities. Replace later with the official municipality register (Destatis Gemeindeverzeichnis) keeping the same shape.",
+    "version": "0.1.0"
+  },
+  "states": [
+    {
+      "code": "DE-BW",
+      "name": "Baden-Württemberg",
+      "localName": "Baden-Württemberg"
+    },
+    {
+      "code": "DE-BY",
+      "name": "Bavaria",
+      "localName": "Bayern"
+    },
+    {
+      "code": "DE-BE",
+      "name": "Berlin",
+      "localName": "Berlin"
+    },
+    {
+      "code": "DE-BB",
+      "name": "Brandenburg",
+      "localName": "Brandenburg"
+    },
+    {
+      "code": "DE-HB",
+      "name": "Bremen",
+      "localName": "Bremen"
+    },
+    {
+      "code": "DE-HH",
+      "name": "Hamburg",
+      "localName": "Hamburg"
+    },
+    {
+      "code": "DE-HE",
+      "name": "Hesse",
+      "localName": "Hessen"
+    },
+    {
+      "code": "DE-MV",
+      "name": "Mecklenburg-Western Pomerania",
+      "localName": "Mecklenburg-Vorpommern"
+    },
+    {
+      "code": "DE-NI",
+      "name": "Lower Saxony",
+      "localName": "Niedersachsen"
+    },
+    {
+      "code": "DE-NW",
+      "name": "North Rhine-Westphalia",
+      "localName": "Nordrhein-Westfalen"
+    },
+    {
+      "code": "DE-RP",
+      "name": "Rhineland-Palatinate",
+      "localName": "Rheinland-Pfalz"
+    },
+    {
+      "code": "DE-SL",
+      "name": "Saarland",
+      "localName": "Saarland"
+    },
+    {
+      "code": "DE-SN",
+      "name": "Saxony",
+      "localName": "Sachsen"
+    },
+    {
+      "code": "DE-ST",
+      "name": "Saxony-Anhalt",
+      "localName": "Sachsen-Anhalt"
+    },
+    {
+      "code": "DE-SH",
+      "name": "Schleswig-Holstein",
+      "localName": "Schleswig-Holstein"
+    },
+    {
+      "code": "DE-TH",
+      "name": "Thuringia",
+      "localName": "Thüringen"
+    }
+  ],
+  "cities": [
+    {
+      "id": "berlin",
+      "name": "Berlin",
+      "state": "DE-BE"
+    },
+    {
+      "id": "hamburg",
+      "name": "Hamburg",
+      "state": "DE-HH"
+    },
+    {
+      "id": "muenchen",
+      "name": "München",
+      "state": "DE-BY",
+      "aliases": [
+        "Munich"
+      ]
+    },
+    {
+      "id": "koeln",
+      "name": "Köln",
+      "state": "DE-NW",
+      "aliases": [
+        "Cologne"
+      ]
+    },
+    {
+      "id": "frankfurt-am-main",
+      "name": "Frankfurt am Main",
+      "state": "DE-HE"
+    },
+    {
+      "id": "stuttgart",
+      "name": "Stuttgart",
+      "state": "DE-BW"
+    },
+    {
+      "id": "duesseldorf",
+      "name": "Düsseldorf",
+      "state": "DE-NW"
+    },
+    {
+      "id": "leipzig",
+      "name": "Leipzig",
+      "state": "DE-SN"
+    },
+    {
+      "id": "dortmund",
+      "name": "Dortmund",
+      "state": "DE-NW"
+    },
+    {
+      "id": "essen",
+      "name": "Essen",
+      "state": "DE-NW"
+    },
+    {
+      "id": "bremen",
+      "name": "Bremen",
+      "state": "DE-HB"
+    },
+    {
+      "id": "dresden",
+      "name": "Dresden",
+      "state": "DE-SN"
+    },
+    {
+      "id": "hannover",
+      "name": "Hannover",
+      "state": "DE-NI",
+      "aliases": [
+        "Hanover"
+      ]
+    },
+    {
+      "id": "nuernberg",
+      "name": "Nürnberg",
+      "state": "DE-BY",
+      "aliases": [
+        "Nuremberg"
+      ]
+    },
+    {
+      "id": "duisburg",
+      "name": "Duisburg",
+      "state": "DE-NW"
+    },
+    {
+      "id": "bochum",
+      "name": "Bochum",
+      "state": "DE-NW"
+    },
+    {
+      "id": "wuppertal",
+      "name": "Wuppertal",
+      "state": "DE-NW"
+    },
+    {
+      "id": "bielefeld",
+      "name": "Bielefeld",
+      "state": "DE-NW"
+    },
+    {
+      "id": "bonn",
+      "name": "Bonn",
+      "state": "DE-NW"
+    },
+    {
+      "id": "muenster",
+      "name": "Münster",
+      "state": "DE-NW"
+    },
+    {
+      "id": "mannheim",
+      "name": "Mannheim",
+      "state": "DE-BW"
+    },
+    {
+      "id": "karlsruhe",
+      "name": "Karlsruhe",
+      "state": "DE-BW"
+    },
+    {
+      "id": "augsburg",
+      "name": "Augsburg",
+      "state": "DE-BY"
+    },
+    {
+      "id": "wiesbaden",
+      "name": "Wiesbaden",
+      "state": "DE-HE"
+    },
+    {
+      "id": "moenchengladbach",
+      "name": "Mönchengladbach",
+      "state": "DE-NW"
+    },
+    {
+      "id": "gelsenkirchen",
+      "name": "Gelsenkirchen",
+      "state": "DE-NW"
+    },
+    {
+      "id": "aachen",
+      "name": "Aachen",
+      "state": "DE-NW"
+    },
+    {
+      "id": "braunschweig",
+      "name": "Braunschweig",
+      "state": "DE-NI"
+    },
+    {
+      "id": "kiel",
+      "name": "Kiel",
+      "state": "DE-SH"
+    },
+    {
+      "id": "chemnitz",
+      "name": "Chemnitz",
+      "state": "DE-SN"
+    },
+    {
+      "id": "halle-saale",
+      "name": "Halle (Saale)",
+      "state": "DE-ST"
+    },
+    {
+      "id": "magdeburg",
+      "name": "Magdeburg",
+      "state": "DE-ST"
+    },
+    {
+      "id": "freiburg-im-breisgau",
+      "name": "Freiburg im Breisgau",
+      "state": "DE-BW"
+    },
+    {
+      "id": "krefeld",
+      "name": "Krefeld",
+      "state": "DE-NW"
+    },
+    {
+      "id": "mainz",
+      "name": "Mainz",
+      "state": "DE-RP"
+    },
+    {
+      "id": "luebeck",
+      "name": "Lübeck",
+      "state": "DE-SH"
+    },
+    {
+      "id": "erfurt",
+      "name": "Erfurt",
+      "state": "DE-TH"
+    },
+    {
+      "id": "oberhausen",
+      "name": "Oberhausen",
+      "state": "DE-NW"
+    },
+    {
+      "id": "rostock",
+      "name": "Rostock",
+      "state": "DE-MV"
+    },
+    {
+      "id": "kassel",
+      "name": "Kassel",
+      "state": "DE-HE"
+    },
+    {
+      "id": "hagen",
+      "name": "Hagen",
+      "state": "DE-NW"
+    },
+    {
+      "id": "potsdam",
+      "name": "Potsdam",
+      "state": "DE-BB"
+    },
+    {
+      "id": "saarbruecken",
+      "name": "Saarbrücken",
+      "state": "DE-SL"
+    },
+    {
+      "id": "hamm",
+      "name": "Hamm",
+      "state": "DE-NW"
+    },
+    {
+      "id": "ludwigshafen-am-rhein",
+      "name": "Ludwigshafen am Rhein",
+      "state": "DE-RP"
+    },
+    {
+      "id": "oldenburg",
+      "name": "Oldenburg",
+      "state": "DE-NI"
+    },
+    {
+      "id": "muelheim-an-der-ruhr",
+      "name": "Mülheim an der Ruhr",
+      "state": "DE-NW"
+    },
+    {
+      "id": "osnabrueck",
+      "name": "Osnabrück",
+      "state": "DE-NI"
+    },
+    {
+      "id": "leverkusen",
+      "name": "Leverkusen",
+      "state": "DE-NW"
+    },
+    {
+      "id": "darmstadt",
+      "name": "Darmstadt",
+      "state": "DE-HE"
+    },
+    {
+      "id": "heidelberg",
+      "name": "Heidelberg",
+      "state": "DE-BW"
+    },
+    {
+      "id": "regensburg",
+      "name": "Regensburg",
+      "state": "DE-BY"
+    },
+    {
+      "id": "wuerzburg",
+      "name": "Würzburg",
+      "state": "DE-BY"
+    },
+    {
+      "id": "goettingen",
+      "name": "Göttingen",
+      "state": "DE-NI"
+    },
+    {
+      "id": "ulm",
+      "name": "Ulm",
+      "state": "DE-BW"
+    },
+    {
+      "id": "ingolstadt",
+      "name": "Ingolstadt",
+      "state": "DE-BY"
+    },
+    {
+      "id": "wolfsburg",
+      "name": "Wolfsburg",
+      "state": "DE-NI"
+    },
+    {
+      "id": "paderborn",
+      "name": "Paderborn",
+      "state": "DE-NW"
+    },
+    {
+      "id": "jena",
+      "name": "Jena",
+      "state": "DE-TH"
+    },
+    {
+      "id": "bremerhaven",
+      "name": "Bremerhaven",
+      "state": "DE-HB"
+    },
+    {
+      "id": "erlangen",
+      "name": "Erlangen",
+      "state": "DE-BY"
+    },
+    {
+      "id": "trier",
+      "name": "Trier",
+      "state": "DE-RP"
+    },
+    {
+      "id": "koblenz",
+      "name": "Koblenz",
+      "state": "DE-RP"
+    },
+    {
+      "id": "kaiserslautern",
+      "name": "Kaiserslautern",
+      "state": "DE-RP"
+    },
+    {
+      "id": "siegen",
+      "name": "Siegen",
+      "state": "DE-NW"
+    },
+    {
+      "id": "hildesheim",
+      "name": "Hildesheim",
+      "state": "DE-NI"
+    },
+    {
+      "id": "konstanz",
+      "name": "Konstanz",
+      "state": "DE-BW"
+    },
+    {
+      "id": "tuebingen",
+      "name": "Tübingen",
+      "state": "DE-BW"
+    },
+    {
+      "id": "passau",
+      "name": "Passau",
+      "state": "DE-BY"
+    },
+    {
+      "id": "bamberg",
+      "name": "Bamberg",
+      "state": "DE-BY"
+    },
+    {
+      "id": "bayreuth",
+      "name": "Bayreuth",
+      "state": "DE-BY"
+    },
+    {
+      "id": "weimar",
+      "name": "Weimar",
+      "state": "DE-TH"
+    },
+    {
+      "id": "greifswald",
+      "name": "Greifswald",
+      "state": "DE-MV"
+    },
+    {
+      "id": "schwerin",
+      "name": "Schwerin",
+      "state": "DE-MV"
+    },
+    {
+      "id": "lueneburg",
+      "name": "Lüneburg",
+      "state": "DE-NI"
+    },
+    {
+      "id": "flensburg",
+      "name": "Flensburg",
+      "state": "DE-SH"
+    },
+    {
+      "id": "cottbus",
+      "name": "Cottbus",
+      "state": "DE-BB"
+    },
+    {
+      "id": "frankfurt-oder",
+      "name": "Frankfurt (Oder)",
+      "state": "DE-BB"
+    },
+    {
+      "id": "giessen",
+      "name": "Gießen",
+      "state": "DE-HE"
+    },
+    {
+      "id": "marburg",
+      "name": "Marburg",
+      "state": "DE-HE"
+    },
+    {
+      "id": "ilmenau",
+      "name": "Ilmenau",
+      "state": "DE-TH"
+    }
+  ]
+}
