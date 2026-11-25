@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { scenario, SHOW_DRAFTS } from '../lib/content'
-import { planTasks, type Bucket } from '../lib/engine'
+import { parseDate, planTasks, type Bucket } from '../lib/engine'
 import { t } from '../lib/i18n'
 import { load } from '../lib/storage'
 import type { Profile } from '../lib/types'
@@ -25,28 +25,30 @@ export function Timeline() {
     [profile, saved.done],
   )
   const doneCount = plan.filter((p) => p.done).length
+  const arrival = parseDate(profile.arrival)
+  const today = Math.max(1, Math.floor((Date.now() - arrival.getTime()) / 86_400_000) + 1)
 
   return (
     <section>
-      <h1 className="text-2xl font-bold">{t('timeline.title')}</h1>
-      {!saved.profile && <p className="mt-2 text-sm text-gray-500">{t('timeline.sample')}</p>}
+      <div className="flex items-end justify-between gap-4">
+        <h1 className="font-sign text-[32px] leading-none font-bold">{t('timeline.title')}</h1>
+        <p className="shrink-0 rounded-md bg-sign px-2.5 py-1 font-sign text-lg leading-none font-bold">
+          Day {today}
+        </p>
+      </div>
+      {!saved.profile && <p className="mt-3 text-muted">{t('timeline.sample')}</p>}
 
-      <div className="mt-4">
-        <div className="flex justify-between text-xs text-gray-500">
-          <span>
-            {doneCount} of {plan.length} done
-          </span>
-        </div>
-        <div className="mt-1 h-2 rounded-full bg-gray-100">
-          <div
-            className="h-2 rounded-full bg-brand"
-            style={{ width: `${plan.length ? (doneCount / plan.length) * 100 : 0}%` }}
-          />
+      <div className="mt-5">
+        <p className="text-sm text-muted">
+          {doneCount} of {plan.length} done
+        </p>
+        <div className="mt-1.5 h-2 bg-concrete">
+          <div className="h-2 bg-ink" style={{ width: `${plan.length ? (doneCount / plan.length) * 100 : 0}%` }} />
         </div>
       </div>
 
       {plan.length === 0 && (
-        <p className="mt-6 rounded-xl bg-gray-50 p-4 text-sm text-gray-600">
+        <p className="mt-8 border-l-4 border-sign pl-3 text-muted">
           No verified tasks yet — content is being checked against official sources.
         </p>
       )}
@@ -55,30 +57,31 @@ export function Timeline() {
         const items = plan.filter((p) => p.bucket === bucket)
         if (!items.length) return null
         return (
-          <div key={bucket} className="mt-6">
-            <h2 className="text-xs font-semibold tracking-wide text-gray-500 uppercase">{t(`bucket.${bucket}`)}</h2>
-            <ul className="mt-2 space-y-2">
+          <div key={bucket} className="mt-8">
+            <h2 className={`font-sign text-xl font-bold ${bucket === 'overdue' ? 'text-alert' : ''}`}>
+              {t(`bucket.${bucket}`)}
+            </h2>
+            <ol className="mt-2 border-t-2 border-ink">
               {items.map(({ task, due, blockedBy }) => (
-                <li key={task.id} className="rounded-xl border border-gray-200 p-3">
-                  <div className="flex items-start justify-between gap-3">
-                    <span className="font-medium">{task.title.en}</span>
-                    <span className="shrink-0 text-xs text-gray-500">{fmt.format(due)}</span>
+                <li key={task.id} className="flex gap-4 border-b border-ink/15 py-3.5">
+                  <div className="w-14 shrink-0 pt-0.5">
+                    <p className="font-sign text-[22px] leading-none font-bold">
+                      {/* arrival day is Day 1, so an offset of N days is Day N+1 */}
+                      Day {task.deadline.offsetDays + 1}
+                    </p>
+                    <p className="mt-1 text-xs text-muted">{fmt.format(due)}</p>
                   </div>
-                  <div className="mt-1.5 flex flex-wrap gap-1.5 text-[11px]">
-                    <span className="rounded-full bg-gray-100 px-2 py-0.5 text-gray-600">{task.category}</span>
-                    {task.deadline.hard && (
-                      <span className="rounded-full bg-red-50 px-2 py-0.5 text-red-700">deadline</span>
-                    )}
-                    {blockedBy.length > 0 && (
-                      <span className="rounded-full bg-gray-50 px-2 py-0.5 text-gray-500">after: {blockedBy.join(', ')}</span>
-                    )}
-                    {task.status === 'draft' && (
-                      <span className="rounded-full bg-amber-100 px-2 py-0.5 text-amber-900">{t('draft.badge')}</span>
-                    )}
+                  <div className="min-w-0">
+                    <p className="text-[17px] leading-snug font-semibold">{task.title.en}</p>
+                    <p className="mt-1 text-sm text-muted">
+                      {task.deadline.hard && <span className="font-semibold text-alert">Legal deadline. </span>}
+                      {blockedBy.length > 0 && <span>Do first: {blockedBy.join(', ')}. </span>}
+                      {task.status === 'draft' && <span className="bg-sign-soft px-1">{t('draft.badge')}</span>}
+                    </p>
                   </div>
                 </li>
               ))}
-            </ul>
+            </ol>
           </div>
         )
       })}

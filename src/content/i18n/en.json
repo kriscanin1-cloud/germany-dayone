@@ -4,8 +4,8 @@
   "nav.entitled": "Entitled",
   "nav.people": "People",
   "nav.me": "Me",
-  "welcome.title": "Your first 30 days in Germany, sorted.",
-  "welcome.body": "Answer a few questions and get a personal plan: what to do, by when, and what you may be entitled to.",
+  "welcome.title": "Congratulations on your move to Germany!",
+  "welcome.body": "We'll help you settle in. Answer a few questions and get your personal plan for the first weeks.",
   "welcome.cta": "Get my plan",
   "draft.badge": "DRAFT",
   "draft.banner": "Preview: content is not verified yet.",
@@ -24,5 +24,5 @@
   "me.deleted": "Your data on this device was deleted.",
   "me.disclaimer": "Practical guidance, not legal advice.",
   "install.ios": "Install: tap Share, then “Add to Home Screen”.",
-  "coming": "Coming next"
+  "coming": "Coming in the next version."
 }

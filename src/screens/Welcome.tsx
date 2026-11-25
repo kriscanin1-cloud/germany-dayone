@@ -3,20 +3,26 @@ import { t } from '../lib/i18n'
 
 export function Welcome() {
   return (
-    <div className="mx-auto flex min-h-full max-w-md flex-col justify-between bg-brand px-6 pt-16 pb-10 text-white">
-      <div>
-        <img src="icons/icon-192.png" alt="" className="h-16 w-16 rounded-2xl" />
-        <h1 className="mt-8 text-3xl leading-tight font-bold">{t('welcome.title')}</h1>
-        <p className="mt-4 text-base text-white/85">{t('welcome.body')}</p>
+    <div className="mx-auto flex min-h-full max-w-md flex-col bg-paper px-6 pt-14 pb-8">
+      {/* Hero: a town-entrance sign that says Germany, day one */}
+      <div className="ortsschild" aria-hidden>
+        <div className="px-5 pt-5 pb-4">
+          <p className="font-sign text-[46px] leading-none font-bold tracking-tight">Deutschland</p>
+          <p className="mt-3 font-sign text-xl leading-none font-semibold">Tag 1</p>
+        </div>
       </div>
-      <div className="safe-bottom">
+
+      <h1 className="mt-10 font-sign text-[32px] leading-[1.1] font-bold">{t('welcome.title')}</h1>
+      <p className="mt-4 text-lg text-muted">{t('welcome.body')}</p>
+
+      <div className="safe-bottom mt-auto pt-10">
         <Link
           to="/onboarding"
-          className="block rounded-xl bg-accent py-3.5 text-center font-semibold text-gray-900"
+          className="block rounded-md bg-ink py-4 text-center text-lg font-semibold text-paper"
         >
           {t('welcome.cta')}
         </Link>
-        <p className="mt-4 text-center text-xs text-white/70">{t('me.disclaimer')}</p>
+        <p className="mt-4 text-center text-sm text-muted">{t('me.disclaimer')}</p>
       </div>
     </div>
   )

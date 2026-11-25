@@ -1,0 +1,207 @@
+{
+  "version": "2026-11-v1",
+  "note": "Question ids and option ids are stable keys in the database. Never reuse an id for a different meaning: add a new id and bump the version.",
+  "parts": [
+    {
+      "id": "plan",
+      "title": "Your plan",
+      "intro": "These answers build your personal plan. They stay on your phone.",
+      "consent": null
+    },
+    {
+      "id": "research",
+      "title": "Help us improve",
+      "intro": "Optional. Your answers help us understand what newcomers need.",
+      "consent": "research_v1"
+    }
+  ],
+  "questions": [
+    {
+      "id": "purpose",
+      "part": "plan",
+      "type": "single",
+      "required": true,
+      "text": "Why are you moving to Germany?",
+      "options": [
+        { "id": "study", "label": "To study" },
+        { "id": "work", "label": "For a job" },
+        { "id": "chancenkarte", "label": "To look for a job (Opportunity Card)" },
+        { "id": "family", "label": "To join my family" },
+        { "id": "other", "label": "Something else" }
+      ],
+      "storage": { "device": "exact", "server": "exact" }
+    },
+    {
+      "id": "eu",
+      "part": "plan",
+      "type": "single",
+      "required": true,
+      "text": "Are you a citizen of an EU country, Iceland, Liechtenstein, Norway or Switzerland?",
+      "help": "If yes, you don't need a visa or residence permit, so we hide those steps.",
+      "options": [
+        { "id": "yes", "label": "Yes" },
+        { "id": "no", "label": "No" }
+      ],
+      "storage": { "device": "exact", "server": "exact" }
+    },
+    {
+      "id": "arrival",
+      "part": "plan",
+      "type": "date",
+      "required": true,
+      "text": "When did you arrive, or when will you arrive?",
+      "storage": { "device": "exact", "server": "month" }
+    },
+    {
+      "id": "place",
+      "part": "plan",
+      "type": "city",
+      "required": true,
+      "text": "Where will you live?",
+      "help": "Start typing your city. Not listed? Choose your state.",
+      "storage": { "device": "exact", "server": "exact" }
+    },
+    {
+      "id": "household",
+      "part": "plan",
+      "type": "single",
+      "required": true,
+      "text": "Who is moving with you?",
+      "options": [
+        { "id": "alone", "label": "Just me" },
+        { "id": "partner", "label": "Me and my partner" },
+        { "id": "children", "label": "Me and my children (with or without a partner)" }
+      ],
+      "storage": { "device": "exact", "server": "exact" }
+    },
+    {
+      "id": "german_level",
+      "part": "plan",
+      "type": "single",
+      "required": true,
+      "text": "How good is your German?",
+      "options": [
+        { "id": "none", "label": "I don't speak German yet" },
+        { "id": "basic", "label": "Basic (A1–A2)" },
+        { "id": "intermediate", "label": "Intermediate (B1–B2)" },
+        { "id": "advanced", "label": "Advanced or native (C1+)" }
+      ],
+      "storage": { "device": "exact", "server": "exact" }
+    },
+    {
+      "id": "done_already",
+      "part": "plan",
+      "type": "multi",
+      "required": false,
+      "text": "What have you already done?",
+      "options": [
+        { "id": "health-insurance", "label": "Health insurance" },
+        { "id": "anmeldung", "label": "Registered my address" },
+        { "id": "bank-account", "label": "Opened a bank account" },
+        { "id": "sim-card", "label": "Got a German phone number" }
+      ],
+      "maps_to": "task_ids",
+      "storage": { "device": "exact", "server": "exact" }
+    },
+    {
+      "id": "worries",
+      "part": "research",
+      "type": "multi",
+      "required": false,
+      "max": 3,
+      "text": "What worries you most right now? Pick up to three.",
+      "options": [
+        { "id": "paperwork", "label": "Paperwork and deadlines" },
+        { "id": "housing", "label": "Finding a place to live" },
+        { "id": "money", "label": "Money, taxes and bank" },
+        { "id": "health", "label": "Health insurance and doctors" },
+        { "id": "language", "label": "Language" },
+        { "id": "friends", "label": "Meeting people and making friends" },
+        { "id": "job", "label": "Finding or keeping a job" },
+        { "id": "family", "label": "Family: childcare, school, partner" }
+      ],
+      "storage": { "device": "exact", "server": "exact" }
+    },
+    {
+      "id": "helpers",
+      "part": "research",
+      "type": "multi",
+      "required": false,
+      "text": "Who is helping you with the move?",
+      "options": [
+        { "id": "employer", "label": "My employer" },
+        { "id": "university", "label": "My university" },
+        { "id": "friends_family", "label": "Friends or family in Germany" },
+        { "id": "paid_service", "label": "A paid service (relocation agency, lawyer)" },
+        { "id": "online", "label": "Online groups and forums" },
+        { "id": "nobody", "label": "Nobody, I'm doing it myself" }
+      ],
+      "storage": { "device": "exact", "server": "exact" }
+    },
+    {
+      "id": "paid_for_help",
+      "part": "research",
+      "type": "single",
+      "required": false,
+      "text": "Have you paid anyone to help with your move?",
+      "options": [
+        { "id": "no", "label": "No" },
+        { "id": "lt100", "label": "Yes, less than €100" },
+        { "id": "100_500", "label": "Yes, €100–500" },
+        { "id": "gt500", "label": "Yes, more than €500" },
+        { "id": "employer_paid", "label": "My employer paid for it" }
+      ],
+      "storage": { "device": "exact", "server": "exact" }
+    },
+    {
+      "id": "read_language",
+      "part": "research",
+      "type": "single",
+      "required": false,
+      "text": "Which language would you most like to use this app in?",
+      "options": [
+        { "id": "en", "label": "English" },
+        { "id": "ru", "label": "Russian" },
+        { "id": "uk", "label": "Ukrainian" },
+        { "id": "tr", "label": "Turkish" },
+        { "id": "ar", "label": "Arabic" },
+        { "id": "hi", "label": "Hindi" },
+        { "id": "es", "label": "Spanish" },
+        { "id": "other", "label": "Another language" }
+      ],
+      "storage": { "device": "exact", "server": "exact" }
+    },
+    {
+      "id": "heard_from",
+      "part": "research",
+      "type": "single",
+      "required": false,
+      "text": "How did you find Day One?",
+      "options": [
+        { "id": "friend", "label": "A friend" },
+        { "id": "community", "label": "An online group or forum" },
+        { "id": "university", "label": "My university" },
+        { "id": "employer", "label": "My employer" },
+        { "id": "social", "label": "Social media" },
+        { "id": "search", "label": "Search or an AI assistant" },
+        { "id": "other", "label": "Somewhere else" }
+      ],
+      "storage": { "device": "exact", "server": "exact" }
+    },
+    {
+      "id": "interview",
+      "part": "research",
+      "type": "email",
+      "required": false,
+      "text": "Can we call you for 20 minutes to hear about your move? Leave your email.",
+      "help": "Only used to arrange the call. Stored separately from your answers.",
+      "storage": { "device": "none", "server": "waitlist" }
+    }
+  ],
+  "consents": {
+    "research_v1": {
+      "text": "Share my answers with Day One, without my name, to improve the app. Day One may publish combined statistics that cannot identify me. I can withdraw at any time in Me → Delete my data.",
+      "default": false
+    }
+  }
+}

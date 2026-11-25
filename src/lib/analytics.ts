@@ -1,4 +1,4 @@
-// Anonymous product events → Supabase `events` table (insert-only, see supabase/schema.sql).
+// Anonymous product events → Supabase `events` table (insert-only, see supabase/migrations/001_schema.sql).
 // If Supabase is not configured the calls are silent no-ops, so the app works without it.
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { load } from './storage'

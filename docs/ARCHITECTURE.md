@@ -46,7 +46,7 @@ Shared core for **international students** and **skilled workers (incl. Blue Car
 | Backend (minimal) | **Supabase, EU region (Frankfurt)** | Anonymous analytics events, waitlist, feedback |
 | Hosting | GitHub Pages via GitHub Actions | Free HTTPS; move to Vercel/Netlify/Cloudflare when commercial |
 
-**No secrets in the frontend.** The Supabase *anon* key is public by design; protection comes from Row Level Security (insert-only tables, see `supabase_schema.sql`). Any future AI call goes through a Supabase Edge Function that holds the model key.
+**No secrets in the frontend.** The Supabase *anon* key is public by design; protection comes from Row Level Security (insert-only tables, see `supabase/migrations/`). Any future AI call goes through a Supabase Edge Function that holds the model key.
 
 ---
 
@@ -173,7 +173,7 @@ Keep it pure (no React inside) so it can be unit-tested with a few profiles.
 ```
 Wrap every read/write in try/catch; if storage fails, keep state in memory.
 
-### In Supabase (insert-only, see `supabase_schema.sql`)
+### In Supabase (insert-only, see `supabase/migrations/`)
 - `events` — anonymous product events
 - `waitlist` — meetup / early-access sign-ups (email only with explicit consent)
 - `feedback` — rating + text

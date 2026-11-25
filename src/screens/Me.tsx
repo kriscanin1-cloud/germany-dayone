@@ -9,11 +9,9 @@ export function Me() {
 
   return (
     <section>
-      <h1 className="text-2xl font-bold">{t('me.title')}</h1>
+      <h1 className="font-sign text-[32px] leading-none font-bold">{t('me.title')}</h1>
 
-      {!installed && (
-        <p className="mt-4 rounded-xl bg-blue-50 p-3 text-sm text-blue-900">{t('install.ios')}</p>
-      )}
+      {!installed && <p className="mt-6 border-l-4 border-sign pl-3">{t('install.ios')}</p>}
 
       <button
         type="button"
@@ -21,15 +19,15 @@ export function Me() {
           wipe()
           setDeleted(true)
         }}
-        className="mt-6 w-full rounded-xl border border-red-200 py-3 font-medium text-red-700"
+        className="mt-8 w-full rounded-md border-2 border-alert py-3 font-semibold text-alert"
       >
         {t('me.delete')}
       </button>
-      {deleted && <p className="mt-2 text-sm text-gray-600">{t('me.deleted')}</p>}
+      {deleted && <p className="mt-2 text-sm text-muted">{t('me.deleted')}</p>}
 
-      <p className="mt-8 text-xs text-gray-500">{t('me.disclaimer')}</p>
-      <p className="mt-1 text-xs text-gray-400">
-        Installed: {installed ? 'yes' : 'no'} · Analytics: {analyticsEnabled ? 'on' : 'off'}
+      <p className="mt-10 text-sm text-muted">{t('me.disclaimer')}</p>
+      <p className="mt-1 text-xs text-muted">
+        Installed: {installed ? 'yes' : 'no'}. Analytics: {analyticsEnabled ? 'on' : 'off'}.
       </p>
     </section>
   )

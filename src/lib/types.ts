@@ -1,4 +1,4 @@
-export type Purpose = 'study' | 'work' | 'chancenkarte' | 'other'
+export type Purpose = 'study' | 'work' | 'chancenkarte' | 'family' | 'other'
 
 /** ISO 3166-2:DE */
 export type StateCode =

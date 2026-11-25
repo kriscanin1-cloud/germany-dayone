@@ -25,7 +25,7 @@ One-time setup on GitHub:
 1. **Settings → Pages → Build and deployment → Source: GitHub Actions**
 2. Optional, **Settings → Secrets and variables → Actions → Variables**:
    - `VITE_SHOW_DRAFTS` — unverified content is shown on the live site by default (with a yellow banner); set to `false` once the content is verified
-   - `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` — turn on anonymous analytics (see `supabase/schema.sql`)
+   - `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` — turn on anonymous analytics (see `supabase/migrations/001_schema.sql`)
 
 Live URL: `https://kriscanin1-cloud.github.io/germany-dayone/`
 
@@ -38,7 +38,8 @@ src/
   screens/            Welcome, Timeline, Me, placeholders for the rest
   components/         Layout (bottom navigation)
 docs/ARCHITECTURE.md  scope, data model, plan
-supabase/schema.sql   insert-only tables + metrics view
+docs/QUESTIONNAIRE.md questions, consent and data flow
+supabase/migrations/ SQL to run in order: 001 tables + metrics, 002 questionnaire answers
 ```
 
 ## Editing content

@@ -1,40 +1,35 @@
 import { NavLink, Outlet } from 'react-router-dom'
-import { t } from '../lib/i18n'
 import { SHOW_DRAFTS } from '../lib/content'
+import { t } from '../lib/i18n'
 
 const tabs = [
-  { to: '/timeline', label: t('nav.timeline'), icon: '🗓️' },
-  { to: '/entitled', label: t('nav.entitled'), icon: '💶' },
-  { to: '/people', label: t('nav.people'), icon: '☕' },
-  { to: '/me', label: t('nav.me'), icon: '👤' },
+  { to: '/timeline', label: t('nav.timeline') },
+  { to: '/entitled', label: t('nav.entitled') },
+  { to: '/people', label: t('nav.people') },
+  { to: '/me', label: t('nav.me') },
 ]
 
 export function Layout() {
   return (
-    <div className="mx-auto flex min-h-full max-w-md flex-col bg-white shadow-sm">
+    <div className="mx-auto flex min-h-full max-w-md flex-col bg-paper">
       {SHOW_DRAFTS && (
-        <div className="bg-amber-100 px-4 py-1.5 text-center text-xs font-medium text-amber-900">
-          {t('draft.banner')}
-        </div>
+        <p className="border-b border-ink/15 bg-sign-soft px-4 py-1.5 text-center text-sm">{t('draft.banner')}</p>
       )}
-      <main className="flex-1 px-4 pt-5 pb-24">
+      <main className="flex-1 px-5 pt-6 pb-28">
         <Outlet />
       </main>
-      <nav className="safe-bottom fixed inset-x-0 bottom-0 mx-auto max-w-md border-t border-gray-200 bg-white">
-        <ul className="grid grid-cols-4">
+      <nav className="safe-bottom fixed inset-x-0 bottom-0 mx-auto max-w-md border-t-2 border-ink bg-paper">
+        <ul className="grid grid-cols-4 gap-1 p-1.5">
           {tabs.map((tab) => (
             <li key={tab.to}>
               <NavLink
                 to={tab.to}
                 className={({ isActive }) =>
-                  `flex flex-col items-center gap-0.5 py-2.5 text-xs ${
-                    isActive ? 'font-semibold text-brand' : 'text-gray-500'
+                  `block rounded-md py-3 text-center text-[15px] font-semibold ${
+                    isActive ? 'bg-sign text-ink' : 'text-muted'
                   }`
                 }
               >
-                <span aria-hidden className="text-lg leading-none">
-                  {tab.icon}
-                </span>
                 {tab.label}
               </NavLink>
             </li>
