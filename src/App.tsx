@@ -1,10 +1,10 @@
 import { createHashRouter, Navigate, RouterProvider } from 'react-router-dom'
 import { Layout } from './components/Layout'
-import { t } from './lib/i18n'
 import { load } from './lib/storage'
 import { Me } from './screens/Me'
 import { Onboarding } from './screens/Onboarding'
-import { Placeholder } from './screens/Placeholder'
+import { NewMeetup } from './screens/NewMeetup'
+import { People } from './screens/People'
 import { Entitled } from './screens/Entitled'
 import { TaskDetail } from './screens/TaskDetail'
 import { Timeline } from './screens/Timeline'
@@ -25,7 +25,8 @@ const router = createHashRouter([
       { path: '/timeline', element: <Timeline /> },
       { path: '/task/:id', element: <TaskDetail /> },
       { path: '/entitled', element: <Entitled /> },
-      { path: '/people', element: <Placeholder title={t('people.title')} body={t('people.body')} /> },
+      { path: '/people', element: <People /> },
+      { path: '/people/new', element: <NewMeetup /> },
       { path: '/me', element: <Me /> },
     ],
   },

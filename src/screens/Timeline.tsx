@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { ConfirmDialog } from '../components/ConfirmDialog'
 import { activitiesByWeek, holidaysInWeeks, type Activity, type DatedHoliday } from '../lib/activities'
+import { track } from '../lib/analytics'
 import { scenario, SHOW_DRAFTS } from '../lib/content'
 import { daysBetween, parseDate, planMilestones, planTasks, type PlannedTask } from '../lib/engine'
 import { t } from '../lib/i18n'
@@ -277,6 +278,13 @@ function ActivityCard({
       >
         {tried ? t('fun.tried') : t('fun.try')}
       </button>
+      <Link
+        to={`/people/new?activity=${a.id}`}
+        onClick={() => track('meetup_create_opened', { from: 'activity', activity: a.id })}
+        className="mt-2.5 ml-2 inline-block rounded-md px-2 py-1 text-sm font-semibold underline"
+      >
+        {t('fun.together')}
+      </Link>
       <button
         type="button"
         onClick={onRemove}

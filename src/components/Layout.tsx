@@ -13,7 +13,9 @@ const tabs = [
 export function Layout() {
   const { pathname } = useLocation()
   // a new screen starts at the top
-  useEffect(() => window.scrollTo({ top: 0 }), [pathname])
+  useEffect(() => {
+    window.scrollTo({ top: 0 })
+  }, [pathname])
   // task pages belong to the Timeline tab
   const active = (to: string) => pathname.startsWith(to) || (to === '/timeline' && pathname.startsWith('/task/'))
   return (

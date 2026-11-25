@@ -1,5 +1,6 @@
 // Everything the app remembers lives on the device under one key.
 // Every access is wrapped: private mode or blocked storage must never break the app.
+import type { Meetup, Rsvp } from './people'
 import type { Answers } from './questionnaire'
 import type { Profile } from './types'
 
@@ -17,6 +18,10 @@ export interface Saved {
   removed?: string[]
   /** activity ids the person ticked as tried */
   tried?: string[]
+  /** People tab (fake door): meetups you created, your RSVPs and the notify switch — device only */
+  meetups?: Meetup[]
+  rsvps?: Record<string, Rsvp>
+  notifyMeetups?: boolean
   createdAt: string
 }
 
