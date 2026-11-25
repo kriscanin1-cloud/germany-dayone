@@ -22,7 +22,20 @@ export interface Saved {
   meetups?: Meetup[]
   rsvps?: Record<string, Rsvp>
   notifyMeetups?: boolean
+  /** Me tab: what you choose to share at meetups, plus private dates — device only */
+  me?: MeInfo
   createdAt: string
+}
+
+export interface MeInfo {
+  /** first name or nickname — no surname needed */
+  name?: string
+  languages?: string[]
+  interests?: string[]
+  /** one line about you, max 120 characters */
+  about?: string
+  /** ISO date, private — for a renewal reminder */
+  passportEnd?: string
 }
 
 let memory: Saved | null = null

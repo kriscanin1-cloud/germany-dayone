@@ -25,7 +25,7 @@ export function NewMeetup() {
   const [date, setDate] = useState(nextSaturday())
   const [time, setTime] = useState('15:00')
   const [area, setArea] = useState('')
-  const [languages, setLanguages] = useState<string[]>(['English'])
+  const [languages, setLanguages] = useState<string[]>(saved.me?.languages?.length ? saved.me.languages : ['English'])
   const [audience, setAudience] = useState<Audience[]>(['everyone'])
   const [maxPeople, setMaxPeople] = useState(6)
   const [womenOnly, setWomenOnly] = useState(false)
@@ -46,7 +46,7 @@ export function NewMeetup() {
       audience: audience.length ? audience : ['everyone'],
       maxPeople,
       womenOnly,
-      host: { name: 'You' },
+      host: { name: saved.me?.name || 'You' },
       interested: 0,
       going: 1,
       mine: true,

@@ -4,6 +4,7 @@ import { ConfirmDialog } from '../components/ConfirmDialog'
 import { activitiesByWeek, holidaysInWeeks, type Activity, type DatedHoliday } from '../lib/activities'
 import { track } from '../lib/analytics'
 import { scenario, SHOW_DRAFTS } from '../lib/content'
+import { countdown, humanDays } from '../lib/dates'
 import { daysBetween, parseDate, planMilestones, planTasks, type PlannedTask } from '../lib/engine'
 import { t } from '../lib/i18n'
 import { toProfile } from '../lib/questionnaire'
@@ -74,6 +75,23 @@ export function Timeline() {
           {t('week.n', { n: String(currentWeek) })}
         </p>
       </div>
+      {saved.profile &&
+        [
+          { key: 'visa', iso: profile.visaEnd, label: t('me.visaEnd'), advice: t('me.visaAdvice') },
+          { key: 'passport', iso: saved.me?.passportEnd, label: t('me.passportEnd'), advice: t('me.passportAdvice') },
+        ]
+          .filter((d) => d.iso && countdown(d.iso).urgency !== 'ok')
+          .map((d) => {
+            const c = countdown(d.iso!)
+            return (
+              <Link key={d.key} to="/me" className={`mt-4 block rounded-md border-2 p-3 ${c.urgency === 'soon' ? 'border-ink bg-sign-soft' : 'border-alert'}`}>
+                <p className={`font-semibold ${c.urgency === 'soon' ? '' : 'text-alert'}`}>
+                  {d.label}: {humanDays(c.days)}
+                </p>
+                <p className="mt-0.5 text-sm">{d.advice}</p>
+              </Link>
+            )
+          })}
       {!saved.profile && (
         <div className="mt-3">
           <p className="text-muted">{t('timeline.sample')}</p>
