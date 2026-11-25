@@ -1230,34 +1230,481 @@
   ],
   "entitlements": [
     {
-      "id": "tax-refund",
+      "id": "kindergeld",
+      "category": "money",
       "title": {
-        "en": "You may get tax back for your first year"
+        "en": "Child benefit (Kindergeld)"
       },
       "valueHint": {
-        "en": "Depends on your income and expenses; people who started work mid-year often overpay."
+        "en": "€259 a month per child (2026)"
       },
+      "who": {
+        "en": "EU citizens; non-EU parents with a settlement permit or a permit that allows work. Students: only while working."
+      },
+      "law": "§ 62 EStG",
       "conditions": [
         {
-          "en": "You were employed in Germany during the year."
+          "en": "Paid for children under 18, and up to 25 while in school, training or university."
+        },
+        {
+          "en": "Parent and child need German tax IDs."
+        },
+        {
+          "en": "On a study permit (§ 16b) you qualify only while you work, are on parental leave or get unemployment benefit."
         }
       ],
       "howTo": {
-        "en": "File a tax return for the year after it ends (online via ELSTER or a tax app)."
+        "en": "Apply to the Familienkasse online once you have the tax IDs. You can claim up to six months back."
+      },
+      "appliesTo": {
+        "purposes": "all",
+        "match": {
+          "household": [
+            "children"
+          ]
+        }
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Familienkasse: Kindergeld"
+          },
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder/kindergeld",
+          "official": true
+        }
+      ],
+      "lastVerified": "2026-11-25",
+      "sources": [
+        "https://www.arbeitsagentur.de/datei/merkblatt-kindergeld-kg2-fuer-2026_ba057307.pdf",
+        "https://www.steuertipps.de/eltern-familie-ehe/kindergeld-kinderfreibetrag/themen"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "kinderzuschlag",
+      "category": "money",
+      "title": {
+        "en": "Child supplement (Kinderzuschlag)"
+      },
+      "valueHint": {
+        "en": "Up to €297 a month per child, on top of Kindergeld"
+      },
+      "who": {
+        "en": "Working families with a low income who get Kindergeld."
+      },
+      "law": "§ 6a BKGG",
+      "conditions": [
+        {
+          "en": "Your gross income must be at least €600 (single parent) or €900 (couple) a month."
+        },
+        {
+          "en": "The amount falls as income rises."
+        },
+        {
+          "en": "Check with counselling first: some benefits can matter when your permit is extended."
+        }
+      ],
+      "howTo": {
+        "en": "Use the Familienkasse's online check (KiZ-Lotse), then apply there."
+      },
+      "appliesTo": {
+        "purposes": "all",
+        "match": {
+          "household": [
+            "children"
+          ]
+        }
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Familienkasse: Kinderzuschlag"
+          },
+          "url": "https://www.arbeitsagentur.de/familie-und-kinder/kinderzuschlag-verstehen",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "elterngeld",
+      "category": "money",
+      "title": {
+        "en": "Parental allowance (Elterngeld)"
+      },
+      "valueHint": {
+        "en": "About two-thirds of your previous net pay, for up to 14 months per couple"
+      },
+      "who": {
+        "en": "EU citizens; non-EU parents with a settlement permit or a permit that allows work — not with a study or language-course permit."
+      },
+      "law": "§ 1 Abs. 7 BEEG",
+      "conditions": [
+        {
+          "en": "For parents who look after their baby themselves and work little or not at all."
+        },
+        {
+          "en": "Non-EU parents qualify only from the day they hold a qualifying permit."
+        }
+      ],
+      "howTo": {
+        "en": "Apply at your state's Elterngeldstelle within three months of the birth — payments go back only three months."
+      },
+      "appliesTo": {
+        "purposes": "all",
+        "match": {
+          "household": [
+            "children",
+            "partner"
+          ]
+        },
+        "anyOf": [
+          {
+            "purposes": "all",
+            "euCitizen": true
+          },
+          {
+            "purposes": [
+              "work",
+              "chancenkarte",
+              "family",
+              "other"
+            ]
+          },
+          {
+            "purposes": "all",
+            "statuses": [
+              "permanent",
+              "blue_card"
+            ]
+          }
+        ]
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Family portal: Elterngeld"
+          },
+          "url": "https://familienportal.de/familienportal/familienleistungen/elterngeld",
+          "official": true
+        }
+      ],
+      "lastVerified": "2026-11-25",
+      "sources": [
+        "https://www.bundesverfassungsgericht.de/SharedDocs/Entscheidungen/DE/2012/07/ls20120710_1bvl000210",
+        "https://www.asyl.net/rsdb/M22520"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "tax-refund",
+      "category": "money",
+      "title": {
+        "en": "Tax refund (Steuererklärung)"
+      },
+      "valueHint": {
+        "en": "Often a few hundred euros back"
+      },
+      "who": {
+        "en": "Anyone who paid German income tax — also students with a job."
+      },
+      "law": "§ 46 EStG",
+      "conditions": [
+        {
+          "en": "Moving costs for a job, work equipment, commuting and tax-advisor fees can count."
+        },
+        {
+          "en": "You can file voluntarily up to four years back."
+        }
+      ],
+      "howTo": {
+        "en": "File online with ELSTER, a tax app, or a wage-tax help association (Lohnsteuerhilfeverein) for a yearly fee."
       },
       "appliesTo": {
         "purposes": [
           "work",
           "chancenkarte",
+          "study",
+          "family",
+          "other"
+        ]
+      },
+      "links": [
+        {
+          "label": {
+            "en": "ELSTER"
+          },
+          "url": "https://www.elster.de",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "bafoeg",
+      "category": "money",
+      "title": {
+        "en": "Student grant and loan (BAföG)"
+      },
+      "valueHint": {
+        "en": "Up to several hundred euros a month, half of it interest-free loan"
+      },
+      "who": {
+        "en": "Not on a study permit. EU citizens with a right to stay long term; non-EU with a settlement permit or certain family or humanitarian permits."
+      },
+      "law": "§ 8 BAföG",
+      "conditions": [
+        {
+          "en": "Your nationality and permit decide — § 8 BAföG lists them."
+        },
+        {
+          "en": "Usually only for a first degree, started before age 45."
+        }
+      ],
+      "howTo": {
+        "en": "Apply online at BAföG Digital before or at the start of the semester."
+      },
+      "appliesTo": {
+        "purposes": [
+          "study"
+        ],
+        "anyOf": [
+          {
+            "purposes": "all",
+            "euCitizen": true
+          },
+          {
+            "purposes": "all",
+            "statuses": [
+              "permanent",
+              "temporary",
+              "protection"
+            ]
+          }
+        ]
+      },
+      "links": [
+        {
+          "label": {
+            "en": "BAföG"
+          },
+          "url": "https://www.bafoeg.de",
+          "official": true
+        },
+        {
+          "label": {
+            "en": "§ 8 BAföG"
+          },
+          "url": "https://www.gesetze-im-internet.de/baf_g/__8.html",
+          "official": true
+        }
+      ],
+      "lastVerified": "2026-11-25",
+      "sources": [
+        "https://www.gesetze-im-internet.de/baf_g/__8.html"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "deutschlandticket",
+      "category": "discount",
+      "title": {
+        "en": "Deutschlandticket"
+      },
+      "valueHint": {
+        "en": "€63 a month for all local and regional transport (€66.80 from Jan 2027)"
+      },
+      "who": {
+        "en": "Everyone. Cheaper as a job ticket or semester ticket."
+      },
+      "conditions": [
+        {
+          "en": "Subscription only, cancellable monthly."
+        },
+        {
+          "en": "Covers buses, trams, U-/S-Bahn and regional trains in all of Germany — not ICE or IC."
+        }
+      ],
+      "howTo": {
+        "en": "Buy it in your local transport app or the DB Navigator app."
+      },
+      "appliesTo": {
+        "purposes": "all"
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Federal Government: FAQ"
+          },
+          "url": "https://www.bundesregierung.de/breg-de/service/newsletter-und-abos/newsletter-verbraucherschutz/deutschlandticket-2134074",
+          "official": true
+        }
+      ],
+      "lastVerified": "2026-11-25",
+      "sources": [
+        "https://www.bundesregierung.de/breg-de/service/newsletter-und-abos/newsletter-verbraucherschutz/deutschlandticket-2134074",
+        "https://www.stmb.bayern.de/med/pressemitteilungen/pressearchiv/2026/115/index.php"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "jobticket",
+      "category": "discount",
+      "title": {
+        "en": "Job ticket"
+      },
+      "valueHint": {
+        "en": "Deutschlandticket for at most €44.10 a month (2026)"
+      },
+      "who": {
+        "en": "Employees whose employer offers it."
+      },
+      "conditions": [
+        {
+          "en": "Your employer pays at least 25% and gets an extra 5% discount."
+        },
+        {
+          "en": "The subsidy is tax-free."
+        }
+      ],
+      "howTo": {
+        "en": "Ask HR in your first week whether they offer the Deutschlandticket Job."
+      },
+      "appliesTo": {
+        "purposes": [
+          "work",
+          "chancenkarte"
+        ]
+      },
+      "links": [
+        {
+          "label": {
+            "en": "DB: Jobticket"
+          },
+          "url": "https://www.bahn.de/bahnbusiness/faq/pk/angebot/pendler/dt-jobticket",
+          "official": true
+        }
+      ],
+      "lastVerified": "2026-11-25",
+      "sources": [
+        "https://www.bahn.de/bahnbusiness/faq/dt-jobticket-preis"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "semesterticket",
+      "category": "discount",
+      "title": {
+        "en": "Semester ticket"
+      },
+      "valueHint": {
+        "en": "Deutschlandticket at a student price, paid with your semester fee"
+      },
+      "who": {
+        "en": "Students at most universities."
+      },
+      "conditions": [
+        {
+          "en": "The price is set per university and included in the semester contribution."
+        },
+        {
+          "en": "Some universities still have a regional ticket instead."
+        }
+      ],
+      "howTo": {
+        "en": "Activate it in your university's app or portal after you enrol."
+      },
+      "appliesTo": {
+        "purposes": [
           "study"
         ]
       },
       "links": [
         {
           "label": {
-            "en": "ELSTER (official tax portal)"
+            "en": "Federal Government: FAQ"
           },
-          "url": "https://www.elster.de",
+          "url": "https://www.bundesregierung.de/breg-de/service/newsletter-und-abos/newsletter-verbraucherschutz/deutschlandticket-2134074",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "student-discounts",
+      "category": "discount",
+      "title": {
+        "en": "Student discounts"
+      },
+      "valueHint": {
+        "en": "Cheaper meals, culture, software and travel"
+      },
+      "who": {
+        "en": "Enrolled students with a student ID."
+      },
+      "conditions": [
+        {
+          "en": "Mensa meals are subsidised."
+        },
+        {
+          "en": "Museums, theatres and cinemas often have reduced prices."
+        },
+        {
+          "en": "Many software makers give free licences through the university."
+        }
+      ],
+      "howTo": {
+        "en": "Always ask for “Studentenrabatt” and carry your student ID."
+      },
+      "appliesTo": {
+        "purposes": [
+          "study"
+        ]
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Deutsches Studierendenwerk"
+          },
+          "url": "https://www.studierendenwerke.de",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "broadcasting-exemption",
+      "category": "discount",
+      "title": {
+        "en": "Exemption from the broadcasting fee"
+      },
+      "valueHint": {
+        "en": "Save €18.36 a month"
+      },
+      "who": {
+        "en": "People who get BAföG, Bürgergeld or certain other benefits — not students in general."
+      },
+      "conditions": [
+        {
+          "en": "You need the benefit decision letter as proof."
+        }
+      ],
+      "howTo": {
+        "en": "Apply on rundfunkbeitrag.de with a copy of your benefit decision."
+      },
+      "appliesTo": {
+        "purposes": "all"
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Rundfunkbeitrag: exemption"
+          },
+          "url": "https://www.rundfunkbeitrag.de",
           "official": true
         }
       ],
@@ -1306,34 +1753,103 @@
       "sources": [
         "https://www.bmi.bund.de/SharedDocs/faqs/DE/themen/gesellschaft-integration/integration/integrationskurs-faq-liste.html",
         "https://www.der-paritaetische.de/alle-meldungen/anpassung-der-integrationskursverordnung-zum-01-august-2026/"
-      ]
+      ],
+      "category": "learning",
+      "who": {
+        "en": "Newcomers with a permit for work, family or a long-term stay; others only if places are free."
+      },
+      "law": "§ 44 AufenthG"
     },
     {
-      "id": "recognition-advice",
+      "id": "berufssprachkurs",
+      "category": "learning",
       "title": {
-        "en": "Free advice on recognising your qualifications"
+        "en": "Job-related German course (Berufssprachkurs)"
       },
       "valueHint": {
-        "en": "Recognition can unlock better-paid jobs and some permit types."
+        "en": "German for work, B1 to C1 — free on a low income"
       },
+      "who": {
+        "en": "Workers, job seekers and people in recognition procedures. Since 30 April 2026, people hired from abroad always pay a contribution."
+      },
+      "law": "§ 45a AufenthG, DeuFöV",
       "conditions": [
         {
-          "en": "You have a foreign vocational or university qualification."
+          "en": "Free if your gross pay is under 33% of the pension contribution ceiling, or if you get Bürgergeld or unemployment benefit."
+        },
+        {
+          "en": "Can run part-time alongside your job."
         }
       ],
       "howTo": {
-        "en": "Use the official recognition finder and book a counselling session."
+        "en": "Find a course in the Arbeitsagentur course search and apply through the school, or ask your Jobcenter."
       },
       "appliesTo": {
         "purposes": [
           "work",
-          "chancenkarte"
+          "chancenkarte",
+          "family",
+          "other"
         ]
       },
       "links": [
         {
           "label": {
-            "en": "Anerkennung in Deutschland"
+            "en": "Arbeitsagentur: Berufssprachkurse"
+          },
+          "url": "https://www.arbeitsagentur.de/arbeitslos-arbeit-finden/berufssprachkurse",
+          "official": true
+        },
+        {
+          "label": {
+            "en": "DeuFöV"
+          },
+          "url": "https://www.gesetze-im-internet.de/deuf_v/BJNR612500016.html",
+          "official": true
+        }
+      ],
+      "lastVerified": "2026-11-25",
+      "sources": [
+        "https://www.gesetze-im-internet.de/deuf_v/BJNR612500016.html",
+        "https://www.dresden.de/de/leben/gesellschaft/migration/orientierungshilfen/sprache/Integrationskurse.php"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "recognition-advice",
+      "category": "learning",
+      "title": {
+        "en": "Free advice on getting your qualification recognised"
+      },
+      "valueHint": {
+        "en": "Free counselling, sometimes funding for fees and courses"
+      },
+      "who": {
+        "en": "Anyone with a foreign degree or vocational qualification."
+      },
+      "conditions": [
+        {
+          "en": "Needed for regulated jobs (doctors, nurses, teachers, engineers in some states) and often helpful for the Blue Card."
+        },
+        {
+          "en": "The IQ network gives free advice, also in English."
+        }
+      ],
+      "howTo": {
+        "en": "Use the Recognition Finder on anerkennung-in-deutschland.de, then book IQ counselling."
+      },
+      "appliesTo": {
+        "purposes": [
+          "work",
+          "chancenkarte",
+          "family",
+          "other"
+        ]
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Recognition in Germany"
           },
           "url": "https://www.anerkennung-in-deutschland.de",
           "official": true
@@ -1344,19 +1860,29 @@
     },
     {
       "id": "scholarships",
+      "category": "learning",
       "title": {
-        "en": "Scholarships open to international students"
+        "en": "Scholarships"
       },
       "valueHint": {
-        "en": "Some programmes pay a monthly stipend."
+        "en": "From €300 a month (Deutschlandstipendium) to full grants"
+      },
+      "who": {
+        "en": "Students, including international students."
       },
       "conditions": [
         {
-          "en": "Enrolled student; programme-specific criteria."
+          "en": "DAAD funds international students and researchers."
+        },
+        {
+          "en": "The Deutschlandstipendium does not depend on nationality."
+        },
+        {
+          "en": "Political and church foundations fund students with good grades and social engagement."
         }
       ],
       "howTo": {
-        "en": "Search the DAAD scholarship database and ask your university about programmes it participates in."
+        "en": "Search the DAAD scholarship database and your university's scholarship page."
       },
       "appliesTo": {
         "purposes": [
@@ -1368,7 +1894,7 @@
           "label": {
             "en": "DAAD scholarship database"
           },
-          "url": "https://www.daad.de",
+          "url": "https://www.daad.de/en/studying-in-germany/scholarships/",
           "official": true
         }
       ],
@@ -1376,20 +1902,24 @@
       "status": "draft"
     },
     {
-      "id": "student-discounts",
+      "id": "university-language",
+      "category": "learning",
       "title": {
-        "en": "Student discounts you can use from day one"
+        "en": "German at your university's language centre"
       },
       "valueHint": {
-        "en": "Transport, culture, software and more."
+        "en": "Free or cheap courses for enrolled students"
+      },
+      "who": {
+        "en": "Enrolled students."
       },
       "conditions": [
         {
-          "en": "Valid student ID or enrolment certificate."
+          "en": "Places fill fast — register at the start of the semester."
         }
       ],
       "howTo": {
-        "en": "Always ask for the student price (Ermäßigung) and check your university's benefits page."
+        "en": "Check your university's language centre (Sprachenzentrum) page."
       },
       "appliesTo": {
         "purposes": [
@@ -1401,9 +1931,44 @@
       "status": "draft"
     },
     {
+      "id": "vhs",
+      "category": "learning",
+      "title": {
+        "en": "Courses at the Volkshochschule (VHS)"
+      },
+      "valueHint": {
+        "en": "Affordable German and many other courses in every town"
+      },
+      "who": {
+        "en": "Everyone, whatever your status."
+      },
+      "conditions": [
+        {
+          "en": "Reduced fees for students, benefit recipients and people on a low income in many towns."
+        }
+      ],
+      "howTo": {
+        "en": "Search your town's VHS website for German courses."
+      },
+      "appliesTo": {
+        "purposes": "all"
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Volkshochschulen"
+          },
+          "url": "https://www.volkshochschule.de",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
       "id": "migration-counselling",
       "title": {
-        "en": "Free counselling for newcomers"
+        "en": "Free migration counselling (MBE / JMD)"
       },
       "valueHint": {
         "en": "Free and confidential advice on permits, work, housing and family."
@@ -1432,44 +1997,390 @@
         }
       ],
       "lastVerified": "",
-      "status": "draft"
+      "status": "draft",
+      "category": "help",
+      "who": {
+        "en": "Everyone who moved to Germany: MBE from 27, JMD for 12–27."
+      }
     },
     {
-      "id": "kindergeld",
+      "id": "faire-integration",
+      "category": "help",
       "title": {
-        "en": "Child benefit (Kindergeld)"
+        "en": "Free advice on your rights at work (Faire Integration)"
       },
       "valueHint": {
-        "en": "A monthly payment per child."
+        "en": "Free, confidential, in many languages"
       },
+      "who": {
+        "en": "Workers from outside the EU. Since 2026 employers hiring from abroad must tell you about it."
+      },
+      "law": "§ 45b AufenthG",
       "conditions": [
         {
-          "en": "EU citizens and permanent residents are generally eligible."
-        },
-        {
-          "en": "With a residence permit, usually only if it allows you to work. Students: only while working."
-        },
-        {
-          "en": "Parent and child need tax IDs."
+          "en": "Contracts, wages and minimum wage, working hours, holidays, sick leave, dismissal."
         }
       ],
       "howTo": {
-        "en": "Apply to the Familienkasse once you have your tax IDs."
+        "en": "Find the nearest counselling centre on faire-integration.de."
       },
       "appliesTo": {
         "purposes": "all",
-        "match": {
-          "household": [
-            "children"
-          ]
-        }
+        "euCitizen": false,
+        "anyOf": [
+          {
+            "purposes": [
+              "work",
+              "chancenkarte"
+            ]
+          },
+          {
+            "purposes": "all",
+            "statuses": [
+              "blue_card"
+            ]
+          }
+        ]
       },
       "links": [
         {
           "label": {
-            "en": "Familienkasse"
+            "en": "Faire Integration"
           },
-          "url": "https://www.arbeitsagentur.de/familie-und-kinder",
+          "url": "https://www.faire-integration.de/beratungsstellen",
+          "official": true
+        }
+      ],
+      "lastVerified": "2026-11-25",
+      "sources": [
+        "https://www.tk.de/firmenkunden/tk-service-ausland/beschaeftigung-von-internationalen-mitarbeitenden/aufenthaltsgesetz-informationspflicht-drittstaatsangehoerige-2213188",
+        "https://www.ihk.de/ulm/hauptnavigation/fachkraefte-internationals/welcome-center-ulm-oberschwaben/beratungsangebot-fuer-unternehmen/faire-integration-neue-pflicht-fuer-arbeitgeber-6926898"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "faire-mobilitaet",
+      "category": "help",
+      "title": {
+        "en": "Free advice on your rights at work (Faire Mobilität)"
+      },
+      "valueHint": {
+        "en": "Free, in many EU languages"
+      },
+      "who": {
+        "en": "Workers from EU countries."
+      },
+      "conditions": [
+        {
+          "en": "Wages, contracts, posted work, accommodation tied to a job."
+        }
+      ],
+      "howTo": {
+        "en": "Contact a Faire Mobilität centre by phone or online."
+      },
+      "appliesTo": {
+        "purposes": "all",
+        "euCitizen": true
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Faire Mobilität"
+          },
+          "url": "https://www.faire-mobilitaet.de",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "work-hotline",
+      "category": "help",
+      "title": {
+        "en": "Official hotline “Working and living in Germany”"
+      },
+      "valueHint": {
+        "en": "Free answers on visas, work and recognition"
+      },
+      "who": {
+        "en": "Skilled workers, job seekers and students."
+      },
+      "conditions": [
+        {
+          "en": "Run by the federal government; English and German."
+        }
+      ],
+      "howTo": {
+        "en": "Call or chat via the Make it in Germany website."
+      },
+      "appliesTo": {
+        "purposes": [
+          "work",
+          "chancenkarte",
+          "study"
+        ]
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Make it in Germany: contact"
+          },
+          "url": "https://www.make-it-in-germany.com/en/service/contact",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "studierendenwerk",
+      "category": "help",
+      "title": {
+        "en": "Studierendenwerk: housing, counselling, emergency help"
+      },
+      "valueHint": {
+        "en": "Student dorms, free social and psychological counselling"
+      },
+      "who": {
+        "en": "Enrolled students."
+      },
+      "conditions": [
+        {
+          "en": "Many also have emergency funds or interest-free loans for students in sudden need."
+        }
+      ],
+      "howTo": {
+        "en": "Find your local Studierendenwerk on studierendenwerke.de."
+      },
+      "appliesTo": {
+        "purposes": [
+          "study"
+        ]
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Deutsches Studierendenwerk"
+          },
+          "url": "https://www.studierendenwerke.de",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "international-office",
+      "category": "help",
+      "title": {
+        "en": "Your university's International Office"
+      },
+      "valueHint": {
+        "en": "Buddy programmes, welcome events, help with paperwork"
+      },
+      "who": {
+        "en": "International students."
+      },
+      "conditions": [
+        {
+          "en": "Many run buddy programmes that match you with a local student."
+        }
+      ],
+      "howTo": {
+        "en": "Write to them in your first week and ask about the buddy programme."
+      },
+      "appliesTo": {
+        "purposes": [
+          "study"
+        ]
+      },
+      "links": [],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "trade-union",
+      "category": "help",
+      "title": {
+        "en": "Join a trade union"
+      },
+      "valueHint": {
+        "en": "Legal advice and representation at work for members"
+      },
+      "who": {
+        "en": "Employees — also part-time and student workers."
+      },
+      "conditions": [
+        {
+          "en": "Membership costs about 1% of gross pay; legal help usually after a few months of membership."
+        },
+        {
+          "en": "Examples: ver.di (services), IG Metall (industry), GEW (education and science)."
+        }
+      ],
+      "howTo": {
+        "en": "Join online; ask your colleagues which union is active in your workplace."
+      },
+      "appliesTo": {
+        "purposes": [
+          "work",
+          "chancenkarte",
+          "study"
+        ]
+      },
+      "links": [
+        {
+          "label": {
+            "en": "DGB unions"
+          },
+          "url": "https://www.dgb.de",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "mieterverein",
+      "category": "help",
+      "title": {
+        "en": "Tenants' association (Mieterverein)"
+      },
+      "valueHint": {
+        "en": "Legal advice on rent and your flat for a small yearly fee"
+      },
+      "who": {
+        "en": "Everyone who rents."
+      },
+      "conditions": [
+        {
+          "en": "Check your rent, deposit and service-charge bill (Nebenkostenabrechnung)."
+        }
+      ],
+      "howTo": {
+        "en": "Join your local Mieterverein — membership is usually under €10 a month."
+      },
+      "appliesTo": {
+        "purposes": "all"
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Deutscher Mieterbund"
+          },
+          "url": "https://www.mieterbund.de",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "verbraucherzentrale",
+      "category": "help",
+      "title": {
+        "en": "Consumer advice centre (Verbraucherzentrale)"
+      },
+      "valueHint": {
+        "en": "Help with contracts, phone plans, scams and energy bills"
+      },
+      "who": {
+        "en": "Everyone, whatever your status."
+      },
+      "conditions": [
+        {
+          "en": "Many leaflets and sample letters are free online."
+        }
+      ],
+      "howTo": {
+        "en": "Book an appointment online or at a local office."
+      },
+      "appliesTo": {
+        "purposes": "all"
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Verbraucherzentrale"
+          },
+          "url": "https://www.verbraucherzentrale.de",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "refugee-council",
+      "category": "help",
+      "title": {
+        "en": "Refugee councils and Pro Asyl"
+      },
+      "valueHint": {
+        "en": "Free advice on asylum and protection status"
+      },
+      "who": {
+        "en": "People in an asylum procedure or with protection status."
+      },
+      "conditions": [
+        {
+          "en": "Each state has a refugee council (Flüchtlingsrat) with counselling or referrals."
+        }
+      ],
+      "howTo": {
+        "en": "Find your state's Flüchtlingsrat or contact Pro Asyl."
+      },
+      "appliesTo": {
+        "purposes": "all",
+        "statuses": [
+          "protection"
+        ]
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Pro Asyl"
+          },
+          "url": "https://www.proasyl.de",
+          "official": true
+        }
+      ],
+      "lastVerified": "",
+      "status": "draft"
+    },
+    {
+      "id": "crisis-line",
+      "category": "help",
+      "title": {
+        "en": "When you feel low: Telefonseelsorge"
+      },
+      "valueHint": {
+        "en": "Free, anonymous, 24/7: 0800 111 0 111 or 0800 111 0 222"
+      },
+      "who": {
+        "en": "Everyone, whatever your status."
+      },
+      "conditions": [
+        {
+          "en": "Moving countries is hard; talking helps. Chat and e-mail are available too."
+        },
+        {
+          "en": "In an emergency call 112."
+        }
+      ],
+      "howTo": {
+        "en": "Call or use the chat on telefonseelsorge.de."
+      },
+      "appliesTo": {
+        "purposes": "all"
+      },
+      "links": [
+        {
+          "label": {
+            "en": "Telefonseelsorge"
+          },
+          "url": "https://www.telefonseelsorge.de",
           "official": true
         }
       ],

@@ -11,7 +11,7 @@
   "draft.banner": "Preview: content is not verified yet.",
   "timeline.title": "Your plan",
   "timeline.sample": "Preview with a sample profile — your own plan appears after onboarding.",
-  "entitled.title": "You may be entitled to",
+  "entitled.title": "What you can get",
   "people.title": "People",
   "people.body": "Coffee with people who arrived the same month in your city — coming soon.",
   "me.title": "Me",
@@ -81,5 +81,16 @@
   "task.cons": "Watch out",
   "task.checked": "Checked against official sources on {date}.",
   "task.notFound": "This task doesn't exist any more.",
-  "task.draftNote": "Draft: not yet checked against official sources."
+  "task.draftNote": "Draft: not yet checked against official sources.",
+  "entitled.intro": "Money, discounts, courses and free help — picked for your status. Tap a card for details.",
+  "entitled.filter": "Filter by type",
+  "entitled.cat.all": "All",
+  "entitled.cat.money": "Money",
+  "entitled.cat.discount": "Discounts",
+  "entitled.cat.learning": "Courses",
+  "entitled.cat.help": "Free help",
+  "entitled.more": "How to get it",
+  "entitled.how": "How:",
+  "entitled.other": "Not for your situation ({n})",
+  "entitled.otherIntro": "These depend on another status or permit. If your situation changes, they may apply."
 }

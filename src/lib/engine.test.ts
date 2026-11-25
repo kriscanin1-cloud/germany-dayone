@@ -212,3 +212,34 @@ describe('task details', () => {
     expect(s.tasks.find((t) => t.id === 'sim-card')!.choices!.items).toHaveLength(3)
   })
 })
+
+describe('entitlements by status', () => {
+  const ids = (p: Profile) => planEntitlements(s.entitlements, p, { showDrafts: true }).map((e) => e.id)
+  it('every entitlement has a category and a "who" line', () => {
+    for (const e of s.entitlements) {
+      expect(['money', 'discount', 'learning', 'help'], e.id).toContain(e.category)
+      expect(e.who.en.length, e.id).toBeGreaterThan(10)
+    }
+  })
+  it('non-EU workers get Faire Integration, EU workers get Faire Mobilität', () => {
+    const blueCard: Profile = { ...euWorker, eu: false, citizenship: 'other', status: 'blue_card' }
+    expect(ids(blueCard)).toContain('faire-integration')
+    expect(ids(blueCard)).not.toContain('faire-mobilitaet')
+    expect(ids(euWorker)).toContain('faire-mobilitaet')
+    expect(ids(euWorker)).not.toContain('faire-integration')
+  })
+  it('BAföG is not offered on a study visa, but is to EU students', () => {
+    expect(ids({ ...student, status: 'national_visa' })).not.toContain('bafoeg')
+    expect(ids({ ...student, eu: true, citizenship: 'eu' })).toContain('bafoeg')
+  })
+  it('Elterngeld is not offered to students on a study permit', () => {
+    expect(ids({ ...student, household: 'children', status: 'temporary' })).not.toContain('elterngeld')
+    expect(ids({ ...euWorker, household: 'children' })).toContain('elterngeld')
+  })
+  it('everyone sees the crisis line and the Deutschlandticket', () => {
+    for (const p of [student, euWorker]) {
+      expect(ids(p)).toContain('crisis-line')
+      expect(ids(p)).toContain('deutschlandticket')
+    }
+  })
+})

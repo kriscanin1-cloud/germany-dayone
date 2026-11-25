@@ -92,10 +92,18 @@ export interface Task {
   status: ContentStatus
 }
 
+export type EntitlementCategory = 'money' | 'discount' | 'learning' | 'help'
+
 export interface Entitlement {
   id: string
+  category: EntitlementCategory
   title: T
+  /** what it is worth, e.g. "€259 a month per child" */
   valueHint: T
+  /** one line: who qualifies, by status */
+  who: T
+  /** legal basis, e.g. "§ 62 EStG" */
+  law?: string
   conditions: T[]
   howTo: T
   appliesTo: AppliesTo
