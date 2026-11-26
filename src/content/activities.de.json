@@ -1,6 +1,6 @@
 {
-  "version": "2026-11-v1",
-  "note": "Fun, optional things to try. Holidays: public holidays by state (shops closed) and traditions. Regional items use `where`.",
+  "version": "2026-11-v2",
+  "note": "Discover: optional things to try, by category (food, routines, fun, outdoors, traditions). `kind` = food or drink inside Food & drink. Regional items use `where`, seasonal ones `months`. Holidays are listed separately by date.",
   "activities": [
     {
       "id": "bratwurst",
@@ -10,7 +10,8 @@
       },
       "body": {
         "en": "Grab one in a bread roll from a street stand or a market — mustard (Senf), not ketchup."
-      }
+      },
+      "category": "food"
     },
     {
       "id": "currywurst",
@@ -20,7 +21,8 @@
       },
       "body": {
         "en": "Sliced sausage with curry ketchup, usually with fries (Pommes). Ask for “mit Darm” or “ohne Darm”."
-      }
+      },
+      "category": "food"
     },
     {
       "id": "brezel",
@@ -30,7 +32,8 @@
       },
       "body": {
         "en": "Buy a pretzel at any bakery. Butterbrezel — with butter — is the classic breakfast on the go."
-      }
+      },
+      "category": "food"
     },
     {
       "id": "broetchen",
@@ -40,7 +43,8 @@
       },
       "body": {
         "en": "Fresh bread rolls from the bakery, butter, jam, cheese, cold cuts and a soft-boiled egg."
-      }
+      },
+      "category": "food"
     },
     {
       "id": "kaffee-kuchen",
@@ -50,7 +54,8 @@
       },
       "body": {
         "en": "Afternoon coffee and cake is a ritual. Try Bienenstich, Käsekuchen or Schwarzwälder Kirschtorte."
-      }
+      },
+      "category": "food"
     },
     {
       "id": "schnitzel",
@@ -60,7 +65,8 @@
       },
       "body": {
         "en": "Wiener Schnitzel is veal; Schnitzel Wiener Art is pork. Jägerschnitzel comes with mushroom sauce."
-      }
+      },
+      "category": "food"
     },
     {
       "id": "doener",
@@ -70,7 +76,8 @@
       },
       "body": {
         "en": "The German-Turkish kebab was perfected in Berlin. Say “mit alles” for everything, “scharf” for spicy."
-      }
+      },
+      "category": "food"
     },
     {
       "id": "kartoffelsalat",
@@ -80,7 +87,8 @@
       },
       "body": {
         "en": "South: with vinegar and broth. North: with mayonnaise. Pick a side."
-      }
+      },
+      "category": "food"
     },
     {
       "id": "spaetzle",
@@ -90,7 +98,8 @@
       },
       "body": {
         "en": "Soft egg noodles baked with cheese and fried onions — Swabian comfort food."
-      }
+      },
+      "category": "food"
     },
     {
       "id": "rouladen",
@@ -100,7 +109,8 @@
       },
       "body": {
         "en": "Beef rolls with bacon, onion and pickle, braised in gravy — a typical family Sunday dish."
-      }
+      },
+      "category": "food"
     },
     {
       "id": "beer",
@@ -113,7 +123,8 @@
       },
       "alt": {
         "en": "Not drinking? Try an alcohol-free beer — Germany makes very good ones."
-      }
+      },
+      "category": "food"
     },
     {
       "id": "apfelschorle",
@@ -123,7 +134,8 @@
       },
       "body": {
         "en": "Apple juice with sparkling water — the national soft drink."
-      }
+      },
+      "category": "food"
     },
     {
       "id": "spezi",
@@ -133,97 +145,98 @@
       },
       "body": {
         "en": "Cola mixed with orange soda. Ask for it in any café or Späti."
-      }
+      },
+      "category": "food"
     },
     {
       "id": "pfand",
-      "kind": "culture",
       "title": {
         "en": "Return your first Pfand bottles"
       },
       "body": {
         "en": "Bottles and cans with the Pfand logo give you 8–25 cents back at the machines in supermarkets."
-      }
+      },
+      "category": "routines"
     },
     {
       "id": "muelltrennung",
-      "kind": "culture",
       "title": {
         "en": "Master waste sorting"
       },
       "body": {
         "en": "Yellow bin: packaging. Blue: paper. Brown: food. Black: the rest. Glass goes to street containers by colour."
-      }
+      },
+      "category": "routines"
     },
     {
       "id": "sonntag",
-      "kind": "culture",
       "title": {
         "en": "Take a Sunday walk"
       },
       "body": {
         "en": "Shops are closed on Sundays, so do what locals do: a long walk (Spaziergang) in a park or forest."
-      }
+      },
+      "category": "outdoors"
     },
     {
       "id": "tatort",
-      "kind": "culture",
       "title": {
         "en": "Watch Tatort on Sunday at 8:15 pm"
       },
       "body": {
         "en": "Germany's longest-running crime show. Many bars screen it — a chance to listen to German."
-      }
+      },
+      "category": "fun"
     },
     {
       "id": "flohmarkt",
-      "kind": "culture",
       "title": {
         "en": "Visit a flea market"
       },
       "body": {
         "en": "Weekend flea markets (Flohmarkt) are good for cheap furniture and kitchen things."
-      }
+      },
+      "category": "fun"
     },
     {
       "id": "library",
-      "kind": "culture",
       "title": {
         "en": "Get a library card"
       },
       "body": {
         "en": "Public libraries (Stadtbibliothek) lend books, films and language courses, often for a small yearly fee."
-      }
+      },
+      "category": "fun"
     },
     {
       "id": "sauna",
-      "kind": "culture",
       "title": {
         "en": "Try a German sauna"
       },
       "body": {
         "en": "Most saunas are mixed and nude, with a towel to sit on. Take a cold shower between rounds."
-      }
+      },
+      "category": "outdoors"
     },
     {
       "id": "ticket-check",
-      "kind": "culture",
       "title": {
         "en": "Ride a regional train"
       },
       "body": {
         "en": "With the Deutschlandticket you can take any regional train — try a day trip to a nearby town."
-      }
+      },
+      "category": "outdoors"
     },
     {
       "id": "feierabend",
-      "kind": "culture",
       "title": {
         "en": "Learn the word Feierabend"
       },
       "body": {
         "en": "The end of the working day — and the right to switch off. Ask a colleague about their Feierabend plans."
-      }
+      },
+      "category": "routines"
     },
     {
       "id": "biergarten",
@@ -244,7 +257,8 @@
       ],
       "alt": {
         "en": "Order an Apfelschorle or a lemonade instead."
-      }
+      },
+      "category": "food"
     },
     {
       "id": "radler",
@@ -264,7 +278,8 @@
       ],
       "alt": {
         "en": "Ask for a Zitronenlimonade instead."
-      }
+      },
+      "category": "food"
     },
     {
       "id": "spargel",
@@ -279,7 +294,8 @@
         4,
         5,
         6
-      ]
+      ],
+      "category": "food"
     },
     {
       "id": "erdbeeren",
@@ -294,7 +310,8 @@
         5,
         6,
         7
-      ]
+      ],
+      "category": "food"
     },
     {
       "id": "eis",
@@ -311,7 +328,8 @@
         7,
         8,
         9
-      ]
+      ],
+      "category": "food"
     },
     {
       "id": "federweisser",
@@ -328,7 +346,8 @@
       ],
       "alt": {
         "en": "Try fresh apple cider juice (Süßmost) instead."
-      }
+      },
+      "category": "food"
     },
     {
       "id": "kuerbis",
@@ -343,7 +362,8 @@
         9,
         10,
         11
-      ]
+      ],
+      "category": "food"
     },
     {
       "id": "gluehwein",
@@ -360,7 +380,8 @@
       ],
       "alt": {
         "en": "Ask for Kinderpunsch — the alcohol-free version."
-      }
+      },
+      "category": "food"
     },
     {
       "id": "lebkuchen",
@@ -375,7 +396,8 @@
         10,
         11,
         12
-      ]
+      ],
+      "category": "food"
     },
     {
       "id": "stollen",
@@ -389,11 +411,11 @@
       "months": [
         11,
         12
-      ]
+      ],
+      "category": "food"
     },
     {
       "id": "weihnachtsmarkt",
-      "kind": "culture",
       "title": {
         "en": "Walk through a Christmas market"
       },
@@ -403,7 +425,8 @@
       "months": [
         11,
         12
-      ]
+      ],
+      "category": "traditions"
     },
     {
       "id": "gans",
@@ -417,7 +440,8 @@
       "months": [
         11,
         12
-      ]
+      ],
+      "category": "food"
     },
     {
       "id": "berliner",
@@ -432,7 +456,8 @@
         1,
         2,
         12
-      ]
+      ],
+      "category": "food"
     },
     {
       "id": "koelsch",
@@ -451,7 +476,8 @@
       },
       "alt": {
         "en": "Ask for a Fassbrause instead."
-      }
+      },
+      "category": "food"
     },
     {
       "id": "altbier",
@@ -469,7 +495,8 @@
       },
       "alt": {
         "en": "Ask for a Fassbrause instead."
-      }
+      },
+      "category": "food"
     },
     {
       "id": "weissbier",
@@ -487,7 +514,8 @@
       },
       "alt": {
         "en": "Alcohol-free Weißbier is everywhere in Bavaria."
-      }
+      },
+      "category": "food"
     },
     {
       "id": "weisswurst",
@@ -502,7 +530,8 @@
         "states": [
           "DE-BY"
         ]
-      }
+      },
+      "category": "food"
     },
     {
       "id": "leberkaese",
@@ -518,7 +547,8 @@
           "DE-BY",
           "DE-BW"
         ]
-      }
+      },
+      "category": "food"
     },
     {
       "id": "maultaschen",
@@ -533,7 +563,8 @@
         "states": [
           "DE-BW"
         ]
-      }
+      },
+      "category": "food"
     },
     {
       "id": "gruene-sosse",
@@ -553,7 +584,8 @@
           "marburg",
           "kassel"
         ]
-      }
+      },
+      "category": "food"
     },
     {
       "id": "apfelwein",
@@ -571,7 +603,8 @@
       },
       "alt": {
         "en": "Ask for a sparkling apple juice (Apfelsaftschorle) instead."
-      }
+      },
+      "category": "food"
     },
     {
       "id": "franzbroetchen",
@@ -587,7 +620,8 @@
           "DE-HH",
           "DE-SH"
         ]
-      }
+      },
+      "category": "food"
     },
     {
       "id": "fischbroetchen",
@@ -606,7 +640,8 @@
           "DE-MV",
           "DE-NI"
         ]
-      }
+      },
+      "category": "food"
     },
     {
       "id": "berliner-weisse",
@@ -624,11 +659,11 @@
       },
       "alt": {
         "en": "Try a Club-Mate instead — Berlin's favourite soft drink."
-      }
+      },
+      "category": "food"
     },
     {
       "id": "spaeti",
-      "kind": "culture",
       "title": {
         "en": "Hang out at a Späti"
       },
@@ -639,7 +674,8 @@
         "states": [
           "DE-BE"
         ]
-      }
+      },
+      "category": "routines"
     },
     {
       "id": "thueringer",
@@ -654,7 +690,8 @@
         "states": [
           "DE-TH"
         ]
-      }
+      },
+      "category": "food"
     },
     {
       "id": "eierschecke",
@@ -669,7 +706,8 @@
         "states": [
           "DE-SN"
         ]
-      }
+      },
+      "category": "food"
     },
     {
       "id": "pfaelzer-saumagen",
@@ -684,7 +722,8 @@
         "states": [
           "DE-RP"
         ]
-      }
+      },
+      "category": "food"
     },
     {
       "id": "labskaus",
@@ -701,7 +740,358 @@
           "DE-HB",
           "DE-SH"
         ]
+      },
+      "category": "food"
+    },
+    {
+      "id": "ruhezeit",
+      "category": "routines",
+      "title": {
+        "en": "Respect quiet hours"
+      },
+      "body": {
+        "en": "Most house rules ask for quiet from 22:00 to 6:00 and all day on Sunday: no drilling, no loud music."
       }
+    },
+    {
+      "id": "lueften",
+      "category": "routines",
+      "title": {
+        "en": "Air your flat the German way"
+      },
+      "body": {
+        "en": "Open the windows wide for 5–10 minutes a few times a day (Stoßlüften) instead of leaving them tilted. It keeps mould away."
+      }
+    },
+    {
+      "id": "bargeld",
+      "category": "routines",
+      "title": {
+        "en": "Keep some cash on you"
+      },
+      "body": {
+        "en": "Cards work in more places every year, but bakeries, kiosks and markets may still want cash."
+      }
+    },
+    {
+      "id": "gruessen",
+      "category": "routines",
+      "title": {
+        "en": "Greet when you walk in"
+      },
+      "body": {
+        "en": "Say “Hallo” or “Guten Tag” in small shops, lifts and doctors' waiting rooms, and “Tschüss” when you leave."
+      }
+    },
+    {
+      "id": "briefkasten",
+      "category": "routines",
+      "title": {
+        "en": "Check your letterbox every day"
+      },
+      "body": {
+        "en": "Offices, banks and insurers write by post, often with deadlines. Make sure your name is on the letterbox."
+      }
+    },
+    {
+      "id": "ampel",
+      "category": "routines",
+      "title": {
+        "en": "Wait for the green man"
+      },
+      "body": {
+        "en": "Crossing on red can be fined and is frowned upon, especially in front of children."
+      }
+    },
+    {
+      "id": "bundesliga",
+      "category": "fun",
+      "title": {
+        "en": "Watch a Bundesliga match"
+      },
+      "body": {
+        "en": "Join fans in a sports bar on a Saturday afternoon, or get a cheap ticket for a lower-league game."
+      }
+    },
+    {
+      "id": "verein",
+      "category": "fun",
+      "title": {
+        "en": "Join a Verein"
+      },
+      "body": {
+        "en": "Clubs for sport, music, gardening or almost anything are where many Germans make friends. Membership is often cheap."
+      }
+    },
+    {
+      "id": "kino-omu",
+      "category": "fun",
+      "title": {
+        "en": "See a film in OmU"
+      },
+      "body": {
+        "en": "OmU means original version with German subtitles — a gentle way to practise German at the cinema."
+      }
+    },
+    {
+      "id": "theater",
+      "category": "fun",
+      "title": {
+        "en": "Go to the city theatre"
+      },
+      "body": {
+        "en": "Most cities run a subsidised theatre or opera house. Many offer reduced tickets for students."
+      }
+    },
+    {
+      "id": "pubquiz",
+      "category": "fun",
+      "title": {
+        "en": "Join a pub quiz"
+      },
+      "body": {
+        "en": "Many bars run quiz nights, some in English — an easy way to meet people."
+      }
+    },
+    {
+      "id": "museum",
+      "category": "fun",
+      "title": {
+        "en": "Visit your city's museum"
+      },
+      "body": {
+        "en": "Many museums have a reduced or free day each month — check your city's museum website."
+      }
+    },
+    {
+      "id": "fahrrad",
+      "category": "outdoors",
+      "title": {
+        "en": "Get around by bike"
+      },
+      "body": {
+        "en": "Use the bike lanes, signal with your arm and switch on lights in the dark — police do check."
+      }
+    },
+    {
+      "id": "wandern",
+      "category": "outdoors",
+      "title": {
+        "en": "Hike a marked trail"
+      },
+      "body": {
+        "en": "Hiking trails (Wanderwege) are marked with symbols on trees. Stop for lunch at a hut or Gasthaus."
+      }
+    },
+    {
+      "id": "lauftreff",
+      "category": "outdoors",
+      "title": {
+        "en": "Run with a Lauftreff"
+      },
+      "body": {
+        "en": "Free running groups meet in parks every week — search “Lauftreff” and your city."
+      }
+    },
+    {
+      "id": "badesee",
+      "category": "outdoors",
+      "title": {
+        "en": "Swim in a lake (Badesee)"
+      },
+      "body": {
+        "en": "On hot days locals head to the nearest lake with a towel and a picnic."
+      },
+      "months": [
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "id": "freibad",
+      "category": "outdoors",
+      "title": {
+        "en": "Go to an outdoor pool (Freibad)"
+      },
+      "body": {
+        "en": "Outdoor pools open for the summer; a season ticket pays off fast."
+      },
+      "months": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "id": "rodeln",
+      "category": "outdoors",
+      "title": {
+        "en": "Go sledging (Rodeln)"
+      },
+      "body": {
+        "en": "When it snows, every hill fills with sledges — borrow one or buy a cheap one."
+      },
+      "months": [
+        12,
+        1,
+        2
+      ]
+    },
+    {
+      "id": "geburtstag",
+      "category": "traditions",
+      "title": {
+        "en": "Bring cake on your birthday"
+      },
+      "body": {
+        "en": "In Germany the birthday person treats friends and colleagues. Never congratulate anyone early — it's bad luck."
+      }
+    },
+    {
+      "id": "anstossen",
+      "category": "traditions",
+      "title": {
+        "en": "Look people in the eye when you say “Prost”"
+      },
+      "body": {
+        "en": "When clinking glasses, keep eye contact. A popular saying promises seven years of bad luck otherwise."
+      }
+    },
+    {
+      "id": "brot-salz",
+      "category": "traditions",
+      "title": {
+        "en": "Bring bread and salt to a housewarming"
+      },
+      "body": {
+        "en": "The traditional gift for a new home (Einweihungsparty)."
+      }
+    },
+    {
+      "id": "stammtisch",
+      "category": "traditions",
+      "title": {
+        "en": "Find a Stammtisch"
+      },
+      "body": {
+        "en": "A regulars' table at a pub. Many cities have international Stammtische for newcomers."
+      }
+    },
+    {
+      "id": "adventskalender",
+      "category": "traditions",
+      "title": {
+        "en": "Open an Advent calendar"
+      },
+      "body": {
+        "en": "24 little doors, one a day from 1 December — supermarkets sell them from autumn."
+      },
+      "months": [
+        11,
+        12
+      ]
+    },
+    {
+      "id": "plaetzchen",
+      "category": "traditions",
+      "title": {
+        "en": "Bake Christmas biscuits (Plätzchen)"
+      },
+      "body": {
+        "en": "Families bake trays of biscuits in December — ask a neighbour or colleague for their recipe."
+      },
+      "months": [
+        12
+      ]
+    },
+    {
+      "id": "osterfeuer",
+      "category": "traditions",
+      "title": {
+        "en": "See an Easter bonfire (Osterfeuer)"
+      },
+      "body": {
+        "en": "Big bonfires around Easter, especially in northern Germany."
+      },
+      "months": [
+        3,
+        4
+      ]
+    },
+    {
+      "id": "maibaum",
+      "category": "traditions",
+      "title": {
+        "en": "Watch a maypole go up"
+      },
+      "body": {
+        "en": "Around 1 May many villages raise a decorated maypole, especially in the south."
+      },
+      "months": [
+        4,
+        5
+      ]
+    },
+    {
+      "id": "fasching",
+      "category": "traditions",
+      "title": {
+        "en": "Dress up for carnival"
+      },
+      "body": {
+        "en": "Fasching or Karneval is celebrated far beyond Cologne — costumes are welcome at many parties and offices."
+      },
+      "months": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "volksfest",
+      "category": "traditions",
+      "title": {
+        "en": "Go to a Volksfest"
+      },
+      "body": {
+        "en": "Rides, beer tents and grilled food — almost every town has its fair in the warm months."
+      },
+      "months": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "id": "erntedank",
+      "category": "traditions",
+      "title": {
+        "en": "Visit a harvest festival (Erntedankfest)"
+      },
+      "body": {
+        "en": "In late September and early October churches and villages decorate with harvest produce, often with a market or parade."
+      },
+      "months": [
+        9,
+        10
+      ]
+    },
+    {
+      "id": "laterne",
+      "category": "traditions",
+      "title": {
+        "en": "Make a lantern for St. Martin"
+      },
+      "body": {
+        "en": "Children carry paper lanterns in processions around 11 November — join one or make a lantern yourself."
+      },
+      "months": [
+        10
+      ]
     }
   ],
   "holidays": [

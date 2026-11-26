@@ -1,7 +1,7 @@
-// "Taste of Germany": three optional things to try each week, plus holidays that fall in that week.
+// Discover: optional things to try in Germany, by category, plus upcoming holidays by date.
 // Pure functions, unit-tested.
 import raw from '../content/activities.de.json'
-import { addDays, daysBetween, parseDate } from './engine'
+import { addDays } from './engine'
 import type { Profile, StateCode, T } from './types'
 
 export interface Where {
@@ -9,9 +9,14 @@ export interface Where {
   cities?: string[]
 }
 
+export type Category = 'food' | 'routines' | 'fun' | 'outdoors' | 'traditions'
+export const CATEGORIES: Category[] = ['food', 'routines', 'fun', 'outdoors', 'traditions']
+
 export interface Activity {
   id: string
-  kind: 'food' | 'drink' | 'culture'
+  category: Category
+  /** inside Food & drink: a dish or a drink */
+  kind?: 'food' | 'drink'
   title: T
   body: T
   /** months when it makes sense (1–12); omit = all year */
@@ -91,29 +96,23 @@ export function holidayDate(rule: HolidayRule, year: number): Date {
   }
 }
 
-/** Week number counted from arrival: days 1–7 are week 1. */
-export function weekOfDay(day: number): number {
-  return Math.max(1, Math.ceil(day / 7))
-}
-
 export interface DatedHoliday {
   holiday: Holiday
   date: Date
-  week: number
 }
 
-/** Holidays for this person's place that fall in weeks `from`..`to`. */
-export function holidaysInWeeks(p: Profile, from: number, to: number): DatedHoliday[] {
-  const arrival = parseDate(p.arrival)
-  const start = addDays(arrival, (from - 1) * 7)
-  const end = addDays(arrival, to * 7 - 1)
+const dayStart = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate())
+
+/** Holidays for this person's place between today and `days` ahead, soonest first. */
+export function upcomingHolidays(p: Pick<Profile, 'state' | 'cityId'>, today: Date = new Date(), days = 42): DatedHoliday[] {
+  const start = dayStart(today)
+  const end = addDays(start, days)
   const out: DatedHoliday[] = []
   for (let year = start.getFullYear(); year <= end.getFullYear(); year++)
     for (const holiday of holidays) {
       if (!inPlace(holiday.where, p)) continue
       const date = holidayDate(holiday.rule, year)
-      if (date < start || date > end) continue
-      out.push({ holiday, date, week: weekOfDay(daysBetween(arrival, date) + 1) })
+      if (date >= start && date <= end) out.push({ holiday, date })
     }
   return out.sort((a, b) => a.date.getTime() - b.date.getTime())
 }
@@ -125,42 +124,26 @@ function hash(s: string): number {
   return h >>> 0
 }
 
-export const PER_WEEK = 3
+export const MAX_PER_CATEGORY = 10
 
 /**
- * Three activities per week from `from` to `to`. Each activity appears at most once,
- * regional ones first, only in season, never one the person removed.
- * Ticked ones stay in the week where they were shown.
+ * Ideas per category for this person today: only for their place and in season, never one they removed.
+ * Regional first (that's what makes it feel local), then seasonal, then the rest in the person's own stable order.
+ * At most 10 per category; removing one lets the next one in.
  */
-export function activitiesByWeek(
-  p: Profile,
+export function suggestions(
+  p: Pick<Profile, 'state' | 'cityId'>,
   seed: string,
-  from: number,
-  to: number,
   removed: Iterable<string> = [],
-): Map<number, Activity[]> {
+  today: Date = new Date(),
+): Record<Category, Activity[]> {
   const gone = new Set(removed)
-  const arrival = parseDate(p.arrival)
+  const month = today.getMonth() + 1
+  const rank = (a: Activity) => (a.where ? 0 : a.months ? 1 : 2)
   const pool = activities
-    .filter((a) => !gone.has(a.id) && inPlace(a.where, p))
-    .sort((a, b) => Number(!a.where) - Number(!b.where) || hash(seed + a.id) - hash(seed + b.id))
-  const used = new Set<string>()
-  const out = new Map<number, Activity[]>()
-  for (let week = 1; week <= to; week++) {
-    const month = addDays(arrival, (week - 1) * 7 + 3).getMonth() + 1
-    const picks: Activity[] = []
-    // seasonal and regional first, so they are not missed; then the rest in the person's own order
-    const candidates = pool.filter((a) => !used.has(a.id) && (!a.months || a.months.includes(month)))
-    const ranked = [...candidates.filter((a) => a.months || a.where), ...candidates.filter((a) => !a.months && !a.where)]
-    // mix kinds: prefer one food, one drink or culture, one of anything
-    for (const a of ranked) {
-      if (picks.length === PER_WEEK) break
-      if (picks.some((x) => x.kind === a.kind) && ranked.some((b) => !used.has(b.id) && !picks.includes(b) && !picks.some((x) => x.kind === b.kind))) continue
-      picks.push(a)
-    }
-    for (const a of ranked) if (picks.length < PER_WEEK && !picks.includes(a)) picks.push(a)
-    picks.forEach((a) => used.add(a.id))
-    if (week >= from) out.set(week, picks)
-  }
+    .filter((a) => !gone.has(a.id) && inPlace(a.where, p) && (!a.months || a.months.includes(month)))
+    .sort((a, b) => rank(a) - rank(b) || hash(seed + a.id) - hash(seed + b.id))
+  const out = Object.fromEntries(CATEGORIES.map((c) => [c, [] as Activity[]])) as Record<Category, Activity[]>
+  for (const a of pool) if (out[a.category].length < MAX_PER_CATEGORY) out[a.category].push(a)
   return out
 }

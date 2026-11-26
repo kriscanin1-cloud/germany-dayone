@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import places from '../content/places.de.json'
-import { activities, activitiesByWeek, easterSunday, holidayDate, holidays, holidaysInWeeks, PER_WEEK, weekOfDay } from './activities'
+import { activities, CATEGORIES, easterSunday, holidayDate, holidays, MAX_PER_CATEGORY, suggestions, upcomingHolidays } from './activities'
 import type { Profile } from './types'
 
 const berlin: Profile = { purpose: 'study', eu: false, arrival: '2026-11-25', state: 'DE-BE', cityId: 'berlin' }
@@ -17,6 +17,9 @@ describe('content', () => {
       for (const c of x.where?.cities ?? []) expect(cities.has(c), `${x.id}: ${c}`).toBe(true)
       for (const s of x.where?.states ?? []) expect(states.has(s), `${x.id}: ${s}`).toBe(true)
     }
+  })
+  it('every idea has a known category', () => {
+    for (const a of activities) expect(CATEGORIES, a.id).toContain(a.category)
   })
   it('every alcoholic drink offers an alternative', () => {
     for (const a of activities.filter((x) => x.kind === 'drink' && /beer|wine|Kölsch|Altbier|Weiß|Apfelwein|Glühwein|Radler|Biergarten|Federweißer/i.test(x.title.en)))
@@ -36,49 +39,57 @@ describe('dates', () => {
     expect(iso(holidayDate({ special: 'repentance' }, 2026))).toBe('2026-11-18')
     expect(iso(holidayDate({ easter: -48 }, 2027))).toBe('2027-02-08') // Rosenmontag
   })
-  it('counts weeks from arrival', () => {
-    expect([1, 7, 8, 14, 15].map(weekOfDay)).toEqual([1, 1, 2, 2, 3])
-  })
 })
 
-describe('holidaysInWeeks', () => {
-  it('puts holidays in the right week and respects the state', () => {
-    const h = holidaysInWeeks(berlin, 1, 8)
+const nov25 = new Date(2026, 10, 25)
+
+describe('upcomingHolidays', () => {
+  it('lists holidays for the place, soonest first, across the new year', () => {
+    const h = upcomingHolidays(berlin, nov25, 42)
     const ids = h.map((x) => x.holiday.id)
-    expect(ids).toContain('advent-1') // 29 Nov 2026, week 1
-    expect(h.find((x) => x.holiday.id === 'advent-1')!.week).toBe(1)
+    expect(ids[0]).toBe('advent-1') // 29 Nov 2026
     expect(ids).toContain('christmas')
-    expect(ids).toContain('new-year') // crosses into 2027
+    expect(ids).toContain('new-year') // 1 Jan 2027
     expect(ids).not.toContain('epiphany') // not a holiday in Berlin
+    for (let i = 1; i < h.length; i++) expect(h[i].date >= h[i - 1].date).toBe(true)
   })
   it('shows Oktoberfest only in Munich', () => {
-    expect(holidaysInWeeks(munich, 1, 4).map((x) => x.holiday.id)).toContain('oktoberfest')
-    expect(holidaysInWeeks({ ...berlin, arrival: '2027-09-10' }, 1, 4).map((x) => x.holiday.id)).not.toContain('oktoberfest')
+    const sep = new Date(2027, 8, 10)
+    expect(upcomingHolidays(munich, sep, 30).map((x) => x.holiday.id)).toContain('oktoberfest')
+    expect(upcomingHolidays(berlin, sep, 30).map((x) => x.holiday.id)).not.toContain('oktoberfest')
   })
 })
 
-describe('activitiesByWeek', () => {
-  it('gives three per week, never repeats, and is stable per person', () => {
-    const a = activitiesByWeek(berlin, 'seed-1', 1, 8)
-    const all = [...a.values()].flat().map((x) => x.id)
-    for (const w of a.values()) expect(w).toHaveLength(PER_WEEK)
-    expect(new Set(all).size).toBe(all.length)
-    expect([...activitiesByWeek(berlin, 'seed-1', 1, 8).values()].flat().map((x) => x.id)).toEqual(all)
+describe('suggestions by category', () => {
+  it('has 5 to 10 ideas in every category, every month, anywhere', () => {
+    for (const place of [berlin, munich, { ...berlin, state: 'DE-SL' as const, cityId: undefined }])
+      for (let m = 0; m < 12; m++) {
+        const s = suggestions(place, 'seed', [], new Date(2027, m, 15))
+        for (const c of CATEGORIES) {
+          expect(s[c].length, `${place.state} month ${m + 1} ${c}`).toBeGreaterThanOrEqual(5)
+          expect(s[c].length).toBeLessThanOrEqual(MAX_PER_CATEGORY)
+        }
+      }
   })
-  it('only picks things for this place and season', () => {
-    const all = [...activitiesByWeek(berlin, 's', 1, 6).values()].flat()
-    expect(all.some((x) => x.id === 'weisswurst')).toBe(false)
-    expect(all.some((x) => x.id === 'spargel')).toBe(false) // November–January: no asparagus
-    const winter = activitiesByWeek(berlin, 's', 1, 2).get(1)!
-    expect(winter.some((x) => x.where || x.months)).toBe(true) // regional or seasonal first
+  it('is stable per person and never repeats', () => {
+    const a = suggestions(berlin, 'seed-1', [], nov25)
+    expect(suggestions(berlin, 'seed-1', [], nov25)).toEqual(a)
+    const ids = Object.values(a).flat().map((x) => x.id)
+    expect(new Set(ids).size).toBe(ids.length)
   })
-  it('replaces a removed activity', () => {
-    const before = activitiesByWeek(berlin, 's', 1, 1).get(1)!
-    const after = activitiesByWeek(berlin, 's', 1, 1, [before[0].id]).get(1)!
-    expect(after).toHaveLength(PER_WEEK)
+  it('only picks things for this place and season, local first', () => {
+    const s = suggestions(berlin, 's', [], nov25)
+    const all = Object.values(s).flat().map((x) => x.id)
+    expect(all).not.toContain('weisswurst')
+    expect(all).not.toContain('spargel')
+    expect(all).toContain('gluehwein')
+    expect(s.food[0].where).toBeDefined() // Berliner Weiße or similar comes first
+    expect(suggestions(munich, 's', [], nov25).food.map((x) => x.id)).toContain('weisswurst')
+  })
+  it('a removed idea is replaced by the next one', () => {
+    const before = suggestions(berlin, 's', [], nov25).food
+    const after = suggestions(berlin, 's', [before[0].id], nov25).food
     expect(after.map((x) => x.id)).not.toContain(before[0].id)
-  })
-  it('mixes kinds within a week', () => {
-    for (const w of activitiesByWeek(berlin, 'x', 1, 6).values()) expect(new Set(w.map((x) => x.kind)).size).toBeGreaterThan(1)
+    expect(after).toHaveLength(before.length)
   })
 })

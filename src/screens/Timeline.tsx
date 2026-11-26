@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { ConfirmDialog } from '../components/ConfirmDialog'
-import { activitiesByWeek, holidaysInWeeks, type Activity, type DatedHoliday } from '../lib/activities'
+import { CATEGORIES, suggestions, upcomingHolidays, type Activity, type Category, type DatedHoliday } from '../lib/activities'
 import { track } from '../lib/analytics'
 import { scenario, SHOW_DRAFTS } from '../lib/content'
 import { countdown, humanDays } from '../lib/dates'
@@ -50,10 +50,10 @@ export function Timeline() {
   const weeks = Array.from({ length: lastWeek }, (_, i) => i + 1)
 
   const fun = useMemo(
-    () => activitiesByWeek(profile, saved.anonId, currentWeek, lastWeek, saved.removed),
-    [profile, saved.anonId, currentWeek, lastWeek, saved.removed],
+    () => suggestions(profile, saved.anonId, saved.removed),
+    [profile, saved.anonId, saved.removed],
   )
-  const hols = useMemo(() => holidaysInWeeks(profile, currentWeek, lastWeek), [profile, currentWeek, lastWeek])
+  const hols = useMemo(() => upcomingHolidays(profile).slice(0, 4), [profile])
 
   const later = plan.filter((p) => p.week > lastWeek)
   const doneCount = plan.filter((p) => p.done).length
@@ -63,7 +63,7 @@ export function Timeline() {
   const [params, setParams] = useSearchParams()
   const view: 'todo' | 'discover' = params.get('view') === 'discover' ? 'discover' : 'todo'
   const openTasks = plan.filter((p) => !p.done && p.week <= currentWeek).length
-  const funThisWeek = (fun.get(currentWeek)?.length ?? 0) + hols.filter((h) => h.week === currentWeek).length
+  const cat: Category = CATEGORIES.find((c) => c === params.get('cat')) ?? 'food'
 
   const persist = (change: (s: Saved) => Saved) => setSaved(update(change))
   const toggleTried = (id: string) =>
@@ -121,7 +121,7 @@ export function Timeline() {
             className={`rounded py-2.5 text-[17px] font-semibold ${view === v ? 'bg-ink text-paper' : ''}`}
           >
             {t(`steps.${v}`)}{' '}
-            <span className={view === v ? 'text-sign' : 'text-muted'}>{v === 'todo' ? openTasks : funThisWeek}</span>
+            {v === 'todo' && <span className={view === v ? 'text-sign' : 'text-muted'}>{openTasks}</span>}
           </button>
         ))}
       </div>
@@ -201,38 +201,62 @@ export function Timeline() {
 
       {view === 'discover' && (
         <div>
-          <p className="mt-4 text-muted">{t('discover.intro')}</p>
-          <p className="mt-2 text-sm font-semibold">{t('discover.tried', { n: String(tried.size) })}</p>
-          {weeks
-            .filter((w) => w >= currentWeek)
-            .map((week) => {
-              const acts = fun.get(week) ?? []
-              const weekHols = hols.filter((h) => h.week === week)
-              if (!acts.length && !weekHols.length) return null
-              return (
-                <div key={week} className="mt-8">
-                  <h2 className="flex items-baseline justify-between border-b-2 border-ink pb-1.5">
-                    <span className="font-sign text-2xl font-bold">{t('week.n', { n: String(week) })}</span>
-                    {week === currentWeek && <span className="bg-sign px-2 py-0.5 text-sm font-semibold">{t('week.this')}</span>}
-                    {week === currentWeek + 1 && <span className="text-sm text-muted">{t('week.next')}</span>}
-                  </h2>
-                  <ul className="mt-3 space-y-2">
-                    {weekHols.map((h) => (
-                      <HolidayCard key={h.holiday.id + h.date.getFullYear()} h={h} />
-                    ))}
-                    {acts.map((a) => (
-                      <ActivityCard
-                        key={a.id}
-                        a={a}
-                        tried={tried.has(a.id)}
-                        onTried={() => toggleTried(a.id)}
-                        onRemove={() => remove(a.id)}
-                      />
-                    ))}
-                  </ul>
-                </div>
-              )
-            })}
+          <p className="mt-4 text-muted">
+            {t('discover.intro')} <span className="font-semibold text-ink">{t('discover.tried', { n: String(tried.size) })}</span>
+          </p>
+
+          {hols.length > 0 && (
+            <div className="mt-5 rounded-md border-2 border-ink p-3">
+              <p className="text-sm font-semibold">{t('discover.comingUp')}</p>
+              <ul className="mt-1.5 divide-y divide-ink/10">
+                {hols.map((h) => (
+                  <HolidayRow key={h.holiday.id + h.date.getFullYear()} h={h} />
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <div role="tablist" aria-label={t('discover.categories')} className="-mx-5 mt-5 flex gap-2 overflow-x-auto px-5 pb-1">
+            {CATEGORIES.map((c) => (
+              <button
+                key={c}
+                type="button"
+                role="tab"
+                aria-selected={cat === c}
+                onClick={() => {
+                  setParams({ view: 'discover', ...(c === 'food' ? {} : { cat: c }) }, { replace: true })
+                  track('discover_category', { category: c })
+                }}
+                className={`shrink-0 rounded-md border-2 px-3 py-1.5 text-[15px] font-semibold ${
+                  cat === c ? 'border-ink bg-ink text-paper' : 'border-ink/20'
+                }`}
+              >
+                {t(`cat.${c}`)} <span className={cat === c ? 'text-sign' : 'text-muted'}>{fun[c].length}</span>
+              </button>
+            ))}
+          </div>
+          <p className="mt-3 text-sm text-muted">{t(`cat.${cat}.intro`)}</p>
+          <ul className="mt-3 space-y-2">
+            {fun[cat].map((a) => (
+              <ActivityCard
+                key={a.id}
+                a={a}
+                tried={tried.has(a.id)}
+                onTried={() => toggleTried(a.id)}
+                onRemove={() => remove(a.id)}
+              />
+            ))}
+          </ul>
+          {fun[cat].length === 0 && <p className="mt-3 text-muted">{t('discover.empty')}</p>}
+          {(saved.removed?.length ?? 0) > 0 && (
+            <button
+              type="button"
+              onClick={() => persist((s) => ({ ...s, removed: [] }))}
+              className="mt-6 text-sm font-semibold underline"
+            >
+              {t('discover.restore', { n: String(saved.removed!.length) })}
+            </button>
+          )}
         </div>
       )}
 
@@ -311,7 +335,6 @@ function TaskRow({
   )
 }
 
-const kindLabel = { food: 'fun.food', drink: 'fun.drink', culture: 'fun.culture' } as const
 
 function ActivityCard({
   a,
@@ -326,7 +349,13 @@ function ActivityCard({
 }) {
   return (
     <li className={`relative rounded-md border-2 p-3.5 pr-11 ${tried ? 'border-ink bg-sign' : 'border-ink/20'}`}>
-      <p className="text-xs font-semibold text-muted">{t(kindLabel[a.kind])}</p>
+      {(a.kind === 'drink' || a.where || a.months) && (
+        <p className="text-xs font-semibold text-muted">
+          {[a.kind === 'drink' && t('fun.drink'), a.where && t('discover.local'), a.months && t('discover.seasonal')]
+            .filter(Boolean)
+            .join(' · ')}
+        </p>
+      )}
       <p className="mt-0.5 font-semibold">{a.title.en}</p>
       <p className="mt-1 text-sm">{a.body.en}</p>
       {a.alt && <p className="mt-1 text-sm text-muted">{a.alt.en}</p>}
@@ -358,15 +387,18 @@ function ActivityCard({
   )
 }
 
-function HolidayCard({ h }: { h: DatedHoliday }) {
+function HolidayRow({ h }: { h: DatedHoliday }) {
   const pub = h.holiday.kind === 'public'
   return (
-    <li className={`rounded-md border-2 p-3.5 ${pub ? 'border-ink bg-ink text-paper' : 'border-ink bg-sign-soft'}`}>
-      <p className={`text-xs font-semibold ${pub ? 'text-sign' : 'text-muted'}`}>
-        {fmtHoliday.format(h.date)} · {t(pub ? 'fun.public' : 'fun.tradition')}
-      </p>
-      <p className="mt-0.5 font-semibold">{h.holiday.title.en}</p>
-      <p className="mt-1 text-sm">{h.holiday.body.en}</p>
+    <li>
+      <details className="py-1.5">
+        <summary className="flex cursor-pointer list-none items-baseline gap-3 [&::-webkit-details-marker]:hidden">
+          <span className="w-24 shrink-0 text-sm text-muted">{fmtHoliday.format(h.date)}</span>
+          <span className="font-semibold">{h.holiday.title.en}</span>
+          {pub && <span className="ml-auto shrink-0 bg-ink px-1.5 text-xs font-semibold text-sign">{t('fun.closed')}</span>}
+        </summary>
+        <p className="mt-1 pl-27 text-sm">{h.holiday.body.en}</p>
+      </details>
     </li>
   )
 }

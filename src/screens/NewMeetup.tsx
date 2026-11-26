@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
-import { activities } from '../lib/activities'
+import { activities, type Category } from '../lib/activities'
 import { track } from '../lib/analytics'
 import { t } from '../lib/i18n'
 import { AUDIENCES, LANGUAGES, MEETUP_TYPES, type Audience, type Meetup, type MeetupType } from '../lib/people'
 import { load, update } from '../lib/storage'
 import { placeName } from './People'
+
+const TYPE_FOR: Record<Category, MeetupType> = { food: 'food', routines: 'other', fun: 'other', outdoors: 'walk', traditions: 'holiday' }
 
 const pad = (n: number) => String(n).padStart(2, '0')
 function nextSaturday(): string {
@@ -20,7 +22,7 @@ export function NewMeetup() {
   const activity = activities.find((a) => a.id === params.get('activity'))
   const saved = load()
 
-  const [type, setType] = useState<MeetupType>(activity ? (activity.kind === 'culture' ? 'walk' : 'food') : 'coffee')
+  const [type, setType] = useState<MeetupType>(activity ? TYPE_FOR[activity.category] : 'coffee')
   const [title, setTitle] = useState(activity ? `${activity.title.en} — together` : '')
   const [date, setDate] = useState(nextSaturday())
   const [time, setTime] = useState('15:00')
