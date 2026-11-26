@@ -67,8 +67,8 @@ create policy "anon insert feedback" on public.feedback
 ------------------------------------------------------------
 -- 4. Metrics for the hypothesis (run in SQL editor)
 ------------------------------------------------------------
--- Activation: users who completed onboarding and, within 7 days,
--- marked a task done or clicked an entitlement action.
+-- Activation: superseded by 004_metrics.sql (current event names). Kept so 001 runs on its own.
+-- Users who completed onboarding and, within 7 days, marked a task done or clicked an entitlement action.
 create or replace view public.metric_activation_7d
 with (security_invoker = true) as
 with onboarded as (

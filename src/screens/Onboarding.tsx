@@ -77,17 +77,24 @@ export function Onboarding() {
       done: [...new Set([...s.done.filter((id) => !DONE_OPTION_IDS.has(id)), ...done])],
     }))
     const days = Math.round((Date.now() - new Date(profile.arrival).getTime()) / 86_400_000)
-    track('onboarding_completed', {
-      purpose: profile.purpose,
-      eu: profile.eu,
-      citizenship: profile.citizenship ?? null,
-      status: profile.status ?? null,
-      state: profile.state,
-      city_listed: Boolean(profile.cityId),
-      days_since_arrival: days,
-      consent: consent,
-      is_standalone: isStandalone(),
-    })
+    // Segment fields (purpose, passport group, status, state, timing) only with research consent —
+    // that is what the Me tab promises. Without it we count the completion, nothing about the person.
+    track(
+      'onboarding_completed',
+      consent
+        ? {
+            consent: true,
+            purpose: profile.purpose,
+            eu: profile.eu,
+            citizenship: profile.citizenship ?? null,
+            status: profile.status ?? null,
+            state: profile.state,
+            city_listed: Boolean(profile.cityId),
+            days_since_arrival: days,
+            is_standalone: isStandalone(),
+          }
+        : { consent: false, is_standalone: isStandalone() },
+    )
     if (consent && CONSENT_ID) void submitResponses(toResearchPayload(answers), CONSENT_ID)
     navigate('/timeline', { replace: true })
   }
