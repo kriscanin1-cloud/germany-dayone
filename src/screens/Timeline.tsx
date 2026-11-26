@@ -1,12 +1,15 @@
 import { useMemo } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { ConfirmDialog } from '../components/ConfirmDialog'
-import { CATEGORIES, suggestions, upcomingHolidays, type Activity, type Category, type DatedHoliday } from '../lib/activities'
+import { CATEGORIES, suggestions, upcomingHolidays, type Category, type DatedHoliday, type Suggestion } from '../lib/activities'
 import { track } from '../lib/analytics'
-import { scenario, SHOW_DRAFTS } from '../lib/content'
+import { cities, scenario, SHOW_DRAFTS } from '../lib/content'
+import { spotsFor, tripsFor, type Spot, type Trip } from '../lib/local'
+import type { Portrait } from '../lib/personal'
+import { safeUrl } from '../lib/url'
 import { countdown, humanDays } from '../lib/dates'
 import { daysBetween, parseDate, planMilestones, planTasks, type PlannedTask } from '../lib/engine'
-import { t } from '../lib/i18n'
+import { t, type Key } from '../lib/i18n'
 import { toProfile } from '../lib/questionnaire'
 import { update, type Saved } from '../lib/storage'
 import { useDone } from '../lib/useDone'
@@ -49,10 +52,18 @@ export function Timeline() {
   const lastWeek = Math.max(WEEKS_SHOWN, currentWeek + 1)
   const weeks = Array.from({ length: lastWeek }, (_, i) => i + 1)
 
-  const fun = useMemo(
-    () => suggestions(profile, saved.anonId, saved.removed),
-    [profile, saved.anonId, saved.removed],
+  const cityName = cities.find((c) => c.id === profile.cityId)?.name
+  // the person's portrait: taste survey + interests + household + what they already tried (device only)
+  const portrait: Portrait = useMemo(
+    () => ({ taste: saved.taste, interests: saved.me?.interests, household: profile.household, tried: saved.tried }),
+    [saved.taste, saved.me?.interests, profile.household, saved.tried],
   )
+  const fun = useMemo(
+    () => suggestions(profile, saved.anonId, saved.removed, new Date(), portrait, cityName),
+    [profile, saved.anonId, saved.removed, portrait, cityName],
+  )
+  const dayTrips = useMemo(() => tripsFor(profile.cityId, portrait, new Date(), SHOW_DRAFTS).slice(0, 3), [profile.cityId, portrait])
+  const personalised = Boolean(saved.taste && Object.values(saved.taste).some(Boolean))
   const hols = useMemo(() => upcomingHolidays(profile).slice(0, 4), [profile])
 
   const later = plan.filter((p) => p.week > lastWeek)
@@ -205,12 +216,36 @@ export function Timeline() {
             {t('discover.intro')} <span className="font-semibold text-ink">{t('discover.tried', { n: String(tried.size) })}</span>
           </p>
 
+          <Link
+            to="/discover/personalise"
+            onClick={() => track('taste_opened', {})}
+            className={`mt-4 flex items-center justify-between gap-3 rounded-md border-2 border-ink p-3 ${personalised ? '' : 'bg-sign'}`}
+          >
+            <span>
+              <span className="block font-semibold">{personalised ? t('discover.personalised') : t('discover.personalise')}</span>
+              {!personalised && <span className="block text-sm">{t('discover.personaliseHint')}</span>}
+            </span>
+            <span aria-hidden className="text-xl">›</span>
+          </Link>
+
           {hols.length > 0 && (
             <div className="mt-5 rounded-md border-2 border-ink p-3">
               <p className="text-sm font-semibold">{t('discover.comingUp')}</p>
               <ul className="mt-1.5 divide-y divide-ink/10">
                 {hols.map((h) => (
                   <HolidayRow key={h.holiday.id + h.date.getFullYear()} h={h} />
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {dayTrips.length > 0 && cityName && (
+            <div className="mt-5">
+              <p className="font-semibold">{t('discover.trips', { city: cityName })}</p>
+              <p className="text-sm text-muted">{t('discover.tripsNote')}</p>
+              <ul className="mt-2 space-y-2">
+                {dayTrips.map((x) => (
+                  <TripCard key={x.id} trip={x} />
                 ))}
               </ul>
             </div>
@@ -237,13 +272,16 @@ export function Timeline() {
           </div>
           <p className="mt-3 text-sm text-muted">{t(`cat.${cat}.intro`)}</p>
           <ul className="mt-3 space-y-2">
-            {fun[cat].map((a) => (
+            {fun[cat].map((sug) => (
               <ActivityCard
-                key={a.id}
-                a={a}
-                tried={tried.has(a.id)}
-                onTried={() => toggleTried(a.id)}
-                onRemove={() => remove(a.id)}
+                key={sug.activity.id}
+                s={sug}
+                spots={spotsFor(sug.activity.id, profile.cityId)}
+                cityName={cityName}
+                hideAlt={saved.taste?.alcohol === 'yes'}
+                tried={tried.has(sug.activity.id)}
+                onTried={() => toggleTried(sug.activity.id)}
+                onRemove={() => remove(sug.activity.id)}
               />
             ))}
           </ul>
@@ -337,28 +375,54 @@ function TaskRow({
 
 
 function ActivityCard({
-  a,
+  s,
+  spots,
+  cityName,
+  hideAlt,
   tried,
   onTried,
   onRemove,
 }: {
-  a: Activity
+  s: Suggestion
+  spots: Spot[]
+  cityName?: string
+  hideAlt: boolean
   tried: boolean
   onTried: () => void
   onRemove: () => void
 }) {
+  const a = s.activity
+  const why = s.reasons.map((r) => t(r.key as Key, r.vars))
+  const label = [a.kind === 'drink' && t('fun.drink'), ...why].filter(Boolean).join(' · ')
   return (
     <li className={`relative rounded-md border-2 p-3.5 pr-11 ${tried ? 'border-ink bg-sign' : 'border-ink/20'}`}>
-      {(a.kind === 'drink' || a.where || a.months) && (
-        <p className="text-xs font-semibold text-muted">
-          {[a.kind === 'drink' && t('fun.drink'), a.where && t('discover.local'), a.months && t('discover.seasonal')]
-            .filter(Boolean)
-            .join(' · ')}
-        </p>
-      )}
+      {label && <p className="text-xs font-semibold text-muted">{label}</p>}
       <p className="mt-0.5 font-semibold">{a.title.en}</p>
       <p className="mt-1 text-sm">{a.body.en}</p>
-      {a.alt && <p className="mt-1 text-sm text-muted">{a.alt.en}</p>}
+      {a.alt && !hideAlt && <p className="mt-1 text-sm text-muted">{a.alt.en}</p>}
+      {spots.length > 0 && cityName && (
+        <details className="mt-2 rounded-md bg-concrete/60 px-3 py-2">
+          <summary className="cursor-pointer text-sm font-semibold">{t('discover.whereToTry', { city: cityName })}</summary>
+          <ul className="mt-1.5 space-y-2">
+            {spots.map((sp) => {
+              const href = safeUrl(sp.url)
+              return (
+                <li key={sp.name} className="text-sm">
+                  {href ? (
+                    <a href={href} target="_blank" rel="noopener noreferrer" className="font-semibold underline">
+                      {sp.name}
+                    </a>
+                  ) : (
+                    <span className="font-semibold">{sp.name}</span>
+                  )}
+                  <span className="text-muted"> — {sp.area}</span>
+                  <span className="block">{sp.note.en}</span>
+                </li>
+              )
+            })}
+          </ul>
+        </details>
+      )}
       <button
         type="button"
         role="checkbox"
@@ -383,6 +447,25 @@ function ActivityCard({
       >
         ×
       </button>
+    </li>
+  )
+}
+
+function TripCard({ trip }: { trip: Trip }) {
+  const href = safeUrl(trip.url)
+  return (
+    <li className="rounded-md border-2 border-ink/20 p-3.5">
+      <p className="text-xs font-semibold text-muted">{trip.travel.en}</p>
+      <p className="mt-0.5 font-semibold">{trip.title.en}</p>
+      <p className="mt-1 text-sm">{trip.body.en}</p>
+      <p className="mt-1.5 text-sm">
+        {href && (
+          <a href={href} target="_blank" rel="noopener noreferrer" className="font-semibold underline">
+            {t('trip.more')}
+          </a>
+        )}
+        {trip.status === 'draft' && <span className="ml-2 bg-sign-soft px-1">{t('draft.badge')}</span>}
+      </p>
     </li>
   )
 }

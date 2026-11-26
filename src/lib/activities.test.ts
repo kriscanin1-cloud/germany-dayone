@@ -74,22 +74,22 @@ describe('suggestions by category', () => {
   it('is stable per person and never repeats', () => {
     const a = suggestions(berlin, 'seed-1', [], nov25)
     expect(suggestions(berlin, 'seed-1', [], nov25)).toEqual(a)
-    const ids = Object.values(a).flat().map((x) => x.id)
+    const ids = Object.values(a).flat().map((x) => x.activity.id)
     expect(new Set(ids).size).toBe(ids.length)
   })
   it('only picks things for this place and season, local first', () => {
     const s = suggestions(berlin, 's', [], nov25)
-    const all = Object.values(s).flat().map((x) => x.id)
+    const all = Object.values(s).flat().map((x) => x.activity.id)
     expect(all).not.toContain('weisswurst')
     expect(all).not.toContain('spargel')
     expect(all).toContain('gluehwein')
-    expect(s.food[0].where).toBeDefined() // Berliner Weiße or similar comes first
-    expect(suggestions(munich, 's', [], nov25).food.map((x) => x.id)).toContain('weisswurst')
+    expect(s.food[0].activity.where).toBeDefined() // Berliner Weiße or similar comes first
+    expect(suggestions(munich, 's', [], nov25).food.map((x) => x.activity.id)).toContain('weisswurst')
   })
   it('a removed idea is replaced by the next one', () => {
     const before = suggestions(berlin, 's', [], nov25).food
-    const after = suggestions(berlin, 's', [before[0].id], nov25).food
-    expect(after.map((x) => x.id)).not.toContain(before[0].id)
+    const after = suggestions(berlin, 's', [before[0].activity.id], nov25).food
+    expect(after.map((x) => x.activity.id)).not.toContain(before[0].activity.id)
     expect(after).toHaveLength(before.length)
   })
 })

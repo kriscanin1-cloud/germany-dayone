@@ -46,3 +46,10 @@ Collected while building. Order inside a section = rough priority.
 - [ ] Monetisation experiments (strategy & business plan doc on claude.ai): affiliate disclosure, “Arrival pack” fake door, uni/employer pilot
 - [ ] Legal check: RDG boundary for paid paperwork help, § 34d GewO (insurance tip-giver only), § 49b BRAO (no per-referral fees to lawyers), GDPR
 - [ ] Company setup (Estonia) and where the business is registered for German affiliate contracts
+
+## Personalisation (added 2026-11-26)
+- Spots and day trips exist only for the 6 pilot cities (Dresden, Leipzig, Köln, Düsseldorf, München, Berlin). Extend city by city; re-verify `lastVerified` every 6 months.
+- Leipzig → Halle trip is still DRAFT (travel time not checked).
+- Halal: we only filter pork and alcohol — meat dishes are not certified halal. Consider a hint "ask for halal" on meat ideas.
+- Translate taste survey and spot notes (RU/UK/AR/TR…).
+- Later: local events (Oktoberfest, Karneval, Striezelmarkt dates) as a dated feed per city.

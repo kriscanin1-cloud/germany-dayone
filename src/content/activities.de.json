@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-v2",
+  "version": "2026-11-v3",
   "note": "Discover: optional things to try, by category (food, routines, fun, outdoors, traditions). `kind` = food or drink inside Food & drink. Regional items use `where`, seasonal ones `months`. Holidays are listed separately by date.",
   "activities": [
     {
@@ -11,7 +11,16 @@
       "body": {
         "en": "Grab one in a bread roll from a street stand or a market — mustard (Senf), not ketchup."
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "contains": [
+        "meat",
+        "pork"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "currywurst",
@@ -22,7 +31,16 @@
       "body": {
         "en": "Sliced sausage with curry ketchup, usually with fries (Pommes). Ask for “mit Darm” or “ohne Darm”."
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "contains": [
+        "meat",
+        "pork"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "brezel",
@@ -33,7 +51,12 @@
       "body": {
         "en": "Buy a pretzel at any bakery. Butterbrezel — with butter — is the classic breakfast on the go."
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "broetchen",
@@ -44,7 +67,12 @@
       "body": {
         "en": "Fresh bread rolls from the bakery, butter, jam, cheese, cold cuts and a soft-boiled egg."
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "kaffee-kuchen",
@@ -55,7 +83,12 @@
       "body": {
         "en": "Afternoon coffee and cake is a ritual. Try Bienenstich, Käsekuchen or Schwarzwälder Kirschtorte."
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "schnitzel",
@@ -66,7 +99,16 @@
       "body": {
         "en": "Wiener Schnitzel is veal; Schnitzel Wiener Art is pork. Jägerschnitzel comes with mushroom sauce."
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "contains": [
+        "meat",
+        "pork"
+      ],
+      "cost": "paid",
+      "pace": "calm"
     },
     {
       "id": "doener",
@@ -77,7 +119,15 @@
       "body": {
         "en": "The German-Turkish kebab was perfected in Berlin. Say “mit alles” for everything, “scharf” for spicy."
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "contains": [
+        "meat"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "kartoffelsalat",
@@ -88,7 +138,12 @@
       "body": {
         "en": "South: with vinegar and broth. North: with mayonnaise. Pick a side."
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "spaetzle",
@@ -99,7 +154,12 @@
       "body": {
         "en": "Soft egg noodles baked with cheese and fried onions — Swabian comfort food."
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "rouladen",
@@ -110,7 +170,16 @@
       "body": {
         "en": "Beef rolls with bacon, onion and pickle, braised in gravy — a typical family Sunday dish."
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "contains": [
+        "meat",
+        "pork"
+      ],
+      "cost": "paid",
+      "pace": "calm"
     },
     {
       "id": "beer",
@@ -124,7 +193,14 @@
       "alt": {
         "en": "Not drinking? Try an alcohol-free beer — Germany makes very good ones."
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food",
+        "nightlife"
+      ],
+      "alcohol": "core",
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "apfelschorle",
@@ -135,7 +211,12 @@
       "body": {
         "en": "Apple juice with sparkling water — the national soft drink."
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "spezi",
@@ -146,7 +227,12 @@
       "body": {
         "en": "Cola mixed with orange soda. Ask for it in any café or Späti."
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "pfand",
@@ -156,7 +242,12 @@
       "body": {
         "en": "Bottles and cans with the Pfand logo give you 8–25 cents back at the machines in supermarkets."
       },
-      "category": "routines"
+      "category": "routines",
+      "tags": [
+        "community"
+      ],
+      "cost": "free",
+      "pace": "calm"
     },
     {
       "id": "muelltrennung",
@@ -166,7 +257,12 @@
       "body": {
         "en": "Yellow bin: packaging. Blue: paper. Brown: food. Black: the rest. Glass goes to street containers by colour."
       },
-      "category": "routines"
+      "category": "routines",
+      "tags": [
+        "community"
+      ],
+      "cost": "free",
+      "pace": "calm"
     },
     {
       "id": "sonntag",
@@ -176,7 +272,13 @@
       "body": {
         "en": "Shops are closed on Sundays, so do what locals do: a long walk (Spaziergang) in a park or forest."
       },
-      "category": "outdoors"
+      "category": "outdoors",
+      "tags": [
+        "nature",
+        "photo"
+      ],
+      "cost": "free",
+      "pace": "active"
     },
     {
       "id": "tatort",
@@ -186,7 +288,13 @@
       "body": {
         "en": "Germany's longest-running crime show. Many bars screen it — a chance to listen to German."
       },
-      "category": "fun"
+      "category": "fun",
+      "tags": [
+        "films",
+        "language"
+      ],
+      "cost": "free",
+      "pace": "calm"
     },
     {
       "id": "flohmarkt",
@@ -196,7 +304,13 @@
       "body": {
         "en": "Weekend flea markets (Flohmarkt) are good for cheap furniture and kitchen things."
       },
-      "category": "fun"
+      "category": "fun",
+      "tags": [
+        "photo",
+        "community"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "library",
@@ -206,7 +320,14 @@
       "body": {
         "en": "Public libraries (Stadtbibliothek) lend books, films and language courses, often for a small yearly fee."
       },
-      "category": "fun"
+      "category": "fun",
+      "tags": [
+        "books",
+        "language",
+        "kids"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "sauna",
@@ -216,7 +337,12 @@
       "body": {
         "en": "Most saunas are mixed and nude, with a towel to sit on. Take a cold shower between rounds."
       },
-      "category": "outdoors"
+      "category": "outdoors",
+      "tags": [
+        "sport"
+      ],
+      "cost": "paid",
+      "pace": "calm"
     },
     {
       "id": "ticket-check",
@@ -226,7 +352,14 @@
       "body": {
         "en": "With the Deutschlandticket you can take any regional train — try a day trip to a nearby town."
       },
-      "category": "outdoors"
+      "category": "outdoors",
+      "tags": [
+        "nature",
+        "culture",
+        "photo"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "feierabend",
@@ -236,7 +369,12 @@
       "body": {
         "en": "The end of the working day — and the right to switch off. Ask a colleague about their Feierabend plans."
       },
-      "category": "routines"
+      "category": "routines",
+      "tags": [
+        "language"
+      ],
+      "cost": "free",
+      "pace": "calm"
     },
     {
       "id": "biergarten",
@@ -258,7 +396,14 @@
       "alt": {
         "en": "Order an Apfelschorle or a lemonade instead."
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food",
+        "nature"
+      ],
+      "alcohol": "optional",
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "radler",
@@ -279,7 +424,13 @@
       "alt": {
         "en": "Ask for a Zitronenlimonade instead."
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "alcohol": "core",
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "spargel",
@@ -295,7 +446,12 @@
         5,
         6
       ],
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "cost": "paid",
+      "pace": "calm"
     },
     {
       "id": "erdbeeren",
@@ -311,7 +467,13 @@
         6,
         7
       ],
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food",
+        "nature"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "eis",
@@ -329,7 +491,13 @@
         8,
         9
       ],
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food",
+        "kids"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "federweisser",
@@ -347,7 +515,13 @@
       "alt": {
         "en": "Try fresh apple cider juice (Süßmost) instead."
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "alcohol": "core",
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "kuerbis",
@@ -363,7 +537,12 @@
         10,
         11
       ],
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "gluehwein",
@@ -381,7 +560,13 @@
       "alt": {
         "en": "Ask for Kinderpunsch — the alcohol-free version."
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "alcohol": "optional",
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "lebkuchen",
@@ -397,7 +582,13 @@
         11,
         12
       ],
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food",
+        "kids"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "stollen",
@@ -412,7 +603,12 @@
         11,
         12
       ],
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "weihnachtsmarkt",
@@ -426,7 +622,14 @@
         11,
         12
       ],
-      "category": "traditions"
+      "category": "traditions",
+      "tags": [
+        "culture",
+        "food",
+        "kids"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "gans",
@@ -441,7 +644,15 @@
         11,
         12
       ],
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "contains": [
+        "meat"
+      ],
+      "cost": "paid",
+      "pace": "calm"
     },
     {
       "id": "berliner",
@@ -457,7 +668,13 @@
         2,
         12
       ],
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food",
+        "kids"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "koelsch",
@@ -477,7 +694,14 @@
       "alt": {
         "en": "Ask for a Fassbrause instead."
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food",
+        "nightlife"
+      ],
+      "alcohol": "core",
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "altbier",
@@ -496,7 +720,14 @@
       "alt": {
         "en": "Ask for a Fassbrause instead."
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food",
+        "nightlife"
+      ],
+      "alcohol": "core",
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "weissbier",
@@ -515,7 +746,13 @@
       "alt": {
         "en": "Alcohol-free Weißbier is everywhere in Bavaria."
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "alcohol": "core",
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "weisswurst",
@@ -531,7 +768,16 @@
           "DE-BY"
         ]
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "contains": [
+        "meat",
+        "pork"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "leberkaese",
@@ -548,7 +794,16 @@
           "DE-BW"
         ]
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "contains": [
+        "meat",
+        "pork"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "maultaschen",
@@ -564,7 +819,16 @@
           "DE-BW"
         ]
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "contains": [
+        "meat",
+        "pork"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "gruene-sosse",
@@ -585,7 +849,12 @@
           "kassel"
         ]
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "apfelwein",
@@ -604,7 +873,13 @@
       "alt": {
         "en": "Ask for a sparkling apple juice (Apfelsaftschorle) instead."
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "alcohol": "core",
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "franzbroetchen",
@@ -621,7 +896,12 @@
           "DE-SH"
         ]
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "fischbroetchen",
@@ -641,7 +921,15 @@
           "DE-NI"
         ]
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "contains": [
+        "fish"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "berliner-weisse",
@@ -660,7 +948,14 @@
       "alt": {
         "en": "Try a Club-Mate instead — Berlin's favourite soft drink."
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food",
+        "nightlife"
+      ],
+      "alcohol": "core",
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "spaeti",
@@ -675,7 +970,13 @@
           "DE-BE"
         ]
       },
-      "category": "routines"
+      "category": "routines",
+      "tags": [
+        "nightlife"
+      ],
+      "alcohol": "optional",
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "thueringer",
@@ -691,7 +992,16 @@
           "DE-TH"
         ]
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "contains": [
+        "meat",
+        "pork"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "eierschecke",
@@ -707,7 +1017,12 @@
           "DE-SN"
         ]
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "pfaelzer-saumagen",
@@ -723,7 +1038,16 @@
           "DE-RP"
         ]
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "contains": [
+        "meat",
+        "pork"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "labskaus",
@@ -741,7 +1065,16 @@
           "DE-SH"
         ]
       },
-      "category": "food"
+      "category": "food",
+      "tags": [
+        "food"
+      ],
+      "contains": [
+        "meat",
+        "fish"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "ruhezeit",
@@ -751,7 +1084,10 @@
       },
       "body": {
         "en": "Most house rules ask for quiet from 22:00 to 6:00 and all day on Sunday: no drilling, no loud music."
-      }
+      },
+      "tags": [],
+      "cost": "free",
+      "pace": "calm"
     },
     {
       "id": "lueften",
@@ -761,7 +1097,10 @@
       },
       "body": {
         "en": "Open the windows wide for 5–10 minutes a few times a day (Stoßlüften) instead of leaving them tilted. It keeps mould away."
-      }
+      },
+      "tags": [],
+      "cost": "free",
+      "pace": "calm"
     },
     {
       "id": "bargeld",
@@ -771,7 +1110,10 @@
       },
       "body": {
         "en": "Cards work in more places every year, but bakeries, kiosks and markets may still want cash."
-      }
+      },
+      "tags": [],
+      "cost": "free",
+      "pace": "calm"
     },
     {
       "id": "gruessen",
@@ -781,7 +1123,12 @@
       },
       "body": {
         "en": "Say “Hallo” or “Guten Tag” in small shops, lifts and doctors' waiting rooms, and “Tschüss” when you leave."
-      }
+      },
+      "tags": [
+        "language"
+      ],
+      "cost": "free",
+      "pace": "calm"
     },
     {
       "id": "briefkasten",
@@ -791,7 +1138,10 @@
       },
       "body": {
         "en": "Offices, banks and insurers write by post, often with deadlines. Make sure your name is on the letterbox."
-      }
+      },
+      "tags": [],
+      "cost": "free",
+      "pace": "calm"
     },
     {
       "id": "ampel",
@@ -801,7 +1151,12 @@
       },
       "body": {
         "en": "Crossing on red can be fined and is frowned upon, especially in front of children."
-      }
+      },
+      "tags": [
+        "kids"
+      ],
+      "cost": "free",
+      "pace": "calm"
     },
     {
       "id": "bundesliga",
@@ -811,7 +1166,13 @@
       },
       "body": {
         "en": "Join fans in a sports bar on a Saturday afternoon, or get a cheap ticket for a lower-league game."
-      }
+      },
+      "tags": [
+        "sport",
+        "nightlife"
+      ],
+      "cost": "paid",
+      "pace": "active"
     },
     {
       "id": "verein",
@@ -821,7 +1182,14 @@
       },
       "body": {
         "en": "Clubs for sport, music, gardening or almost anything are where many Germans make friends. Membership is often cheap."
-      }
+      },
+      "tags": [
+        "sport",
+        "music",
+        "community"
+      ],
+      "cost": "low",
+      "pace": "active"
     },
     {
       "id": "kino-omu",
@@ -831,7 +1199,13 @@
       },
       "body": {
         "en": "OmU means original version with German subtitles — a gentle way to practise German at the cinema."
-      }
+      },
+      "tags": [
+        "films",
+        "language"
+      ],
+      "cost": "paid",
+      "pace": "calm"
     },
     {
       "id": "theater",
@@ -841,7 +1215,13 @@
       },
       "body": {
         "en": "Most cities run a subsidised theatre or opera house. Many offer reduced tickets for students."
-      }
+      },
+      "tags": [
+        "culture",
+        "music"
+      ],
+      "cost": "paid",
+      "pace": "calm"
     },
     {
       "id": "pubquiz",
@@ -851,7 +1231,14 @@
       },
       "body": {
         "en": "Many bars run quiz nights, some in English — an easy way to meet people."
-      }
+      },
+      "tags": [
+        "games",
+        "nightlife",
+        "language"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "museum",
@@ -861,7 +1248,13 @@
       },
       "body": {
         "en": "Many museums have a reduced or free day each month — check your city's museum website."
-      }
+      },
+      "tags": [
+        "culture",
+        "kids"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "fahrrad",
@@ -871,7 +1264,13 @@
       },
       "body": {
         "en": "Use the bike lanes, signal with your arm and switch on lights in the dark — police do check."
-      }
+      },
+      "tags": [
+        "sport",
+        "nature"
+      ],
+      "cost": "low",
+      "pace": "active"
     },
     {
       "id": "wandern",
@@ -881,7 +1280,14 @@
       },
       "body": {
         "en": "Hiking trails (Wanderwege) are marked with symbols on trees. Stop for lunch at a hut or Gasthaus."
-      }
+      },
+      "tags": [
+        "nature",
+        "sport",
+        "photo"
+      ],
+      "cost": "free",
+      "pace": "active"
     },
     {
       "id": "lauftreff",
@@ -891,7 +1297,13 @@
       },
       "body": {
         "en": "Free running groups meet in parks every week — search “Lauftreff” and your city."
-      }
+      },
+      "tags": [
+        "sport",
+        "community"
+      ],
+      "cost": "free",
+      "pace": "active"
     },
     {
       "id": "badesee",
@@ -906,7 +1318,14 @@
         6,
         7,
         8
-      ]
+      ],
+      "tags": [
+        "nature",
+        "sport",
+        "kids"
+      ],
+      "cost": "free",
+      "pace": "active"
     },
     {
       "id": "freibad",
@@ -923,7 +1342,13 @@
         7,
         8,
         9
-      ]
+      ],
+      "tags": [
+        "sport",
+        "kids"
+      ],
+      "cost": "low",
+      "pace": "active"
     },
     {
       "id": "rodeln",
@@ -938,7 +1363,14 @@
         12,
         1,
         2
-      ]
+      ],
+      "tags": [
+        "sport",
+        "kids",
+        "nature"
+      ],
+      "cost": "low",
+      "pace": "active"
     },
     {
       "id": "geburtstag",
@@ -948,7 +1380,12 @@
       },
       "body": {
         "en": "In Germany the birthday person treats friends and colleagues. Never congratulate anyone early — it's bad luck."
-      }
+      },
+      "tags": [
+        "community"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "anstossen",
@@ -958,7 +1395,12 @@
       },
       "body": {
         "en": "When clinking glasses, keep eye contact. A popular saying promises seven years of bad luck otherwise."
-      }
+      },
+      "tags": [
+        "nightlife"
+      ],
+      "cost": "free",
+      "pace": "calm"
     },
     {
       "id": "brot-salz",
@@ -968,7 +1410,12 @@
       },
       "body": {
         "en": "The traditional gift for a new home (Einweihungsparty)."
-      }
+      },
+      "tags": [
+        "community"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "stammtisch",
@@ -978,7 +1425,14 @@
       },
       "body": {
         "en": "A regulars' table at a pub. Many cities have international Stammtische for newcomers."
-      }
+      },
+      "tags": [
+        "community",
+        "language",
+        "nightlife"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "adventskalender",
@@ -992,7 +1446,12 @@
       "months": [
         11,
         12
-      ]
+      ],
+      "tags": [
+        "kids"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "plaetzchen",
@@ -1005,7 +1464,13 @@
       },
       "months": [
         12
-      ]
+      ],
+      "tags": [
+        "food",
+        "kids"
+      ],
+      "cost": "low",
+      "pace": "calm"
     },
     {
       "id": "osterfeuer",
@@ -1019,7 +1484,13 @@
       "months": [
         3,
         4
-      ]
+      ],
+      "tags": [
+        "community",
+        "nature"
+      ],
+      "cost": "free",
+      "pace": "calm"
     },
     {
       "id": "maibaum",
@@ -1033,7 +1504,13 @@
       "months": [
         4,
         5
-      ]
+      ],
+      "tags": [
+        "community",
+        "culture"
+      ],
+      "cost": "free",
+      "pace": "calm"
     },
     {
       "id": "fasching",
@@ -1047,7 +1524,14 @@
       "months": [
         1,
         2
-      ]
+      ],
+      "tags": [
+        "nightlife",
+        "music",
+        "kids"
+      ],
+      "cost": "low",
+      "pace": "active"
     },
     {
       "id": "volksfest",
@@ -1064,7 +1548,14 @@
         7,
         8,
         9
-      ]
+      ],
+      "tags": [
+        "kids",
+        "food",
+        "nightlife"
+      ],
+      "cost": "low",
+      "pace": "active"
     },
     {
       "id": "erntedank",
@@ -1078,7 +1569,13 @@
       "months": [
         9,
         10
-      ]
+      ],
+      "tags": [
+        "community",
+        "culture"
+      ],
+      "cost": "free",
+      "pace": "calm"
     },
     {
       "id": "laterne",
@@ -1091,7 +1588,59 @@
       },
       "months": [
         10
-      ]
+      ],
+      "tags": [
+        "kids",
+        "community"
+      ],
+      "cost": "free",
+      "pace": "calm"
+    },
+    {
+      "id": "gose",
+      "category": "food",
+      "kind": "drink",
+      "title": {
+        "en": "Taste a Leipziger Gose"
+      },
+      "body": {
+        "en": "A sour, slightly salty top-fermented beer with a 1,000-year history, brewed again in Leipzig since 2000."
+      },
+      "where": {
+        "cities": [
+          "leipzig"
+        ]
+      },
+      "alt": {
+        "en": "Ask for an alcohol-free drink and a Leipziger Lerche instead."
+      },
+      "tags": [
+        "food",
+        "nightlife"
+      ],
+      "alcohol": "core",
+      "cost": "low",
+      "pace": "calm"
+    },
+    {
+      "id": "lerche",
+      "category": "food",
+      "title": {
+        "en": "Eat a Leipziger Lerche"
+      },
+      "body": {
+        "en": "Shortcrust pastry with marzipan and a cherry — Leipzig's signature sweet, sold in many bakeries."
+      },
+      "where": {
+        "cities": [
+          "leipzig"
+        ]
+      },
+      "tags": [
+        "food"
+      ],
+      "cost": "low",
+      "pace": "calm"
     }
   ],
   "holidays": [

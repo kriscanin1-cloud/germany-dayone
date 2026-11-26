@@ -2,6 +2,7 @@
 // Pure functions, unit-tested.
 import raw from '../content/activities.de.json'
 import { addDays } from './engine'
+import { allowed, score, type Portrait, type Reason } from './personal'
 import type { Profile, StateCode, T } from './types'
 
 export interface Where {
@@ -24,6 +25,13 @@ export interface Activity {
   where?: Where
   /** an alcohol-free alternative */
   alt?: T
+  /** interest tags, matched against the person's interests (see personal.ts) */
+  tags?: string[]
+  /** core: it IS an alcoholic drink; optional: a place or custom where drinking is optional */
+  alcohol?: 'core' | 'optional'
+  contains?: ('meat' | 'pork' | 'fish')[]
+  cost?: 'free' | 'low' | 'paid'
+  pace?: 'calm' | 'active'
 }
 
 export type HolidayRule = { fixed: string } | { easter: number } | { special: 'oktoberfest' | 'advent1' | 'repentance' }
@@ -126,9 +134,14 @@ function hash(s: string): number {
 
 export const MAX_PER_CATEGORY = 10
 
+export interface Suggestion {
+  activity: Activity
+  reasons: Reason[]
+}
+
 /**
- * Ideas per category for this person today: only for their place and in season, never one they removed.
- * Regional first (that's what makes it feel local), then seasonal, then the rest in the person's own stable order.
+ * Ideas per category for this person today: for their place, in season, allowed by their taste,
+ * never one they removed — ranked by how well they fit (personal.ts), ties in the person's own stable order.
  * At most 10 per category; removing one lets the next one in.
  */
 export function suggestions(
@@ -136,14 +149,16 @@ export function suggestions(
   seed: string,
   removed: Iterable<string> = [],
   today: Date = new Date(),
-): Record<Category, Activity[]> {
+  portrait: Portrait = {},
+  placeName?: string,
+): Record<Category, Suggestion[]> {
   const gone = new Set(removed)
   const month = today.getMonth() + 1
-  const rank = (a: Activity) => (a.where ? 0 : a.months ? 1 : 2)
-  const pool = activities
-    .filter((a) => !gone.has(a.id) && inPlace(a.where, p) && (!a.months || a.months.includes(month)))
-    .sort((a, b) => rank(a) - rank(b) || hash(seed + a.id) - hash(seed + b.id))
-  const out = Object.fromEntries(CATEGORIES.map((c) => [c, [] as Activity[]])) as Record<Category, Activity[]>
-  for (const a of pool) if (out[a.category].length < MAX_PER_CATEGORY) out[a.category].push(a)
+  const scored = activities
+    .filter((a) => !gone.has(a.id) && inPlace(a.where, p) && (!a.months || a.months.includes(month)) && allowed(a, portrait.taste))
+    .map((a) => ({ a, ...score(a, p, portrait, placeName) }))
+    .sort((x, y) => y.score - x.score || hash(seed + x.a.id) - hash(seed + y.a.id))
+  const out = Object.fromEntries(CATEGORIES.map((c) => [c, [] as Suggestion[]])) as Record<Category, Suggestion[]>
+  for (const { a, reasons } of scored) if (out[a.category].length < MAX_PER_CATEGORY) out[a.category].push({ activity: a, reasons })
   return out
 }

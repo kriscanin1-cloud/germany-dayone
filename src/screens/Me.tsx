@@ -6,13 +6,11 @@ import { countdown, humanDays, type Urgency } from '../lib/dates'
 import { daysBetween, parseDate } from '../lib/engine'
 import { t } from '../lib/i18n'
 import { LANGUAGES } from '../lib/people'
+import { INTEREST_LABELS } from '../lib/personal'
 import { CONSENT_ID, questionnaire, toProfile } from '../lib/questionnaire'
 import { load, update, wipe, type MeInfo, type Saved } from '../lib/storage'
 
-const INTERESTS = [
-  'Food & cooking', 'Hiking & nature', 'Sports', 'Board games', 'Music', 'Art & museums', 'Films',
-  'Tech', 'Books', 'Parenting', 'Language practice', 'Nightlife', 'Volunteering', 'Photography',
-] as const
+const INTERESTS = INTEREST_LABELS
 
 const label = (questionId: string, optionId?: string) =>
   questionnaire.questions.find((q) => q.id === questionId)?.options?.find((o) => o.id === optionId)?.label

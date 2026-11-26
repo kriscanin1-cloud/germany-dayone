@@ -1,0 +1,589 @@
+{
+  "version": "2026-11-v1",
+  "note": "Local layer for Discover: verified spots tied to ideas (by city) and day trips by regional train (Deutschlandticket). Spots are suggestions, not adverts — never paid.",
+  "spots": [
+    {
+      "activity": "biergarten",
+      "city": "muenchen",
+      "name": "Augustiner-Keller",
+      "area": "Maxvorstadt, near the main station",
+      "note": {
+        "en": "Munich's oldest beer garden, under 100+ chestnut trees. Bringing your own food is a Munich tradition."
+      },
+      "url": "https://www.muenchen.travel/artikel/essen-trinken/schoene-biergaerten-in-muenchen-und-umgebung",
+      "lastVerified": "2026-11-26",
+      "sources": [
+        "https://www.muenchen.travel/artikel/essen-trinken/schoene-biergaerten-in-muenchen-und-umgebung"
+      ]
+    },
+    {
+      "activity": "biergarten",
+      "city": "muenchen",
+      "name": "Königlicher Hirschgarten",
+      "area": "Neuhausen",
+      "note": {
+        "en": "Bavaria's biggest beer garden, with playgrounds and a deer enclosure — good with kids."
+      },
+      "url": "https://www.muenchen.travel/artikel/essen-trinken/schoene-biergaerten-in-muenchen-und-umgebung",
+      "lastVerified": "2026-11-26",
+      "sources": [
+        "https://www.muenchen.travel/artikel/essen-trinken/schoene-biergaerten-in-muenchen-und-umgebung"
+      ]
+    },
+    {
+      "activity": "weisswurst",
+      "city": "muenchen",
+      "name": "Augustiner-Keller",
+      "area": "Maxvorstadt",
+      "note": {
+        "en": "Classic Weißwurst with sweet mustard and a Brezn in a traditional beer hall."
+      },
+      "url": "https://doeatbetterexperience.com/de/blog/essen-in-m-nchen-die-besten-bayerischen-spezialit-ten/",
+      "lastVerified": "2026-11-26",
+      "sources": [
+        "https://doeatbetterexperience.com/de/blog/essen-in-m-nchen-die-besten-bayerischen-spezialit-ten/"
+      ]
+    },
+    {
+      "activity": "weissbier",
+      "city": "muenchen",
+      "name": "Schneider Bräuhaus",
+      "area": "Altstadt, Tal",
+      "note": {
+        "en": "The wheat-beer brewery's own inn — Weißbier is its speciality."
+      },
+      "url": "https://www.muenchen.travel/artikel/essen-trinken/ueberblick-alles-ueber-die-bayerische-kueche",
+      "lastVerified": "2026-11-26",
+      "sources": [
+        "https://www.muenchen.travel/artikel/essen-trinken/ueberblick-alles-ueber-die-bayerische-kueche"
+      ]
+    },
+    {
+      "activity": "leberkaese",
+      "city": "muenchen",
+      "name": "Viktualienmarkt",
+      "area": "Altstadt",
+      "note": {
+        "en": "The central food market: butchers sell Leberkässemmel to go, and there is a beer garden in the middle."
+      },
+      "url": "https://www.muenchen.travel/artikel/essen-trinken/schoene-biergaerten-in-muenchen-und-umgebung",
+      "lastVerified": "2026-11-26",
+      "sources": [
+        "https://www.muenchen.travel/artikel/essen-trinken/schoene-biergaerten-in-muenchen-und-umgebung"
+      ]
+    },
+    {
+      "activity": "koelsch",
+      "city": "koeln",
+      "name": "Früh am Dom",
+      "area": "Altstadt, by the cathedral",
+      "note": {
+        "en": "Cologne's biggest brewhouse; Kölsch is tapped from wooden casks. The best first Kölsch experience."
+      },
+      "url": "https://www.koeln.de/tourismus/ll/brauhaus-koeln/",
+      "lastVerified": "2026-11-26",
+      "sources": [
+        "https://www.koeln.de/tourismus/ll/brauhaus-koeln/"
+      ]
+    },
+    {
+      "activity": "koelsch",
+      "city": "koeln",
+      "name": "Brauhaus Päffgen",
+      "area": "Friesenstraße",
+      "note": {
+        "en": "An institution since 1884, still brewing its own Kölsch in the back yard."
+      },
+      "url": "https://www.koeln.de/tourismus/ll/brauhaus-koeln/",
+      "lastVerified": "2026-11-26",
+      "sources": [
+        "https://www.koeln.de/tourismus/ll/brauhaus-koeln/"
+      ]
+    },
+    {
+      "activity": "koelsch",
+      "city": "koeln",
+      "name": "Gaffel am Dom",
+      "area": "Right outside the main station",
+      "note": {
+        "en": "Easy to find on day one — and it serves a Kölsch breakfast."
+      },
+      "url": "https://www.koeln.de/gastro/eintrag/4273/restaurants/gaffel-am-dom",
+      "lastVerified": "2026-11-26",
+      "sources": [
+        "https://www.koeln.de/gastro/eintrag/4273/restaurants/gaffel-am-dom"
+      ]
+    },
+    {
+      "activity": "altbier",
+      "city": "duesseldorf",
+      "name": "Uerige",
+      "area": "Altstadt, Berger Straße",
+      "note": {
+        "en": "A Düsseldorf institution near the Rhine, brewing its own Alt."
+      },
+      "url": "https://www.visitduesseldorf.de/storys/2024/04/19/6-altbier-hotspots-keine-angst-vor-duesseldorfer-bier/",
+      "lastVerified": "2026-11-26",
+      "sources": [
+        "https://www.visitduesseldorf.de/storys/2024/04/19/6-altbier-hotspots-keine-angst-vor-duesseldorfer-bier/"
+      ]
+    },
+    {
+      "activity": "altbier",
+      "city": "duesseldorf",
+      "name": "Brauerei im Füchschen",
+      "area": "Altstadt, Ratinger Straße",
+      "note": {
+        "en": "Brewing Alt since 1848 — and it has an alcohol-free Altbier radler."
+      },
+      "url": "https://www.visitduesseldorf.de/storys/2025/10/29/brauerei-im-fuechschen-lena-backes/",
+      "lastVerified": "2026-11-26",
+      "sources": [
+        "https://www.visitduesseldorf.de/storys/2025/10/29/brauerei-im-fuechschen-lena-backes/"
+      ]
+    },
+    {
+      "activity": "altbier",
+      "city": "duesseldorf",
+      "name": "Brauerei Schumacher",
+      "area": "City centre",
+      "note": {
+        "en": "The city's oldest brewery, brewing since 1838, with hearty Rhineland food."
+      },
+      "url": "https://www.visitduesseldorf.de/storys/2024/04/19/6-altbier-hotspots-keine-angst-vor-duesseldorfer-bier/",
+      "lastVerified": "2026-11-26",
+      "sources": [
+        "https://www.visitduesseldorf.de/storys/2024/04/19/6-altbier-hotspots-keine-angst-vor-duesseldorfer-bier/"
+      ]
+    },
+    {
+      "activity": "gose",
+      "city": "leipzig",
+      "name": "Bayerischer Bahnhof",
+      "area": "Südvorstadt",
+      "note": {
+        "en": "Brewery inn in the world's oldest surviving terminus station — home of Leipziger Gose, with a beer garden."
+      },
+      "url": "https://www.leipzig.travel/en/gastro/gasthaus-gosebrauerei-bayerischer-bahnhof-and-wilhelm-horn-brand-spirits",
+      "lastVerified": "2026-11-26",
+      "sources": [
+        "https://www.leipzig.travel/en/gastro/gasthaus-gosebrauerei-bayerischer-bahnhof-and-wilhelm-horn-brand-spirits"
+      ]
+    },
+    {
+      "activity": "gose",
+      "city": "leipzig",
+      "name": "Gosenschenke „Ohne Bedenken“",
+      "area": "Gohlis",
+      "note": {
+        "en": "A traditional Gose pub recommended by the city's tourism office."
+      },
+      "url": "https://www.leipzig.travel/en/blog/beer-enjoyment-in-Leipzig",
+      "lastVerified": "2026-11-26",
+      "sources": [
+        "https://www.leipzig.travel/en/blog/beer-enjoyment-in-Leipzig"
+      ]
+    },
+    {
+      "activity": "lerche",
+      "city": "leipzig",
+      "name": "Barthels Hof",
+      "area": "Old town, by the market square",
+      "note": {
+        "en": "Baroque inn serving Leipziger Lerche, rolled beef and Gose."
+      },
+      "url": "https://www.leipzig.travel/en/blog/delicious-leipzig-traditional-cuisine",
+      "lastVerified": "2026-11-26",
+      "sources": [
+        "https://www.leipzig.travel/en/blog/delicious-leipzig-traditional-cuisine"
+      ]
+    },
+    {
+      "activity": "lerche",
+      "city": "leipzig",
+      "name": "Auerbachs Keller",
+      "area": "Mädler-Passage, city centre",
+      "note": {
+        "en": "Saxon cuisine for over 500 years — the cellar Goethe put in “Faust”. Vegetarian dishes too."
+      },
+      "url": "https://www.leipzig.travel/en/blog/delicious-leipzig-traditional-cuisine",
+      "lastVerified": "2026-11-26",
+      "sources": [
+        "https://www.leipzig.travel/en/blog/delicious-leipzig-traditional-cuisine"
+      ]
+    },
+    {
+      "activity": "weihnachtsmarkt",
+      "city": "dresden",
+      "name": "Striezelmarkt",
+      "area": "Altmarkt",
+      "note": {
+        "en": "Germany's oldest Christmas market — in 2026 from 25 November to 24 December."
+      },
+      "url": "https://striezelmarkt.dresden.de/en/",
+      "lastVerified": "2026-11-26",
+      "sources": [
+        "https://www.dresden.de/de/rathaus/aktuelles/pressemitteilungen/2026/04/pm_019.php"
+      ]
+    },
+    {
+      "activity": "stollen",
+      "city": "dresden",
+      "name": "Striezelmarkt",
+      "area": "Altmarkt",
+      "note": {
+        "en": "Dresdner Christstollen is sold at the stalls, along with Pulsnitz gingerbread."
+      },
+      "url": "https://www.dresden.de/de/rathaus/aktuelles/pressemitteilungen/11/pm_031.php",
+      "lastVerified": "2026-11-26",
+      "sources": [
+        "https://www.dresden.de/de/rathaus/aktuelles/pressemitteilungen/11/pm_031.php"
+      ]
+    },
+    {
+      "activity": "currywurst",
+      "city": "berlin",
+      "name": "Curry 36",
+      "area": "Kreuzberg, Mehringdamm",
+      "note": {
+        "en": "The West Berlin classic since 1981 — also a vegan Currywurst."
+      },
+      "url": "https://www.visitberlin.de/en/berlins-currywurst/district/friedrichshain-kreuzberg",
+      "lastVerified": "2026-11-26",
+      "sources": [
+        "https://falstaff.com/en/the-best/street-food-guide-germany-2024-the-best-street-food-stands-in-berlin"
+      ]
+    },
+    {
+      "activity": "currywurst",
+      "city": "berlin",
+      "name": "Konnopke's Imbiss",
+      "area": "Prenzlauer Berg, under the U-Bahn at Eberswalder Straße",
+      "note": {
+        "en": "The East Berlin classic: the first Currywurst in East Berlin was served here in 1960."
+      },
+      "url": "https://www.berliner-zeitung.de/article/bei-konnopkes-an-der-eberswalder-schmeckt-berlin-noch-wie-frueher-2360190",
+      "lastVerified": "2026-11-26",
+      "sources": [
+        "https://www.berliner-zeitung.de/article/bei-konnopkes-an-der-eberswalder-schmeckt-berlin-noch-wie-frueher-2360190"
+      ]
+    }
+  ],
+  "trips": [
+    {
+      "id": "dd-leipzig",
+      "city": "dresden",
+      "title": {
+        "en": "Leipzig: your first day trip"
+      },
+      "travel": {
+        "en": "About 1 h 35 min by RE 50 (Saxonia-Express), every hour"
+      },
+      "body": {
+        "en": "Saxony's other big city: Bach, the Nikolaikirche, arcades and a Gose at the Bayerischer Bahnhof."
+      },
+      "url": "https://www.bahn.de/reisen/view/verbindung/dresden/leipzig.shtml",
+      "tags": [
+        "culture",
+        "food"
+      ],
+      "lastVerified": "2026-11-26",
+      "status": "verified",
+      "sources": [
+        "https://www.bahn.de/reisen/view/verbindung/dresden/leipzig.shtml"
+      ]
+    },
+    {
+      "id": "dd-schandau",
+      "city": "dresden",
+      "title": {
+        "en": "Saxon Switzerland: sandstone cliffs"
+      },
+      "travel": {
+        "en": "About 45 min by S-Bahn S1 to Bad Schandau"
+      },
+      "body": {
+        "en": "Hike the sandstone rocks of the Elbe valley — Rathen and Königstein are on the same line."
+      },
+      "url": "https://www.vvo-online.de/en/leisure/excursion-destinations/dresden-180.cshtml",
+      "tags": [
+        "nature",
+        "sport",
+        "photo"
+      ],
+      "lastVerified": "2026-11-26",
+      "status": "verified",
+      "sources": [
+        "https://www.bahnhof.de/api/schedule/Regeltafel_8010085.pdf"
+      ]
+    },
+    {
+      "id": "dd-meissen",
+      "city": "dresden",
+      "title": {
+        "en": "Meißen: porcelain and an old town"
+      },
+      "travel": {
+        "en": "About 40 min by S-Bahn S1"
+      },
+      "body": {
+        "en": "A cathedral on the hill, the porcelain manufactory and wine from the Elbe valley."
+      },
+      "url": "https://www.vvo-online.de/en/leisure/excursion-destinations/dresden-180.cshtml",
+      "tags": [
+        "culture",
+        "art"
+      ],
+      "lastVerified": "2026-11-26",
+      "status": "verified",
+      "sources": [
+        "https://www.bahnhof.de/api/schedule/Regeltafel_8011424.pdf"
+      ]
+    },
+    {
+      "id": "le-dresden",
+      "city": "leipzig",
+      "title": {
+        "en": "Dresden: Baroque on the Elbe"
+      },
+      "travel": {
+        "en": "About 1 h 35 min by RE 50 (Saxonia-Express), every hour"
+      },
+      "body": {
+        "en": "The Frauenkirche, the Zwinger and the Elbe meadows — and in December the Striezelmarkt."
+      },
+      "url": "https://www.bahn.de/reisen/view/verbindung/leipzig/dresden.shtml",
+      "tags": [
+        "culture",
+        "art"
+      ],
+      "lastVerified": "2026-11-26",
+      "status": "verified",
+      "sources": [
+        "https://www.bahn.de/reisen/view/verbindung/leipzig/dresden.shtml"
+      ]
+    },
+    {
+      "id": "le-halle",
+      "city": "leipzig",
+      "title": {
+        "en": "Halle (Saale): next door"
+      },
+      "travel": {
+        "en": "About 30 min by S-Bahn"
+      },
+      "body": {
+        "en": "Handel's birthplace, a lively student town and the Saale river."
+      },
+      "url": "https://www.zug-ticket-kaufen.de/ausfluege-ab/leipzig",
+      "tags": [
+        "culture"
+      ],
+      "lastVerified": "",
+      "status": "draft",
+      "sources": [
+        "https://www.bahn.de"
+      ]
+    },
+    {
+      "id": "m-tegernsee",
+      "city": "muenchen",
+      "title": {
+        "en": "Tegernsee: lake and mountains"
+      },
+      "travel": {
+        "en": "About 1 h by Bayerische Regiobahn (RB 57)"
+      },
+      "body": {
+        "en": "Walk along the lake, visit the Braustüberl and in summer go swimming."
+      },
+      "url": "https://www.munich.travel/artikel/berge-seen/deutschlandticket-ausfluege",
+      "tags": [
+        "nature",
+        "sport",
+        "food"
+      ],
+      "lastVerified": "2026-11-26",
+      "status": "verified",
+      "sources": [
+        "https://www.munich.travel/artikel/berge-seen/deutschlandticket-ausfluege"
+      ]
+    },
+    {
+      "id": "m-fuenfseen",
+      "city": "muenchen",
+      "title": {
+        "en": "Five-lakes country"
+      },
+      "travel": {
+        "en": "S-Bahn S8 to Herrsching"
+      },
+      "body": {
+        "en": "Four lakes on one S-Bahn line — Weßlinger See is a popular swimming lake. Note: lake boats are not covered by the Deutschlandticket."
+      },
+      "url": "https://www.muenchen.de/node/42653",
+      "tags": [
+        "nature",
+        "sport"
+      ],
+      "lastVerified": "2026-11-26",
+      "status": "verified",
+      "sources": [
+        "https://www.muenchen.de/node/42653",
+        "https://www.finanztip.de/daily/heimaturlaub-mit-dem-deutschlandticket-diese-strecken-lohnen-sich/"
+      ],
+      "months": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "id": "b-potsdam",
+      "city": "berlin",
+      "title": {
+        "en": "Potsdam: palaces and parks"
+      },
+      "travel": {
+        "en": "About 26 min by RE 1"
+      },
+      "body": {
+        "en": "Sanssouci park, the Dutch quarter and lakes all around."
+      },
+      "url": "https://www.zug-ticket-kaufen.de/ausfluege-ab/berlin",
+      "tags": [
+        "culture",
+        "nature",
+        "photo"
+      ],
+      "lastVerified": "2026-11-26",
+      "status": "verified",
+      "sources": [
+        "https://www.zug-ticket-kaufen.de/ausfluege-ab/berlin"
+      ]
+    },
+    {
+      "id": "b-spreewald",
+      "city": "berlin",
+      "title": {
+        "en": "Spreewald: punting on the canals"
+      },
+      "travel": {
+        "en": "About 1 h by RE 2 to Lübbenau"
+      },
+      "body": {
+        "en": "Boat trips through forest canals, pickles from the barrel and potatoes with linseed oil."
+      },
+      "url": "https://www.berliner-zeitung.de/article/2334914",
+      "tags": [
+        "nature",
+        "food",
+        "kids"
+      ],
+      "lastVerified": "2026-11-26",
+      "status": "verified",
+      "sources": [
+        "https://www.vbb.de/unterwegs-im-vbb/freizeitangebote/ausflugsziele/regional-und-s-bahn-verkehr/"
+      ]
+    },
+    {
+      "id": "k-duesseldorf",
+      "city": "koeln",
+      "title": {
+        "en": "Düsseldorf: the friendly rival"
+      },
+      "travel": {
+        "en": "About 35 min by RE 1 / RE 5 (RRX), several an hour"
+      },
+      "body": {
+        "en": "Try Altbier in the Altstadt and walk the Rhine promenade — just don't order a Kölsch."
+      },
+      "url": "https://www.zug-ticket-kaufen.de/ausfluege-ab/koeln",
+      "tags": [
+        "food",
+        "culture",
+        "nightlife"
+      ],
+      "lastVerified": "2026-11-26",
+      "status": "verified",
+      "sources": [
+        "https://bahnhof.de/downloads/schedule/Regeltafel_3321.pdf",
+        "https://www.zug-ticket-kaufen.de/ausfluege-ab/koeln"
+      ]
+    },
+    {
+      "id": "k-bonn",
+      "city": "koeln",
+      "title": {
+        "en": "Bonn: Beethoven and the Rhine"
+      },
+      "travel": {
+        "en": "About 20–30 min by RE or RB 26"
+      },
+      "body": {
+        "en": "Beethoven's birthplace, the old government quarter and cherry blossom streets in April."
+      },
+      "url": "https://www.zug-ticket-kaufen.de/ausfluege-ab/koeln",
+      "tags": [
+        "culture",
+        "music"
+      ],
+      "lastVerified": "2026-11-26",
+      "status": "verified",
+      "sources": [
+        "https://bahnhof.de/downloads/schedule/Regeltafel_3321.pdf",
+        "https://www.zug-ticket-kaufen.de/ausfluege-ab/koeln"
+      ]
+    },
+    {
+      "id": "d-koeln",
+      "city": "duesseldorf",
+      "title": {
+        "en": "Cologne: the cathedral city"
+      },
+      "travel": {
+        "en": "About 35 min by RE 1 / RE 5 (RRX), several an hour"
+      },
+      "body": {
+        "en": "See the cathedral, have a Kölsch in a brewhouse — and enjoy the rivalry."
+      },
+      "url": "https://www.zug-ticket-kaufen.de/ausfluege-ab/duesseldorf",
+      "tags": [
+        "culture",
+        "food"
+      ],
+      "lastVerified": "2026-11-26",
+      "status": "verified",
+      "sources": [
+        "https://bahnhof.de/downloads/schedule/Regeltafel_3321.pdf",
+        "https://www.zug-ticket-kaufen.de/ausfluege-ab/duesseldorf"
+      ]
+    },
+    {
+      "id": "d-duisburg",
+      "city": "duesseldorf",
+      "title": {
+        "en": "Landschaftspark Duisburg-Nord"
+      },
+      "travel": {
+        "en": "About 15 min by RE to Duisburg Hbf, then tram 903"
+      },
+      "body": {
+        "en": "A former steelworks turned park: climbing walls, a diving gasometer and light shows at night."
+      },
+      "url": "https://www.zug-ticket-kaufen.de/ausfluege-ab/duesseldorf",
+      "tags": [
+        "culture",
+        "photo",
+        "sport"
+      ],
+      "lastVerified": "2026-11-26",
+      "status": "verified",
+      "sources": [
+        "https://bahnhof.de/downloads/schedule/Regeltafel_3321.pdf"
+      ]
+    }
+  ]
+}

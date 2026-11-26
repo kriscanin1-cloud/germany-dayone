@@ -1,3 +1,4 @@
+import type { Taste } from './personal'
 // Everything the app remembers lives on the device under one key.
 // Every access is wrapped: private mode or blocked storage must never break the app.
 import type { Meetup, Rsvp } from './people'
@@ -24,6 +25,8 @@ export interface Saved {
   notifyMeetups?: boolean
   /** Me tab: what you choose to share at meetups, plus private dates — device only */
   me?: MeInfo
+  /** Discover → Personalise. Diet/alcohol can reveal religion (GDPR Art. 9): device only, never sent */
+  taste?: Taste
   createdAt: string
 }
 
@@ -39,6 +42,9 @@ export interface MeInfo {
 }
 
 let memory: Saved | null = null
+
+const oneOf = <V extends string>(v: unknown, allowed: readonly V[]): V | undefined =>
+  typeof v === 'string' && (allowed as readonly string[]).includes(v) ? (v as V) : undefined
 
 function newId(): string {
   try {
@@ -85,6 +91,14 @@ export function sanitize(raw: unknown): Saved | null {
       languages: strings(raw.me.languages, 20),
       interests: strings(raw.me.interests, 30),
       passportEnd: typeof raw.me.passportEnd === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(raw.me.passportEnd) ? raw.me.passportEnd : undefined,
+    }
+  if (isObj(raw.taste))
+    out.taste = {
+      diet: oneOf(raw.taste.diet, ['all', 'vegetarian', 'vegan', 'halal', 'no_pork'] as const),
+      alcohol: oneOf(raw.taste.alcohol, ['yes', 'no'] as const),
+      company: oneOf(raw.taste.company, ['alone', 'partner', 'kids'] as const),
+      pace: oneOf(raw.taste.pace, ['calm', 'mixed', 'active'] as const),
+      budget: oneOf(raw.taste.budget, ['free', 'low', 'any'] as const),
     }
   return out
 }

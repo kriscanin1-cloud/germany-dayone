@@ -5,6 +5,7 @@ import { Me } from './screens/Me'
 import { Onboarding } from './screens/Onboarding'
 import { NewMeetup } from './screens/NewMeetup'
 import { People } from './screens/People'
+import { Personalise } from './screens/Personalise'
 import { Entitled } from './screens/Entitled'
 import { ErrorScreen } from './screens/ErrorScreen'
 import { TaskDetail } from './screens/TaskDetail'
@@ -30,6 +31,7 @@ const router = createHashRouter([
       { path: '/people', element: <People /> },
       { path: '/people/new', element: <NewMeetup /> },
       { path: '/me', element: <Me /> },
+      { path: '/discover/personalise', element: <Personalise /> },
     ],
   },
   { path: '*', element: <Navigate to="/" replace /> },

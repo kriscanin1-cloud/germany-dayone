@@ -1,6 +1,6 @@
 import en from '../content/i18n/en.json'
 
-type Key = keyof typeof en
+export type Key = keyof typeof en
 
 /** English only for now; more languages = more JSON files with the same keys. */
 export function t(key: Key, vars: Record<string, string> = {}): string {
