@@ -27,6 +27,11 @@ Collected while building. Order inside a section = rough priority.
 - [ ] City events: Oktoberfest, carnival, Christmas markets, local festivals
 - [ ] Research part of the questionnaire (“Help us improve”), currently disabled
 
+## Security (see docs/SECURITY.md)
+- [ ] Rate limits (edge function) + moderation tooling before meetups go live
+- [ ] Host with real headers for frame-ancestors / HSTS (or accept residual)
+- [ ] Pin GitHub Actions to commit SHAs
+
 ## Product
 - [ ] Push/e-mail reminders: deadlines (visa end, passport, legal task deadlines), new meetups
 - [ ] People safety: report/block, moderation queue, exact place only for “going” (RPC), rate limits, code of conduct page

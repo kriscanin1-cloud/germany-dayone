@@ -64,3 +64,7 @@ revoke all on public.responses_latest from anon, authenticated;
 -- delete from public.events    where anon_id = '<id>';
 -- delete from public.waitlist  where anon_id = '<id>';
 -- delete from public.feedback  where anon_id = '<id>';
+
+-- Security hardening: insert only what the app sends; created_at and id come from the database.
+revoke all on public.responses from anon, authenticated;
+grant insert (anon_id, questionnaire_version, plan, research, consent) on public.responses to anon;

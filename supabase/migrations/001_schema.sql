@@ -11,7 +11,7 @@
 create table if not exists public.events (
   id          bigint generated always as identity primary key,
   anon_id     uuid        not null,
-  name        text        not null check (char_length(name) between 1 and 64),
+  name        text        not null check (name ~ '^[a-z][a-z0-9_]{0,63}$'),
   props       jsonb       not null default '{}'::jsonb
                           check (pg_column_size(props) < 2000),
   created_at  timestamptz not null default now()
@@ -109,3 +109,15 @@ revoke all on public.metric_activation_7d from anon, authenticated;
 -- where name in ('onboarding_started','onboarding_completed','timeline_viewed',
 --                'task_done','entitlement_action','meetup_joined')
 -- group by 1 order by 2 desc;
+
+------------------------------------------------------------
+-- 5. Security hardening (OWASP A01/A08)
+------------------------------------------------------------
+-- The anon key is public by design. It may insert only the columns the app sends:
+-- ids and timestamps are set by the database, never by the client.
+revoke all on public.events, public.waitlist, public.feedback from anon, authenticated;
+grant insert (anon_id, name, props) on public.events to anon;
+grant insert (anon_id, interest, state, city_id, arrival_month, email, consent) on public.waitlist to anon;
+grant insert (anon_id, rating, message) on public.feedback to anon;
+-- Analysis views are for the dashboard only, never for the API.
+revoke all on public.metric_activation_7d from anon, authenticated;

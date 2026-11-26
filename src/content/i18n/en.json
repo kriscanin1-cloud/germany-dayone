@@ -194,5 +194,9 @@
   "steps.todo": "To do",
   "steps.discover": "Discover",
   "discover.intro": "Optional and fun: local food, everyday Germany and the holidays near you. Tick what you tried, remove what's not for you.",
-  "discover.tried": "Tried so far: {n}"
+  "discover.tried": "Tried so far: {n}",
+  "error.sign": "Umleitung",
+  "error.title": "Something went wrong",
+  "error.body": "Your plan and answers are safe on this phone. Reload to continue.",
+  "error.cta": "Reload the app"
 }

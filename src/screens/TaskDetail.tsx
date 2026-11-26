@@ -4,6 +4,7 @@ import { track } from '../lib/analytics'
 import { scenario } from '../lib/content'
 import { dueDate, daysBetween, parseDate } from '../lib/engine'
 import { t } from '../lib/i18n'
+import { safeUrl } from '../lib/url'
 import { toProfile } from '../lib/questionnaire'
 import { useDone } from '../lib/useDone'
 import type { ChoiceItem } from '../lib/types'
@@ -108,7 +109,7 @@ export function TaskDetail() {
           <ul className="space-y-1">
             {task.links.map((l) => (
               <li key={l.url}>
-                <a href={l.url} target="_blank" rel="noreferrer" className="font-semibold underline">
+                <a href={safeUrl(l.url)} target="_blank" rel="noopener noreferrer" className="font-semibold underline">
                   {l.label.en} ↗
                 </a>
               </li>
@@ -150,9 +151,9 @@ function Choice({ c }: { c: ChoiceItem }) {
       <div className="flex items-baseline justify-between gap-3">
         <p className="font-sign text-xl font-bold">{c.name}</p>
         <a
-          href={c.url}
+          href={safeUrl(c.url)}
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           onClick={() => track('choice_clicked', { name: c.name })}
           className="shrink-0 text-sm font-semibold underline"
         >

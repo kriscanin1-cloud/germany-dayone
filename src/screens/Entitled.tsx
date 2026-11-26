@@ -4,6 +4,7 @@ import { track } from '../lib/analytics'
 import { scenario, SHOW_DRAFTS } from '../lib/content'
 import { applies } from '../lib/engine'
 import { t } from '../lib/i18n'
+import { safeUrl } from '../lib/url'
 import { toProfile } from '../lib/questionnaire'
 import { load } from '../lib/storage'
 import type { Entitlement, EntitlementCategory, Profile } from '../lib/types'
@@ -116,7 +117,7 @@ function Card({ e }: { e: Entitlement }) {
             <ul className="mt-3 space-y-1">
               {e.links.map((l) => (
                 <li key={l.url}>
-                  <a href={l.url} target="_blank" rel="noreferrer" className="text-[15px] font-semibold underline">
+                  <a href={safeUrl(l.url)} target="_blank" rel="noopener noreferrer" className="text-[15px] font-semibold underline">
                     {l.label.en} ↗
                   </a>
                 </li>

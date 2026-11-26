@@ -7,9 +7,38 @@ import { VitePWA } from 'vite-plugin-pwa'
 // The site is served from https://<user>.github.io/germany-dayone/
 const BASE = '/germany-dayone/'
 
+/**
+ * Security headers as meta tags (GitHub Pages cannot set response headers). Build only:
+ * the dev server injects inline scripts and styles for hot reload, which this policy would block.
+ * Not covered by meta: frame-ancestors (clickjacking) — needs a host with real headers.
+ */
+const CSP = [
+  "default-src 'self'",
+  "script-src 'self'",
+  "style-src 'self'",
+  "img-src 'self' data:",
+  "font-src 'self'",
+  "connect-src 'self' https://*.supabase.co wss://*.supabase.co",
+  "manifest-src 'self'",
+  "worker-src 'self'",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'none'",
+].join('; ')
+
+const securityMeta = {
+  name: 'security-meta',
+  apply: 'build' as const,
+  transformIndexHtml: () => [
+    { tag: 'meta', attrs: { 'http-equiv': 'Content-Security-Policy', content: CSP }, injectTo: 'head-prepend' as const },
+    { tag: 'meta', attrs: { name: 'referrer', content: 'strict-origin-when-cross-origin' }, injectTo: 'head-prepend' as const },
+  ],
+}
+
 export default defineConfig({
   base: BASE,
   plugins: [
+    securityMeta,
     react(),
     tailwindcss(),
     VitePWA({

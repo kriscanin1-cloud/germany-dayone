@@ -6,6 +6,7 @@ import { Onboarding } from './screens/Onboarding'
 import { NewMeetup } from './screens/NewMeetup'
 import { People } from './screens/People'
 import { Entitled } from './screens/Entitled'
+import { ErrorScreen } from './screens/ErrorScreen'
 import { TaskDetail } from './screens/TaskDetail'
 import { Timeline } from './screens/Timeline'
 import { Welcome } from './screens/Welcome'
@@ -17,10 +18,11 @@ function Start() {
 
 // HashRouter-style URLs (/#/timeline) because GitHub Pages cannot serve SPA routes.
 const router = createHashRouter([
-  { path: '/', element: <Start /> },
-  { path: '/onboarding', element: <Onboarding /> },
+  { path: '/', element: <Start />, errorElement: <ErrorScreen /> },
+  { path: '/onboarding', element: <Onboarding />, errorElement: <ErrorScreen /> },
   {
     element: <Layout />,
+    errorElement: <ErrorScreen />,
     children: [
       { path: '/timeline', element: <Timeline /> },
       { path: '/task/:id', element: <TaskDetail /> },
